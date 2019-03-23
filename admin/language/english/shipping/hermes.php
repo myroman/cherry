@@ -1,15 +1,15 @@
 <?php
 // Heading
-$_['heading_title']           = 'myhermes';
+$_['heading_title']           = 'Hermes';
 
 // Text
 $_['text_shipping']           = 'Shipping';
-$_['text_success']            = 'Success: You have modified myhermes shipping!';
-$_['text_edit']               = 'Edit myhermes Shipping';
+$_['text_success']            = 'Success: You have modified Hermes shipping!';
+$_['text_edit']               = 'Edit Hermes Shipping';
 
 // Entry
-$_['entry_rate']              = 'myhermes Rates';
-$_['entry_insurance']         = 'myhermes Compensation Rates';
+$_['entry_rate']              = 'Hermes Rates';
+$_['entry_insurance']         = 'Hermes Compensation Rates';
 $_['entry_display_weight']    = 'Display Delivery Weight';
 $_['entry_display_insurance'] = 'Display Insurance';
 $_['entry_display_time']      = 'Display Delivery Time';
@@ -26,4 +26,4 @@ $_['help_display_insurance'] = 'Do you want to display the shipping insurance? (
 $_['help_display_time']      = 'Do you want to display the shipping time? (e.g. Ships within 3 to 5 days)';
 
 // Error
-$_['error_permission']        = 'Warning: You do not have permission to modify myhermes shipping!';
+$_['error_permission']        = 'Warning: You do not have permission to modify Hermes shipping!';
