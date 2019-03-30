@@ -16,6 +16,7 @@ define('DIR_CONFIG', '/opt/lampp/htdocs/cherry/system/config/');
 define('DIR_IMAGE', '/opt/lampp/htdocs/cherry/image/');
 define('DIR_CACHE', '/opt/lampp/htdocs/cherry/system/storage/cache/');
 define('DIR_DOWNLOAD', '/opt/lampp/htdocs/cherry/system/storage/download/');
+define('DIR_JSONFILES', '/opt/lampp/htdocs/cherry/system/storage/json-files/');
 define('DIR_LOGS', '/opt/lampp/htdocs/cherry/system/storage/logs/');
 define('DIR_MODIFICATION', '/opt/lampp/htdocs/cherry/system/storage/modification/');
 define('DIR_UPLOAD', '/opt/lampp/htdocs/cherry/system/storage/upload/');
