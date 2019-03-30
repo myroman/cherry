@@ -1,41 +1,6 @@
 <?php
 class ModelShippingHermes extends Model
 {
-    public function populateParcelShops()
-    {
-		$log = new Log('test.log');
-		$log->write('populating parcel shops');
-
-        // create tables
-        // $this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "hermes_parcelshops` (
-		// 	`id` int(11) NOT NULL AUTO_INCREMENT,
-		// 	`createdate` DATETIME NOT NULL,
-		// 	`modifydate` DATETIME NULL,
-		// 	`parcelShopCode` VARCHAR(100) COLLATE utf8_bin NOT NULL
-		// 	PRIMARY KEY (`id`)
-		//   )");
-
-		// request hermes API or load json
-		$filepath = DIR_JSONFILES . 'getParcelShops.json';
-		
-		if (!file_exists($filepath)) {
-			$log->write('cannot find the json ' . $filepath);
-			return;
-		}
-
-        $jsondata = file_get_contents($filepath);
-		//parse json
-		$json = json_decode($jsondata);
-		foreach($json->data as $key => $data) {
-			$log->write('Key is ' . $key);
-		}
-
-		$log->write('finished parsing');
-
-//fill the table
-
-    }
-
     public function getQuote($address)
     {
         $this->load->language('shipping/hermes');
