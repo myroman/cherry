@@ -1,6 +1,30 @@
 <?php
 class ModelShippingHermes extends Model
 {
+    public function getParcelShopCities() {
+        
+        $sql = "SELECT DISTINCT `city` FROM " . DB_PREFIX . "hermes_parcelshops ORDER BY `city`";
+        $query = $this->db->query($sql);
+        $rows = $query->rows;
+        $log = new Log('test.log');
+        $log->write('hey', count($rows));
+        $result = array_map(array($this, 'getCity'), $rows);
+        
+        return $result;
+    }
+
+    private function getCity($row){
+        return $row['city'];
+    }
+
+    public function getParcelShops($city) {
+        
+        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops WHERE `city`=" . $city . " ORDER BY `city`";
+        $query = $this->db->query($sql);
+		return $query->rows;
+    }
+
+    //TODO: implement
     public function getQuote($address)
     {
         $this->load->language('shipping/hermes');
