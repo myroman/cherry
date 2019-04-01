@@ -26,7 +26,7 @@
       </div>
       <div class="panel-body">
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-hermes-parcels" class="form-horizontal">
-            <input type="checkbox" id="hermes_updateparcels" name="hermes_updateparcels" checked style="display: inline" />
+            <input type="checkbox" id="hermes_updateparcels" name="hermes_updateparcels" checked style="display: none;" />
         </form>
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-hermes" class="form-horizontal">
           <div class="form-group">
