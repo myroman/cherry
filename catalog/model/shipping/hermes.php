@@ -17,9 +17,9 @@ class ModelShippingHermes extends Model
         return $row['city'];
     }
 
-    public function getParcelShops($city) {
+    public function getParcelShopsByCity($city) {
         
-        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops WHERE `city`=" . $city . " ORDER BY `city`";
+        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops WHERE `city`='" . $city . "' ORDER BY `address`";
         $query = $this->db->query($sql);
 		return $query->rows;
     }

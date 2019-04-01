@@ -24,13 +24,19 @@
         <div class="form-group required">
           <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
           <div class="col-sm-10">
-            <!-- <select name="zone_id" id="input-zone" class="form-control">
-						</select> -->
-						
-						<select name="parcelShopCity" id="input-parcelshopcity" class="form-control">
+						<select name="parcelshopcity" id="input-parcelshopcity" class="form-control">
 							</select>
           </div>
-        </div>
+				</div>
+				
+				<div class="form-group required">
+						<label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_handout; ?></label>
+						<div class="col-sm-10">
+							<select name="parcelshop" id="input-parcelshop" class="form-control">
+							</select>
+						</div>
+					</div>
+
         <div class="form-group required">
           <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
           <div class="col-sm-10">
@@ -186,7 +192,7 @@ $('select[name=\'country_id\']').on('change', function() {
 				for (i = 0; i < json['cities'].length; i++) {
 					html += '<option value="' + json['cities'][i] + '"';
 
-					// if (json['cities'][i]['city'] == '<?php echo $parcelShopCity; ?>') {
+					// if (json['cities'][i]['city'] == '<?php echo $parcelshopcity; ?>') {
 					// 	html += ' selected="selected"';
 					// }
 
@@ -196,7 +202,39 @@ $('select[name=\'country_id\']').on('change', function() {
 				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 
-			$('select[name=\'parcelShopCity\']').html(html);
+			$('select[name=\'parcelshopcity\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('select[name=\'parcelshopcity\']').on('change', function() {
+	$.ajax({
+		url: 'index.php?route=total/shipping/parcelshops&city=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'parcelshopcity\']').after(' <i class="fa fa-circle-o-notch fa-spin"></i>');
+		},
+		complete: function() {
+			$('.fa-spin').remove();
+		},
+		success: function(json) {
+
+			html = '<option value=""><?php echo $text_select; ?></option>';
+			
+			if (json && json.length) {
+				for (i = 0; i < json.length; i++) {
+					html += '<option value="' + json[i]['id'] + '"';
+
+					html += '>' + json[i]['address'] + '</option>';
+				}
+			} else {
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
+			}
+
+			$('select[name=\'parcelshop\']').html(html);
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

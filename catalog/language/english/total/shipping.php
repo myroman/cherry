@@ -10,6 +10,7 @@ $_['text_shipping_method'] = 'Please select the preferred shipping method to use
 // Entry
 $_['entry_country']        = 'Country';
 $_['entry_zone']           = 'Region / State';
+$_['entry_zone']           = 'Handout location';
 $_['entry_postcode']       = 'Post Code';
 
 // Error

@@ -205,16 +205,8 @@ class ControllerTotalShipping extends Controller
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
-	}
-	
-
-    private function mapParcelShop($value)
-    {
-        return array(
-            'city' => $value['city'],
-        );
     }
-
+    
     public function country()
     {
         $json = array();
@@ -240,6 +232,24 @@ class ControllerTotalShipping extends Controller
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
+    }
+
+    private function mapParcelShop($value)
+    {
+        return array(
+            'id' => $value['id'],
+            'address' => $value['address']
+        );
+    }
+
+    public function parcelShops() 
+    {
+        $json = array();
+        $this->load->model('shipping/hermes');
+        $city = $this->request->get['city'];
+        $rows = $this->model_shipping_hermes->getParcelShopsByCity($city);
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode(array_map(array($this, 'mapParcelShop'), $rows)));
     }
 
 }
