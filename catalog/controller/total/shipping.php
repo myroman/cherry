@@ -242,14 +242,27 @@ class ControllerTotalShipping extends Controller
         );
     }
 
-    public function parcelShops() 
-    {
-        $json = array();
+    public function parcelShops() {
         $this->load->model('shipping/hermes');
         $city = $this->request->get['city'];
         $rows = $this->model_shipping_hermes->getParcelShopsByCity($city);
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode(array_map(array($this, 'mapParcelShop'), $rows)));
+    }
+
+    public function parcelShopDetails() {
+        $this->load->model('shipping/hermes');
+        $id = $this->request->get['id'];
+        $model = $this->model_shipping_hermes->getParcelShopById($id);
+        $log = new Log('test.log');
+
+        $this->response->addHeader('Content-Type: application/json');
+        $json = array(
+            'id' => $model['id'],
+            'addressnotes' => $model['addressnotes']
+        );
+        $log->write($json);
+        $this->response->setOutput(json_encode($json));
     }
 
 }

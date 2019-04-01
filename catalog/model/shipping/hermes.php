@@ -6,8 +6,6 @@ class ModelShippingHermes extends Model
         $sql = "SELECT DISTINCT `city` FROM " . DB_PREFIX . "hermes_parcelshops ORDER BY `city`";
         $query = $this->db->query($sql);
         $rows = $query->rows;
-        $log = new Log('test.log');
-        $log->write('hey', count($rows));
         $result = array_map(array($this, 'getCity'), $rows);
         
         return $result;
@@ -22,6 +20,12 @@ class ModelShippingHermes extends Model
         $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops WHERE `city`='" . $city . "' ORDER BY `address`";
         $query = $this->db->query($sql);
 		return $query->rows;
+    }
+
+    public function getParcelShopById($id) {
+        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops WHERE `id`=" . $id;
+        $query = $this->db->query($sql);
+		return $query->row;
     }
 
     //TODO: implement

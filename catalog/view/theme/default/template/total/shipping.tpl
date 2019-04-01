@@ -37,6 +37,13 @@
 						</div>
 					</div>
 
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Address</label>
+					<div class="col-sm-10">
+						<p id="txtAddressNotes"></p>
+					</div>
+				</div>
+
         <div class="form-group required">
           <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
           <div class="col-sm-10">
@@ -169,6 +176,8 @@ $(document).delegate('#button-shipping', 'click', function() {
 });
 //--></script>
 <script type="text/javascript"><!--
+
+	//get list of cities
 $('select[name=\'country_id\']').on('change', function() {
 	$.ajax({
 		url: 'index.php?route=total/shipping/country&country_id=' + this.value,
@@ -210,6 +219,7 @@ $('select[name=\'country_id\']').on('change', function() {
 	});
 });
 
+//get list of parcel shops by city
 $('select[name=\'parcelshopcity\']').on('change', function() {
 	$.ajax({
 		url: 'index.php?route=total/shipping/parcelshops&city=' + this.value,
@@ -235,6 +245,28 @@ $('select[name=\'parcelshopcity\']').on('change', function() {
 			}
 
 			$('select[name=\'parcelshop\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+//get details of a parcel shops
+$('select[name=\'parcelshop\']').on('change', function() {
+	$.ajax({
+		url: 'index.php?route=total/shipping/parcelShopDetails&id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'parcelshop\']').after(' <i class="fa fa-circle-o-notch fa-spin"></i>');
+		},
+		complete: function() {
+			$('.fa-spin').remove();
+		},
+		success: function(json) {
+
+			$('#txtAddressNotes').text(json.addressnotes);
+			
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
