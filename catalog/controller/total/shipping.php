@@ -16,6 +16,8 @@ class ControllerTotalShipping extends Controller
 
             $data['entry_country'] = $this->language->get('entry_country');
             $data['entry_zone'] = $this->language->get('entry_zone');
+            $data['entry_handout'] = $this->language->get('entry_handout');
+            $data['entry_addressnotes'] = $this->language->get('entry_addressnotes');
             $data['entry_postcode'] = $this->language->get('entry_postcode');
 
             $data['button_quote'] = $this->language->get('button_quote');

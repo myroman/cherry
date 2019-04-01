@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="pull-right">
         <button type="submit" form="form-hermes" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
-        <button type="submit" form="form-hermes-parcels" data-toggle="tooltip" title="<?php echo $button_refresh_pvz; ?>" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
+        <button type="submit" form="form-hermes-parcels" data-toggle="tooltip" title="<?php echo $button_refresh_handout; ?>" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
         <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
       <h1><?php echo $heading_title; ?></h1>
       <ul class="breadcrumb">

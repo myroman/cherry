@@ -40,6 +40,7 @@ class ControllerShippingHermes extends Controller {
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
 
+
 		$data['entry_rate'] = $this->language->get('entry_rate');
 		$data['entry_insurance'] = $this->language->get('entry_insurance');
 		$data['entry_display_weight'] = $this->language->get('entry_display_weight');
@@ -57,6 +58,7 @@ class ControllerShippingHermes extends Controller {
 		$data['help_display_time'] = $this->language->get('help_display_time');
 
 		$data['button_save'] = $this->language->get('button_save');
+		$data['button_refresh_handout'] = $this->language->get('button_refresh_handout');
 		$data['button_cancel'] = $this->language->get('button_cancel');
 
 		$data['tab_general'] = $this->language->get('tab_general');

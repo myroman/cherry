@@ -96,7 +96,7 @@ $_['button_link']                   = 'Ссылка';
 $_['button_currency']               = 'Обновить значение валюты';
 $_['button_apply']                  = 'Применить';
 $_['button_category_add']           = 'Добавить категорию';
-$_['button_refresh_pvz']           = 'Обновить ПВЗ';
+$_['button_refresh_handout']           = 'Обновить список ПВЗ';
 
 
 // Tab

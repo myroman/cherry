@@ -95,7 +95,7 @@ $_['button_link']                   = 'Link';
 $_['button_currency']               = 'Refresh Currency Values';
 $_['button_apply']                  = 'Apply';
 $_['button_category_add']           = 'Add Category';
-$_['button_refresh_pvz']           = 'Refresh PVZ';
+$_['button_refresh_handout']           = 'Refresh parcel locations';
 
 // Tab
 $_['tab_address']                   = 'Address';

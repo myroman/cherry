@@ -28,6 +28,7 @@ class ControllerTotalShipping extends Controller {
 		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
 		$data['button_save'] = $this->language->get('button_save');
+		$data['button_refresh'] = $this->language->get('button_refresh');
 		$data['button_cancel'] = $this->language->get('button_cancel');
 
 		if (isset($this->error['warning'])) {

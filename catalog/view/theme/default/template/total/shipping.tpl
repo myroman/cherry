@@ -38,7 +38,7 @@
 					</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Address</label>
+					<label class="col-sm-2 control-label"><?php echo $entry_addressnotes; ?></label>
 					<div class="col-sm-10">
 						<p id="txtAddressNotes"></p>
 					</div>
