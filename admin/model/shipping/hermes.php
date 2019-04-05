@@ -22,7 +22,7 @@ class ModelShippingHermes extends Model
             `maxParcelWeight` DECIMAL(8, 2) NULL,
             `paymentType` VARCHAR(100) NULL,
             `region` NVARCHAR(100) NOT NULL,
-            `schedulejson` VARCHAR(1000) NOT NULL,
+            `schedulejson` VARCHAR(3000) NOT NULL,
             `services` VARCHAR(200) NOT NULL,
             `zipcode` VARCHAR(10) NULL,
 			PRIMARY KEY (`id`)

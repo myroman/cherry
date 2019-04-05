@@ -301,6 +301,8 @@ $('select[name=\'parcelshop\']').on('change', function() {
 				var dayNames = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
 
 				var i, $body = $('.parcel-shop-hours').find('tbody');
+
+				$body.html('');
 				for(i = 0;i < data.length; i++) {
 					var dayInfo = data[i];
 					var dayName = dayNames[dayInfo.WeekDay];
