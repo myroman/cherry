@@ -37,12 +37,27 @@
 						</div>
 					</div>
 
-				<div class="form-group">
-					<label class="col-sm-2 control-label"><?php echo $entry_addressnotes; ?></label>
-					<div class="col-sm-10">
-						<p id="txtAddressNotes"></p>
+				<div class="parcel-shop-details" style="display: none;">
+					<div class="form-group">
+						<label class="col-sm-2 control-label"><?php echo $entry_address; ?></label>
+						<div class="col-sm-10">
+							<p id="txtAddress"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label"><?php echo $entry_addressnotes; ?></label>
+						<div class="col-sm-10">
+							<p id="txtAddressNotes"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label"><?php echo $entry_workhours; ?></label>
+						<div class="col-sm-10">
+							<p id="txtWorkhours"></p>
+						</div>
 					</div>
 				</div>
+				
 
         <div class="form-group required">
           <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
@@ -189,6 +204,8 @@ $('select[name=\'country_id\']').on('change', function() {
 			$('.fa-spin').remove();
 		},
 		success: function(json) {
+			$('.parcel-shop-details').hide();
+
 			if (json['postcode_required'] == '1') {
 				$('input[name=\'postcode\']').parent().parent().addClass('required');
 			} else {
@@ -231,6 +248,7 @@ $('select[name=\'parcelshopcity\']').on('change', function() {
 			$('.fa-spin').remove();
 		},
 		success: function(json) {
+			$('.parcel-shop-details').hide();
 
 			html = '<option value=""><?php echo $text_select; ?></option>';
 			
@@ -265,8 +283,11 @@ $('select[name=\'parcelshop\']').on('change', function() {
 		},
 		success: function(json) {
 
+			$('.parcel-shop-details').show();
+
+			$('#txtAddress').text(json.address);
 			$('#txtAddressNotes').text(json.addressnotes);
-			
+			$('#txtWorkhours').text('9-6');
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

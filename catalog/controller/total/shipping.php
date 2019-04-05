@@ -18,6 +18,8 @@ class ControllerTotalShipping extends Controller
             $data['entry_zone'] = $this->language->get('entry_zone');
             $data['entry_handout'] = $this->language->get('entry_handout');
             $data['entry_addressnotes'] = $this->language->get('entry_addressnotes');
+            $data['entry_address'] = $this->language->get('entry_address');
+            $data['entry_workhours'] = $this->language->get('entry_workhours');
             $data['entry_postcode'] = $this->language->get('entry_postcode');
 
             $data['button_quote'] = $this->language->get('button_quote');
@@ -261,7 +263,9 @@ class ControllerTotalShipping extends Controller
         $this->response->addHeader('Content-Type: application/json');
         $json = array(
             'id' => $model['id'],
-            'addressnotes' => $model['addressnotes']
+            'addressnotes' => $model['addressnotes'],
+            'address' => $model['address'],
+            'schedulejson' => $model['schedulejson']
         );
         $log->write($json);
         $this->response->setOutput(json_encode($json));
