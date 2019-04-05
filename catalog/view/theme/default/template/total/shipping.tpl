@@ -53,7 +53,10 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label"><?php echo $entry_workhours; ?></label>
 						<div class="col-sm-10">
-							<p id="txtWorkhours"></p>
+							<table class="parcel-shop-hours">
+								<tbody>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -288,6 +291,51 @@ $('select[name=\'parcelshop\']').on('change', function() {
 			$('#txtAddress').text(json.address);
 			$('#txtAddressNotes').text(json.addressnotes);
 			$('#txtWorkhours').text('9-6');
+
+			if (json.schedulejson)
+				fillScheduleTable(JSON.parse(json.schedulejson));
+
+			function fillScheduleTable(data) {
+				if (!data) return;
+
+				var dayNames = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+
+				var i, $body = $('.parcel-shop-hours').find('tbody');
+				for(i = 0;i < data.length; i++) {
+					var dayInfo = data[i];
+					var dayName = dayNames[dayInfo.WeekDay];
+
+					$body.append(
+						$('<tr>').append(
+							$('<td>').text(dayName)
+						).append(
+							$('<td>').text(getHours(dayInfo.TimeIntervals))
+						)
+					);
+				}
+
+				function getHours(timeIntervals) {
+					if (!timeIntervals) return '';
+					var i;
+
+					var times = [];
+					for(i = 0;i < timeIntervals.length;i++) {
+						var interval = timeIntervals[i];
+						var fromTime = interval.From;
+						var toTime = interval.To;
+						var timeStr = padWithHeadingZero(fromTime.Hours) + ':' + padWithHeadingZero(fromTime.Minutes) +
+							'–' + padWithHeadingZero(toTime.Hours) + ':' + padWithHeadingZero(toTime.Minutes);
+						times.push(timeStr);
+					}
+					return times.join(', ');
+
+					function padWithHeadingZero(unit) {
+						if ((unit+'').length == 1)
+							return '0' + unit;
+						return unit + '';
+					}
+				}
+			}
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

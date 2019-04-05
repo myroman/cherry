@@ -1,3 +1,7 @@
 .parcel-shop-details .form-group p {
     margin-top: 8px !important;
 }
+
+table.parcel-shop-hours td {
+    padding-right: 8px;
+}
