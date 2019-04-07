@@ -1,12 +1,14 @@
 <?php
 class ModelShippingHermes extends Model
 {
+    private $log;
+
     public function populateParcelShops()
     {
-        $log = new Log('test.log');
-        $log->write('populating parcel shops');
+        $this->log = new Log('test.log');
+        $this->log->write('populating parcel shops');
         
-        // create tables
+        // create tables oc_hermes_parcelshops
         $this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "hermes_parcelshops` (
 			`id` int(11) NOT NULL AUTO_INCREMENT,
 			`createdate` DATETIME NOT NULL,
@@ -33,7 +35,7 @@ class ModelShippingHermes extends Model
         $filepath = DIR_JSONFILES . 'parcelShops.json';
 
         if (!file_exists($filepath)) {
-            $log->write('cannot find the json ' . $filepath);
+            $this->log->write('cannot find the json ' . $filepath);
             return;
         }
 
@@ -44,7 +46,93 @@ class ModelShippingHermes extends Model
             $sql = $this->createInsertParcelEntrySql($item);
             $this->db->query($sql);
         }
-        $log->write('filled new parcel shops');
+        $this->log->write('filled new parcel shops');
+    }
+
+    public function populatePrices()
+    {
+        $this->log = new Log('test.log');
+        $this->log->write('populating prices');
+        
+        // create tables oc_hermes_delivery_price
+        $this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "hermes_price` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`createdate` DATETIME NOT NULL,
+			`parcelShopCode` VARCHAR(100) NOT NULL,
+            `price` DECIMAL(8, 2) NULL,
+            `currencyCode` VARCHAR(3) NULL,
+            `error` BIT(1) NULL,
+            `errorMsg` VARCHAR(1000) NULL, 
+            `errorCategory` INT(11) NULL,           
+			PRIMARY KEY (`id`)
+          )
+          CHARACTER SET utf8 COLLATE utf8_bin");
+
+        $this->db->query("DELETE `" . DB_PREFIX . "hermes_delivery_price`");
+
+        // request hermes API or load json
+        $requestToParcelShopCodes = array();
+        $pricesJson = $this->downloadPricesForParcelShopsTest($requestToParcelShopCodes);
+        
+        foreach ($pricesJson as $respItem) {
+            $sql = $this->createInsertPriceSql($respItem, $requestToParcelShopCodes);
+            $this->log->write("price: " . $sql);
+            $this->db->query($sql);
+        }
+        $this->log->write('filled delivery prices');
+    }
+
+    private function downloadPricesForParcelShopsTest($requestToParcelShopCodes) {
+        $filepath = DIR_JSONFILES . 'deliveryPrices.json';
+
+        if (!file_exists($filepath)) {
+            $this->log->write('cannot find the json ' . $filepath);
+            return;
+        }
+
+        $jsondata = file_get_contents($filepath);
+
+        $requestToParcelShopCodes["1919918958"] = "912043";
+        $requestToParcelShopCodes["1919918959"] = "901041";
+
+        return json_decode($jsondata);
+    }
+
+    private function createInsertPriceSql($entry, $requestToParcelShopCodes) {
+        $parcelShopCode = $requestToParcelShopCodes[$entry->RequestId];
+
+        if ($entry->ErrorCode != 0) {
+            $this->log->write("error cat1: " . $entry->ErrorMessage);
+            return "INSERT INTO `oc_hermes_price` (`createdate`,`parcelshopcode`,`error`,`errormsg`,`errorCategory`)" .
+            "SELECT UTC_TIMESTAMP()" .
+            ",'" . $parcelShopCode .
+            "'," . $entry->ErrorCode .
+            ",'" . $entry->ErrorMessage . 
+            "'," . 0;
+        }
+
+        $productPrice = $entry->ProductPrices[0];
+        if ($productPrice->ErrorCode != 0) {
+            $this->log->write("error cat2: " . $productPrice->ErrorMessage);
+
+            return "INSERT INTO `oc_hermes_price` (`createdate`,`parcelshopcode`,`error`,`errormsg`,`errorCategory`)" .
+            "SELECT UTC_TIMESTAMP()" .
+            ",'" . $parcelShopCode .
+            "'," . $productPrice->ErrorCode .
+            ",'" . $productPrice->ErrorMessage .
+            "'," . 1;
+        }
+        
+        $price = $productPrice->Price->Value;
+        $currencyCode = $productPrice->Price->CurrencyCode;
+        $result = "INSERT INTO `oc_hermes_price` (`createdate`,`parcelshopcode`,`price`,`currencycode`)" .
+        "SELECT UTC_TIMESTAMP()" .
+        ",'" . $parcelShopCode .
+        "'," . $price .
+        ",'" . $currencyCode .
+        "'";
+        
+        return $result;
     }
     
     private function extractNotes($params) {
