@@ -72,7 +72,7 @@ class ModelShippingHermes extends Model
 
         // request hermes API or load json
         $requestToParcelShopCodes = array();
-        $pricesJson = $this->downloadPricesForParcelShopsTest($requestToParcelShopCodes);
+        $pricesJson = $this->downloadPricesForParcelShops($requestToParcelShopCodes);
         
         foreach ($pricesJson as $respItem) {
             $sql = $this->createInsertPriceSql($respItem, $requestToParcelShopCodes);
@@ -96,6 +96,91 @@ class ModelShippingHermes extends Model
         $requestToParcelShopCodes["1919918959"] = "901041";
 
         return json_decode($jsondata);
+    }
+
+    public function getParcelShops() {        
+        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops LIMIT 10";
+        $query = $this->db->query($sql);
+		return $query->rows;
+    }
+
+    private function downloadPricesForParcelShops($requestToParcelShopCodes) {
+        $url = "https://test-api.hermesrussia.ru/Calculator/RestService.svc/rest/CalculateProductPrice";
+        $pickupCode = "437";
+        $deliveryProductId = "1";
+        $cashOnDelivery = "3200";
+        $insuranceAmount = "500";
+        $now = date(DATE_ATOM,time());
+        $weight = "3200";
+        $height = $width = $length = "20";
+
+        $parcelShops = $this->getParcelShops();
+        
+        $payloadRequests = array();
+        $requestId = time();
+        // $requestId = 1;
+        
+        foreach($parcelShops as $item) {
+            $productApps = array();
+            array_push($productApps, array(
+                'HandOutAddress' => array(
+                    '__type' => 'ParcelShopLocation:#B2C.API.DTO',
+                    'Code' => $item['parcelShopCode']
+                ),
+                'PickupAddress' => array(
+                    '__type' => 'DistributionCenterLocation:#B2C.API.DTO',
+                    'Code' => $pickupCode
+                ),
+                'Product' => array(
+                    'Id' => $deliveryProductId
+                )
+            ));    
+            $req = array(
+                'RequestId' => $requestId,
+                'ProductApplications' => $productApps,
+                'BusinessUnitCode' => "1000",
+                'CashOnDelivery' => array(
+                    'Value' => $cashOnDelivery,
+                    'CurrencyCode' => 'RUB'
+                ),
+                'Insurance' => array(
+                    'Value' => $insuranceAmount,
+                    'CurrencyCode' => 'RUB'
+                ),
+                'CommitmentDate' => $now,
+                'InvoicingDate' => $now,
+                'Weight' => $weight,
+                'Height' => $height,
+                'Width' => $width,
+                'Length' => $length
+            );
+            array_push($payloadRequests, $req);
+            $requestToParcelShopCodes[$requestId] = $item->parcelCode;
+
+            $requestId = $requestId + 1;
+        }
+
+        $payload = array(
+            'productPriceCalculationRequests' => $payloadRequests
+        );
+
+        $this->log->write(json_encode($payload));
+        return;
+
+        $curl = curl_init($url);
+
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: Basic dGVzdGxvZ2luOnRlc3RwYXNzd29yZA=='));
+        
+        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($curl, CURLOPT_HEADER, false);
+        // curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
     }
 
     private function createInsertPriceSql($entry, $requestToParcelShopCodes) {
