@@ -2,10 +2,12 @@
 class ModelShippingHermes extends Model
 {
     private $log;
+    private $dumplog;
 
     public function populateParcelShops()
     {
         $this->log = new Log('test.log');
+        $this->dumplog = new Log('dump.log');
         $this->log->write('populating parcel shops');
         
         // create tables oc_hermes_parcelshops
@@ -52,6 +54,7 @@ class ModelShippingHermes extends Model
     public function populatePrices()
     {
         $this->log = new Log('test.log');
+        $this->dumplog = new Log('dump.log');
         $this->log->write('populating prices');
         
         // create tables oc_hermes_delivery_price
@@ -68,44 +71,31 @@ class ModelShippingHermes extends Model
           )
           CHARACTER SET utf8 COLLATE utf8_bin");
 
-        $this->db->query("DELETE `" . DB_PREFIX . "hermes_delivery_price`");
+        $deletesql = "DELETE FROM `" . DB_PREFIX . "hermes_price`";
+        $this->db->query($deletesql);
 
         // request hermes API or load json
-        $requestToParcelShopCodes = array();
-        $pricesJson = $this->downloadPricesForParcelShops($requestToParcelShopCodes);
         
+        $downloadedResult = $this->downloadPricesForParcelShops();
+        $pricesJson = $downloadedResult['response'];
+        $requestToParcelShopCodes = $downloadedResult['requestParcelCodeMap'];
+
+        $this->log->write($requestToParcelShopCodes);
         foreach ($pricesJson as $respItem) {
             $sql = $this->createInsertPriceSql($respItem, $requestToParcelShopCodes);
-            $this->log->write("price: " . $sql);
+            $this->log->write("rid:" . $respItem->RequestId . ", price sql: " . $sql);
             $this->db->query($sql);
         }
         $this->log->write('filled delivery prices');
     }
 
-    private function downloadPricesForParcelShopsTest($requestToParcelShopCodes) {
-        $filepath = DIR_JSONFILES . 'deliveryPrices.json';
-
-        if (!file_exists($filepath)) {
-            $this->log->write('cannot find the json ' . $filepath);
-            return;
-        }
-
-        $jsondata = file_get_contents($filepath);
-
-        $requestToParcelShopCodes["1919918958"] = "912043";
-        $requestToParcelShopCodes["1919918959"] = "901041";
-
-        return json_decode($jsondata);
-    }
-
     public function getParcelShops() {        
-        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops LIMIT 10";
+        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops LIMIT 100";
         $query = $this->db->query($sql);
 		return $query->rows;
     }
 
-    private function downloadPricesForParcelShops($requestToParcelShopCodes) {
-        $url = "https://test-api.hermesrussia.ru/Calculator/RestService.svc/rest/CalculateProductPrice";
+    private function downloadPricesForParcelShops() {
         $pickupCode = "437";
         $deliveryProductId = "1";
         $cashOnDelivery = "3200";
@@ -118,7 +108,6 @@ class ModelShippingHermes extends Model
         
         $payloadRequests = array();
         $requestId = time();
-        // $requestId = 1;
         
         foreach($parcelShops as $item) {
             $productApps = array();
@@ -155,8 +144,7 @@ class ModelShippingHermes extends Model
                 'Length' => $length
             );
             array_push($payloadRequests, $req);
-            $requestToParcelShopCodes[$requestId] = $item->parcelCode;
-
+            $requestToParcelShopCodes[$requestId] = $item['parcelShopCode'];
             $requestId = $requestId + 1;
         }
 
@@ -164,23 +152,48 @@ class ModelShippingHermes extends Model
             'productPriceCalculationRequests' => $payloadRequests
         );
 
-        $this->log->write(json_encode($payload));
-        return;
+        //call hermes API
+        $response = $this->calculateHermesApi($payload);
+        $jsonResponse = json_decode($response);
+        return array(
+            'response' => $jsonResponse,
+            'requestParcelCodeMap' => $requestToParcelShopCodes
+        );
+    }
 
-        $curl = curl_init($url);
+    private function calculateHermesApi($payload) {
+        $url = "https://test-api.hermesrussia.ru/Calculator/RestService.svc/rest/CalculateProductPrice";
+        $this->dumplog->write("Request to hermes API:\n" . json_encode($payload));
 
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: Basic dGVzdGxvZ2luOnRlc3RwYXNzd29yZA=='));
-        
-        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($curl, CURLOPT_HEADER, false);
-        // curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-        // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $ch = curl_init($url);
 
-        $response = curl_exec($curl);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json; charset=utf-8', 
+            'Authorization: Basic dGVzdGxvZ2luOnRlc3RwYXNzd29yZA==')
+        );        
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_ENCODING, '');
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-        curl_close($curl);
+        $response = curl_exec($ch);
+        if(curl_errno($ch)){
+            $this->log->write('Request failed: ' . curl_error($ch));
+            return NULL;
+        }
+        curl_close($ch);
+
+        //Hermes replies with BOM, which we should trim
+        //https://stackoverflow.com/questions/12509855/curl-gets-response-with-utf-8-bom
+        $__BOM = pack('CCC', 239, 187, 191);
+        while(0 === strpos($response, $__BOM)) {
+            $response = substr($response, 3);
+        }            
+        $this->dumplog->write("Response:\n" . $response);
+        return $response;
     }
 
     private function createInsertPriceSql($entry, $requestToParcelShopCodes) {
