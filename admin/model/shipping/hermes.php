@@ -4,53 +4,6 @@ class ModelShippingHermes extends Model
     private $log;
     private $dumplog;
 
-    public function populateParcelShops()
-    {
-        $this->log = new Log('test.log');
-        $this->dumplog = new Log('dump.log');
-        $this->log->write('populating parcel shops');
-        
-        // create tables oc_hermes_parcelshops
-        $this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "hermes_parcelshops` (
-			`id` int(11) NOT NULL AUTO_INCREMENT,
-			`createdate` DATETIME NOT NULL,
-			`modifydate` DATETIME NULL,
-            `updateTimestamp` VARCHAR(50) NOT NULL,
-			`parcelShopCode` VARCHAR(100) NOT NULL,
-            `parcelShopName` NVARCHAR(100) NOT NULL,
-            `address` NVARCHAR(500) NOT NULL,
-            `city` NVARCHAR(100) NOT NULL,
-            `addressnotes` NVARCHAR(1000) NOT NULL,
-            `maxParcelOverallSize` DECIMAL(8, 2) NULL,
-            `maxParcelValue` DECIMAL(8, 2) NULL,
-            `maxParcelWeight` DECIMAL(8, 2) NULL,
-            `paymentType` VARCHAR(100) NULL,
-            `region` NVARCHAR(100) NOT NULL,
-            `schedulejson` VARCHAR(3000) NOT NULL,
-            `services` VARCHAR(200) NOT NULL,
-            `zipcode` VARCHAR(10) NULL,
-			PRIMARY KEY (`id`)
-          )
-          CHARACTER SET utf8 COLLATE utf8_bin");
-
-        // request hermes API or load json
-        $filepath = DIR_JSONFILES . 'parcelShops.json';
-
-        if (!file_exists($filepath)) {
-            $this->log->write('cannot find the json ' . $filepath);
-            return;
-        }
-
-        $jsondata = file_get_contents($filepath);
-        
-        $json = json_decode($jsondata);
-        foreach ($json->GetParcelShopsResult as $item) {
-            $sql = $this->createInsertParcelEntrySql($item);
-            $this->db->query($sql);
-        }
-        $this->log->write('filled new parcel shops');
-    }
-
     public function populatePrices()
     {
         $this->log = new Log('test.log');
@@ -231,6 +184,54 @@ class ModelShippingHermes extends Model
         "'";
         
         return $result;
+    }
+
+
+    public function populateParcelShops()
+    {
+        $this->log = new Log('test.log');
+        $this->dumplog = new Log('dump.log');
+        $this->log->write('populating parcel shops');
+        
+        // create tables oc_hermes_parcelshops
+        $this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "hermes_parcelshops` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`createdate` DATETIME NOT NULL,
+			`modifydate` DATETIME NULL,
+            `updateTimestamp` VARCHAR(50) NOT NULL,
+			`parcelShopCode` VARCHAR(100) NOT NULL,
+            `parcelShopName` NVARCHAR(100) NOT NULL,
+            `address` NVARCHAR(500) NOT NULL,
+            `city` NVARCHAR(100) NOT NULL,
+            `addressnotes` NVARCHAR(1000) NOT NULL,
+            `maxParcelOverallSize` DECIMAL(8, 2) NULL,
+            `maxParcelValue` DECIMAL(8, 2) NULL,
+            `maxParcelWeight` DECIMAL(8, 2) NULL,
+            `paymentType` VARCHAR(100) NULL,
+            `region` NVARCHAR(100) NOT NULL,
+            `schedulejson` VARCHAR(3000) NOT NULL,
+            `services` VARCHAR(200) NOT NULL,
+            `zipcode` VARCHAR(10) NULL,
+			PRIMARY KEY (`id`)
+          )
+          CHARACTER SET utf8 COLLATE utf8_bin");
+
+        // request hermes API or load json
+        $filepath = DIR_JSONFILES . 'parcelShops.json';
+
+        if (!file_exists($filepath)) {
+            $this->log->write('cannot find the json ' . $filepath);
+            return;
+        }
+
+        $jsondata = file_get_contents($filepath);
+        
+        $json = json_decode($jsondata);
+        foreach ($json->GetParcelShopsResult as $item) {
+            $sql = $this->createInsertParcelEntrySql($item);
+            $this->db->query($sql);
+        }
+        $this->log->write('filled new parcel shops');
     }
     
     private function extractNotes($params) {
