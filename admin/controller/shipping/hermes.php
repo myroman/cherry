@@ -14,7 +14,7 @@ class ControllerShippingHermes extends Controller {
 		
 		if ($this->request->server['REQUEST_METHOD'] == 'POST' && isset($this->request->post['hermes_updateparcels'])) {
 			//$this->model_shipping_hermes->populateParcelShops();
-			$this->model_shipping_hermes->populatePrices();
+			$this->model_shipping_hermes->updatePrices();
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL'));

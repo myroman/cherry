@@ -4,12 +4,13 @@ class ModelShippingHermes extends Model
     private $log;
     private $dumplog;
 
-    public function populatePrices()
+    public function updatePrices()
     {
         $this->log = new Log('test.log');
         $this->dumplog = new Log('dump.log');
-        $this->log->write('populating prices');
+        $this->log->write('Updating prices');
         
+        $this->log->write('Create table and/or delete rows');
         // create tables oc_hermes_delivery_price
         $this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "hermes_price` (
 			`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -28,27 +29,50 @@ class ModelShippingHermes extends Model
         $this->db->query($deletesql);
 
         // request hermes API or load json
-        
-        $downloadedResult = $this->downloadPricesForParcelShops();
-        $pricesJson = $downloadedResult['response'];
-        $requestToParcelShopCodes = $downloadedResult['requestParcelCodeMap'];
+        $pageSize = 100;
+        $pageNumber = 1;
+        do {
+            $this->log->write("Processing parcelshop prices pageNumber = " . $pageNumber . ", pageSize=" . $pageSize);
+            $parcelShops = $this->getParcelShopsPaged($pageSize, $pageNumber);   
+            $parcelShopCodes = array_map(array($this, 'getParcelShopCode'), $parcelShops);
+            if (count($parcelShops) == 0) {
+                $this->log->write('last page, break');
+                break;
+            }    
+            $this->log->write("Fetched " . count($parcelShops));
+            $this->dumplog->write("Will get prices for " . json_encode($parcelShopCodes));
+            $downloadedResult = $this->downloadPricesForParcelShops($parcelShopCodes);
+            $pricesJson = $downloadedResult['response'];
+            $requestToParcelShopCodes = $downloadedResult['requestParcelCodeMap'];
 
-        $this->log->write($requestToParcelShopCodes);
-        foreach ($pricesJson as $respItem) {
-            $sql = $this->createInsertPriceSql($respItem, $requestToParcelShopCodes);
-            $this->log->write("rid:" . $respItem->RequestId . ", price sql: " . $sql);
-            $this->db->query($sql);
-        }
-        $this->log->write('filled delivery prices');
+            foreach ($pricesJson as $respItem) {
+                $sql = $this->createInsertPriceSql($respItem, $requestToParcelShopCodes);
+                $this->db->query($sql);
+            }
+
+            $pageNumber = $pageNumber + 1;
+        } while (count($parcelShops) == $pageSize);
+        
+        $this->log->write('Updated all prices');
     }
 
     public function getParcelShops() {        
-        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops LIMIT 100";
+        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops";
+        $query = $this->db->query($sql);
+		return $query->rows;
+    }
+    public function getParcelShopsPaged($pageSize, $pageNumber) {       
+        $offset = $pageSize * ($pageNumber - 1); 
+        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_parcelshops LIMIT " . $offset . ", " . $pageSize;
         $query = $this->db->query($sql);
 		return $query->rows;
     }
 
-    private function downloadPricesForParcelShops() {
+    private function getParcelShopCode($parcelShop) {
+        return $parcelShop['parcelShopCode'];
+    }
+
+    private function downloadPricesForParcelShops($parcelShopCodes) {
         $pickupCode = "437";
         $deliveryProductId = "1";
         $cashOnDelivery = "3200";
@@ -56,18 +80,15 @@ class ModelShippingHermes extends Model
         $now = date(DATE_ATOM,time());
         $weight = "3200";
         $height = $width = $length = "20";
-
-        $parcelShops = $this->getParcelShops();
-        
         $payloadRequests = array();
         $requestId = time();
         
-        foreach($parcelShops as $item) {
+        foreach($parcelShopCodes as $parcelShopCode) {
             $productApps = array();
             array_push($productApps, array(
                 'HandOutAddress' => array(
                     '__type' => 'ParcelShopLocation:#B2C.API.DTO',
-                    'Code' => $item['parcelShopCode']
+                    'Code' => $parcelShopCode
                 ),
                 'PickupAddress' => array(
                     '__type' => 'DistributionCenterLocation:#B2C.API.DTO',
@@ -97,7 +118,7 @@ class ModelShippingHermes extends Model
                 'Length' => $length
             );
             array_push($payloadRequests, $req);
-            $requestToParcelShopCodes[$requestId] = $item['parcelShopCode'];
+            $requestToParcelShopCodes[$requestId] = $parcelShopCode;
             $requestId = $requestId + 1;
         }
 
@@ -128,7 +149,7 @@ class ModelShippingHermes extends Model
         );        
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch,CURLOPT_HEADER,0);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_ENCODING, '');
         // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
