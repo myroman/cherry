@@ -60,14 +60,6 @@
 						</div>
 					</div>
 				</div>
-				
-
-        <div class="form-group required">
-          <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
-          <div class="col-sm-10">
-            <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control" />
-          </div>
-        </div>
         <button type="button" id="button-quote" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_quote; ?></button>
       </div>
       <script type="text/javascript"><!--
@@ -75,7 +67,7 @@ $('#button-quote').on('click', function() {
 	$.ajax({
 		url: 'index.php?route=total/shipping/quote',
 		type: 'post',
-		data: 'country_id=' + $('select[name=\'country_id\']').val() + '&parcelshopcity=' + $('select[name=\'parcelshopcity\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
+		data: 'country_id=' + $('select[name=\'country_id\']').val() + '&parcelshopcity=' + $('select[name=\'parcelshopcity\']').val() + '&parcelshop=' + encodeURIComponent($('select[name=\'parcelshop\']').val()),
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-quote').button('loading');
@@ -97,12 +89,12 @@ $('#button-quote').on('click', function() {
 					$('select[name=\'country_id\']').after('<div class="text-danger">' + json['error']['country'] + '</div>');
 				}
 
-				if (json['error']['zone']) {
-					$('select[name=\'zone_id\']').after('<div class="text-danger">' + json['error']['zone'] + '</div>');
+				if (json['error']['parcelshopcity']) {
+					$('select[name=\'parcelshopcity\']').after('<div class="text-danger">' + json['error']['parcelshopcity'] + '</div>');
 				}
 
-				if (json['error']['postcode']) {
-					$('input[name=\'postcode\']').after('<div class="text-danger">' + json['error']['postcode'] + '</div>');
+				if (json['error']['parcelshop']) {
+					$('select[name=\'parcelshop\']').after('<div class="text-danger">' + json['error']['parcelshop'] + '</div>');
 				}
 			}
 
@@ -275,6 +267,9 @@ $('select[name=\'parcelshopcity\']').on('change', function() {
 
 //get details of a parcel shops
 $('select[name=\'parcelshop\']').on('change', function() {
+	if (!this.value) {
+		return;
+	}
 	$.ajax({
 		url: 'index.php?route=total/shipping/parcelShopDetails&id=' + this.value,
 		dataType: 'json',

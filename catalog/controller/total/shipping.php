@@ -16,6 +16,7 @@ class ControllerTotalShipping extends Controller
 
             $data['entry_country'] = $this->language->get('entry_country');
             $data['entry_zone'] = $this->language->get('entry_zone');
+            $data['entry_city'] = $this->language->get('entry_city');
             $data['entry_handout'] = $this->language->get('entry_handout');
             $data['entry_addressnotes'] = $this->language->get('entry_addressnotes');
             $data['entry_address'] = $this->language->get('entry_address');
@@ -80,8 +81,12 @@ class ControllerTotalShipping extends Controller
             $json['error']['country'] = $this->language->get('error_country');
         }
 
-        if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
-            $json['error']['zone'] = $this->language->get('error_zone');
+        if (!isset($this->request->post['parcelshopcity']) || $this->request->post['parcelshopcity'] == '') {
+            $json['error']['parcelshopcity'] = $this->language->get('error_city');
+        }
+
+        if (!isset($this->request->post['parcelshop']) || $this->request->post['parcelshop'] == '') {
+            $json['error']['parcelshop'] = $this->language->get('error_parcelshop');
         }
 
         $this->load->model('localisation/country');
@@ -257,6 +262,9 @@ class ControllerTotalShipping extends Controller
     public function parcelShopDetails() {
         $this->load->model('shipping/hermes');
         $id = $this->request->get['id'];
+        if ($id == 0) {
+            return "{}";
+        }
         $model = $this->model_shipping_hermes->getParcelShopById($id);
         $log = new Log('test.log');
 
