@@ -13,13 +13,16 @@ class ControllerShippingHermes extends Controller {
 		//$log->write('checkbox: ' . $this->request->post['hermes_updateparcels']);
 		
 		if ($this->request->server['REQUEST_METHOD'] == 'POST' && isset($this->request->post['hermes_updateparcels'])) {
+			$log->write('updating parcels');
 			//$this->model_shipping_hermes->populateParcelShops();
-			$this->model_shipping_hermes->updatePrices();
+			// $this->model_shipping_hermes->updatePrices();
+			
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 		else if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			$log->write('updating hermes settings');
 			$this->model_setting_setting->editSetting('hermes', $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');

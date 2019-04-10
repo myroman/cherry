@@ -25,9 +25,9 @@
         <h3 class="panel-title"><i class="fa fa-pencil"></i> <?php echo $text_edit; ?></h3>
       </div>
       <div class="panel-body">
-        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-hermes-parcels" class="form-horizontal">
+        <!-- <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-hermes-parcels" class="form-horizontal">
             <input type="checkbox" id="hermes_updateparcels" name="hermes_updateparcels" checked style="display: none;" />
-        </form>
+        </form> -->
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-hermes" class="form-horizontal">
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-rate"><span data-toggle="tooltip" title="<?php echo $help_rate; ?>"><?php echo $entry_rate; ?></span></label>
