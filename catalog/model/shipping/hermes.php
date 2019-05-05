@@ -40,11 +40,11 @@ class ModelShippingHermes extends Model
         $log = new Log('test.log');
         $log->write(json_encode($address));
 
-        if (!isset($address['id']) || $address['id'] == 0) {
+        if (!isset($address['parcelshopid']) || $address['parcelshopid'] == 0) {
             return NULL;
         }
 
-        $parcelShop = $this->getParcelShopById($address['id']);
+        $parcelShop = $this->getParcelShopById($address['parcelshopid']);
         if ($parcelShop == NULL) {
             return NULL;
         }
@@ -55,20 +55,16 @@ class ModelShippingHermes extends Model
         $cost = $priceRecord['price'];
 
         $this->load->language('shipping/hermes');
-
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int) $this->config->get('hermes_geo_zone_id') . "' AND country_id = '" . (int) $address['country_id'] . "' AND (zone_id = '" . (int) $address['zone_id'] . "' OR zone_id = '0')");
-
+        $title = $this->language->get('text_description');
         $method_data = array();
         //$description = $this->currency->format($this->tax->calculate($cost, $this->config->get('hermes_tax_class_id'), $this->config->get('config_tax')));
         $quote_data['hermes'] = array(
             'code' => 'hermes.hermes',
-            'title' => $text,
+            'title' => $title,
             'cost' => $cost,
-            //'tax_class_id' => $this->config->get('hermes_tax_class_id'),
-            'text' => 'No tax!',
+            'text' => $this->currency->format($cost)
         );
-
-        $text = $this->language->get('text_description') . " hey!";
+        
         $method_data = array(
             'code' => 'hermes',
             'title' => $this->language->get('text_title'),
@@ -76,6 +72,7 @@ class ModelShippingHermes extends Model
             'sort_order' => $this->config->get('hermes_sort_order'),
             'error' => false,
         );
+        return $method_data;
 
         // if ($status) {
         //     $cost = 0;

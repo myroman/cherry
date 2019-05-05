@@ -67,7 +67,7 @@ $('#button-quote').on('click', function() {
 	$.ajax({
 		url: 'index.php?route=total/shipping/quote',
 		type: 'post',
-		data: 'country_id=' + $('select[name=\'country_id\']').val() + '&parcelshopcity=' + $('select[name=\'parcelshopcity\']').val() + '&parcelshop=' + encodeURIComponent($('select[name=\'parcelshop\']').val()),
+		data: 'country_id=' + $('select[name=\'country_id\']').val() + '&city=' + $('select[name=\'parcelshopcity\']').val() + '&parcelshopid=' + encodeURIComponent($('select[name=\'parcelshop\']').val()),
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-quote').button('loading');
