@@ -70,7 +70,7 @@ class ModelShippingHermes extends Model
             'title' => $this->language->get('text_title'),
             'quote' => $quote_data,
             'sort_order' => $this->config->get('hermes_sort_order'),
-            'error' => false,
+            'error' => false
         );
         return $method_data;
 
