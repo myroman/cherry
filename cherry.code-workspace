@@ -5,10 +5,6 @@
 		}
 	],
 	"settings": {
-		"editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?",
-		"files.exclude": {
-			"*/.*": true,
-			"**/.**": true
-		}
+		"editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?"		
 	}	
 }
