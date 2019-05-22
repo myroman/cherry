@@ -7,3 +7,40 @@ table.parcel-shop-hours td {
 }
 
 /* landing page, from top to bottom */
+.top-action-logo {
+    flex: 1 0 auto;
+}
+
+.top-action-info-block {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.top-action {
+    flex: 0.1 0 auto;
+}
+
+.top-cart {
+    flex: 0.2 0 auto;
+}
+
+.top-action > button {
+    width: 140px;
+}
+
+.top-info {
+    flex: 0.1 0 auto;
+}
+
+.top-info-phone {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.top-info-shipinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
