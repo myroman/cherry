@@ -68,22 +68,37 @@
   </div>
 </nav>
 <header>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4">
-        <div id="logo">
-          <?php if ($logo) { ?>
-          <a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" class="img-responsive" /></a>
-          <?php } else { ?>
-          <h1><a href="<?php echo $home; ?>"><?php echo $name; ?></a></h1>
-          <?php } ?>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="top-action-info-block">
+                <div id="logo" class="top-action-logo">
+                    <?php if ($logo) { ?>
+                    <a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" class="img-responsive" /></a>
+                    <?php } else { ?>
+                    <h1><a href="<?php echo $home; ?>"><?php echo $name; ?></a></h1>
+                    <?php } ?>
+                </div>
+    
+                <div class="top-action">
+                    <button type="button" class="btn btn-default btn-med">Buy</button>
+                </div>
+    
+                <div class="top-cart">
+                    <?php echo $cart; ?>
+                </div>
+    
+                <div class="top-info">
+                    <div class="top-info-phone">8 800 500 67 46</div>
+                    <div class="top-info-shipinfo">
+                      <div>Бесплатный звонок</div>  
+                      <div>Доставка по всей России</div>    
+                    </div>
+                </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-sm-5"><?php echo $search; ?>
-      </div>
-      <div class="col-sm-3"><?php echo $cart; ?></div>
-    </div>
-  </div>
 </header>
 <?php if ($categories) { ?>
 <div class="container">
