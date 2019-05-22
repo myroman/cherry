@@ -104,6 +104,21 @@ class ControllerCommonHeader extends Controller {
 
 		$this->load->model('catalog/product');
 
+		//load informations
+		$this->load->model('catalog/information');
+
+		$data['informations'] = array();
+
+		foreach ($this->model_catalog_information->getInformations() as $result) {
+			if ($result['bottom']) {
+				$data['informations'][] = array(
+					'title' => $result['title'],
+					'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
+				);
+			}
+		}
+
+		//load categories
 		$data['categories'] = array();
 
 		$categories = $this->model_catalog_category->getCategories(0);
@@ -136,6 +151,8 @@ class ControllerCommonHeader extends Controller {
 				);
 			}
 		}
+
+		
 
 		$data['language'] = $this->load->controller('common/language');
 		$data['currency'] = $this->load->controller('common/currency');
