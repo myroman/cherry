@@ -9,6 +9,12 @@ table.parcel-shop-hours td {
 /* common styles */
 .subheadline {
     font-size: 32px;
+    text-transform: uppercase; 
+}
+
+.btn-green {
+    /* background: rgb(58,122,125);
+    color: rgb(255,255,255); */
 }
 
 /* landing page, from top to bottom */
@@ -84,4 +90,52 @@ table.parcel-shop-hours td {
 
 .how-works-row2 .filler {
     width: 20%;
+}
+
+/* features of cherry */
+
+.cherry-features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: rgb(234,241,241);
+    padding: 20px;
+}
+
+.cherry-features-row2 {
+    display: flex;
+    flex-direction: row;
+}
+.cherry-features-img-buy-wrap {
+    flex: 1 2 auto;
+}
+.cherry-features-img-buy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+}
+
+.cherry-features-img {}
+
+.cherry-features-img img {
+    width: 70%;
+}
+
+.cherry-features-buy {}
+
+.cherry-features-ul {
+    flex: 1 1 auto;
+}
+
+li.cherry-features-li {
+    list-style-type: none;
+}
+.cherry-features-li {
+    margin-top: 30px;
+}
+.cherry-features-li-title {
+    color: rgb(152,34,44);
+    font-weight: bold;
+    font-size: 14px;
 }

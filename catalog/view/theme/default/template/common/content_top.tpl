@@ -31,5 +31,43 @@
         </div>
     </div>
 
-    <div></div>
+    <div class="cherry-features">
+        <div class="cherry-features-heading">
+            <h2 class="subheadline">ПРЕИМУЩЕСТВА ВИШНИ</h2>
+        </div>
+
+        <div class="cherry-features-row2">
+            <div class="cherry-features-img-buy-wrap">
+                <div class="cherry-features-img-buy">
+                    <div class="cherry-features-img">
+                        <img src="/cherry/image/catalog/cherry-box-blue-bg.jpg" />
+                    </div>
+    
+                    <div class="cherry-features-buy">
+                        <button type="button" class="btn btn-default btn-med btn-green">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <?php if ($cherryFeatures) {?>
+                <div class="cherry-features-ul">
+
+                    <ul>
+                        <?php foreach($cherryFeatures as $item) { ?>
+                        <li class="cherry-features-li">
+                            <div class="cherry-features-li-title">
+                                <i class="fa fa-check-circle"></i>
+                                <?php echo $item['title'] ?>
+                            </div>
+        
+                            <div class="cherry-features-li-description">
+                                <?php echo $item['description'] ?>
+                            </div>
+                        </li>
+                        <?php } ?>
+                    </ul>                
+                </div>
+            <?php } ?>
+        </div>
+    </div>
 </div>

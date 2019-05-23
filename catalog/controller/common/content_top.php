@@ -61,6 +61,41 @@ class ControllerCommonContentTop extends Controller {
 			}
 		}
 
+		$cherryFeatures = array();
+		$item1 = array(
+			'title' => 'title1', 
+			'description'=>'hello'
+		);
+		array_push($cherryFeatures, 
+			array(
+				'title' => 'Простота использования', 
+				'description'=>'Любой человек без специальных знаний и навыков может
+				эффективно использовать огнетушитель ВИШНЯ.'
+			),
+			array(
+				'title' => 'Самосрабатывающее устройство', 
+				'description'=>'При проявлениях возгорания, огнетушитель ВИШНЯ
+				срабатывает автоматически, обеспечивая максимальную
+				защиту помещения от пожара.'
+			),
+			array(
+				'title' => 'Высокая эффективность', 
+				'description'=>'Огнетушитель ВИШНЯ способен локализовать возгарание
+				в помещении объемом 36 м.куб.'
+			),
+			array(
+				'title' => 'Не требует тех обслуживания', 
+				'description'=>'Вам не потребуется перезаряжать огнетушитель ВИШНЯ
+				и производить любые другие действия в течение 5 лет.'
+			),
+			array(
+				'title' => 'Безопасность для окружающих', 
+				'description'=>'Огнетушитель ВИШНЯ не причиняет вреда здоровью
+				людей, имуществу и окружающей среде.'
+			)
+		);
+		$data['cherryFeatures'] = $cherryFeatures;
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/content_top.tpl')) {
 			return $this->load->view($this->config->get('config_template') . '/template/common/content_top.tpl', $data);
 		} else {
