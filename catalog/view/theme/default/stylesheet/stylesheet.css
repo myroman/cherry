@@ -311,25 +311,25 @@ div.required .control-label:before {
 footer {
 	margin-top: 30px;
 	padding-top: 30px;
-	background-color: #303030;
+	background-color: rgb(231,239,239);
 	border-top: 1px solid #ddd;
-	color: #e2e2e2;
+	color: rgb(112,112,112);
 }
 footer hr {
 	border-top: none;
 	border-bottom: 1px solid #666;
 }
 footer a {
-	color: #ccc;
+	color: rgb(112,112,112);
 }
 footer a:hover {
-	color: #fff;
+	color: #000;
 }
 footer h5 {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 13px;
 	font-weight: bold;
-	color: #fff;
+	color: rgb(112,112,112);
 }
 /* alert */
 .alert {
