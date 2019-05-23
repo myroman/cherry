@@ -9,6 +9,7 @@ class ControllerCommonHome extends Controller {
 			$this->document->addLink(HTTP_SERVER, 'canonical');
 		}
 
+		$data['baseurl'] = HTTPS_SERVER;
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
@@ -54,7 +55,7 @@ class ControllerCommonHome extends Controller {
 				'description' => 'Огнетушитель следует забросить в очаг возгорания.
 				Активация устройства произойдет автоматически в
 				течении1 сек от прямого контакта с пламенем.',
-				'imageUrl' => '/cherry/image/catalog/usage-1.jpg'
+				'imageUrl' => $data['baseurl'] . 'image/catalog/usage-1.jpg'
 			),
 			array(
 				'title' => 'Автоматический режим:',
@@ -62,7 +63,7 @@ class ControllerCommonHome extends Controller {
 				опасном месте возникновения очага возгорания.
 				Огнетушитель активизируется в течении 1 сек от
 				прямого контакта с пламенем.',
-				'imageUrl' => '/cherry/image/catalog/usage-2.jpg'
+				'imageUrl' => $data['baseurl'] . 'image/catalog/usage-2.jpg'
 			)
 		);
 
