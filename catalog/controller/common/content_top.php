@@ -113,7 +113,6 @@ class ControllerCommonContentTop extends Controller {
 
 		$data['usageList'] = $usageList;
 
-
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/content_top.tpl')) {
 			return $this->load->view($this->config->get('config_template') . '/template/common/content_top.tpl', $data);
 		} else {
