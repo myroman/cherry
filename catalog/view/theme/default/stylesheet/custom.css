@@ -178,3 +178,45 @@ table.parcel-shop-hours td {
 .usage-img img{
     width: 500px;
 }
+
+/* feedback section */
+.feedback-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.feedback-message {
+    width: 100%;
+    background: rgb(59,123,124);
+    color: white;
+    text-align: center;
+    padding: 25px;
+    line-height: 3em;
+}
+
+.feedback-header {
+    margin-top: 20px;
+}
+
+.feedback-form {
+    margin-top: 20px;
+    width: 40%;
+}
+.feedback-form > form > div {
+    margin-top: 14px;
+}
+.feedback-form input,
+.feedback-form textarea {
+    border-radius: 15px;
+    border: 1px solid rgb(59,123,124);
+    width: 100%;
+    padding: 4px 10px;
+}
+
+.feedback-form textarea {
+    resize: none;
+}
+
+.submit-button-wrapper {
+    text-align: center;
+}

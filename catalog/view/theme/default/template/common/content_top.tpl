@@ -103,4 +103,46 @@
     </div>
 
     <?php } ?>
+
+    <div class="feedback-box">
+        <div class="feedback-message">
+            <p>
+                Если у Вас остались какие-либо вопросы, свяжитесь с нами для консультации.
+                
+            </p>
+            <p>
+                    Телефон горячей линии: 8 800 500-67-46 (звонок бесплатный)
+            </p>
+        </div>
+
+        <div class="feedback-header">
+            <h2 class="subheadline">
+                ФОРМА ОБРАТНОЙ СВЯЗИ
+            </h2>
+        </div>
+
+        <div class="feedback-form">
+            <form>
+                <div>
+                    <input type="text" name="fullname" placeholder="Имя*" />
+                </div>
+
+                <div>
+                    <input type="email" name="email" placeholder="E-mail*" />
+                </div>
+
+                <div>
+                    <input type="tel" name="phone" placeholder="Телефон" />
+                </div>
+
+                <div>
+                    <textarea name="message" maxlength="1000" placeholder="Сообщение*" rows="5"></textarea>
+                </div>
+
+                <div class="submit-button-wrapper">
+                    <button type="button" class="btn btn-default btn-med btn-green">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
