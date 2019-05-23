@@ -6,6 +6,11 @@ table.parcel-shop-hours td {
     padding-right: 8px;
 }
 
+/* common styles */
+.subheadline {
+    font-size: 32px;
+}
+
 /* landing page, from top to bottom */
 .top-action-logo {
     flex: 1 0 auto;
@@ -43,4 +48,40 @@ table.parcel-shop-hours td {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* how it works section */
+.how-works {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.how-works-row2 {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.how-works-img {
+    flex: 1 1 auto;
+}
+
+.how-works-img img {
+    width: 100px;
+}
+.how-works-description p {
+    text-align: justify;
+    font-size: 13px;
+}
+
+.how-works-description1 {
+    flex: 1 1.3 auto;
+}
+.how-works-description2 {
+    flex: 1 1 auto;
+}
+
+.how-works-row2 .filler {
+    width: 20%;
 }
