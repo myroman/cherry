@@ -20,7 +20,7 @@
             </div>
             <div class="how-works-row2">
                 <div class="how-works-img">
-                    <img src="/cherry/image/catalog/how-works-1.jpg" />
+                    <img src="<?php echo $baseurl ?>image/catalog/how-works-1.jpg" />
                 </div>
                 <div class="how-works-description how-works-description1">
                   <p>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="filler"></div>
                 <div class="how-works-img">
-                    <img src="/cherry/image/catalog/how-works-2.jpg" />
+                    <img src="<?php echo $baseurl ?>image/catalog/how-works-2.jpg" />
                 </div>
                 <div class="how-works-description how-works-description2">
                     <p>
@@ -51,7 +51,7 @@
                 <div class="cherry-features-img-buy-wrap">
                     <div class="cherry-features-img-buy">
                         <div class="cherry-features-img">
-                            <img src="/cherry/image/catalog/cherry-box-blue-bg.jpg" />
+                            <img src="<?php echo $baseurl ?>image/catalog/cherry-box-blue-bg.jpg" />
                         </div>
         
                         <div class="cherry-features-buy">
