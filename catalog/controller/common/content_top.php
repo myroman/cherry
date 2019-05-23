@@ -61,11 +61,7 @@ class ControllerCommonContentTop extends Controller {
 			}
 		}
 
-		$cherryFeatures = array();
-		$item1 = array(
-			'title' => 'title1', 
-			'description'=>'hello'
-		);
+		$cherryFeatures = array();		
 		array_push($cherryFeatures, 
 			array(
 				'title' => 'Простота использования', 
@@ -95,6 +91,28 @@ class ControllerCommonContentTop extends Controller {
 			)
 		);
 		$data['cherryFeatures'] = $cherryFeatures;
+
+		$usageList = array();
+		array_push($usageList,
+			array(
+				'title' => 'Ручной режим:',
+				'description' => 'Огнетушитель следует забросить в очаг возгорания.
+				Активация устройства произойдет автоматически в
+				течении1 сек от прямого контакта с пламенем.',
+				'imageUrl' => '/cherry/image/catalog/usage-1.jpg'
+			),
+			array(
+				'title' => 'Автоматический режим:',
+				'description' => 'Заранее расположите огнетушитель в потенциально
+				опасном месте возникновения очага возгорания.
+				Огнетушитель активизируется в течении 1 сек от
+				прямого контакта с пламенем.',
+				'imageUrl' => '/cherry/image/catalog/usage-2.jpg'
+			)
+		);
+
+		$data['usageList'] = $usageList;
+
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/content_top.tpl')) {
 			return $this->load->view($this->config->get('config_template') . '/template/common/content_top.tpl', $data);

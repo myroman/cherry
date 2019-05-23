@@ -55,7 +55,7 @@
                     <ul>
                         <?php foreach($cherryFeatures as $item) { ?>
                         <li class="cherry-features-li">
-                            <div class="cherry-features-li-title">
+                            <div class="cherry-features-li-title clr-maroon">
                                 <i class="fa fa-check-circle"></i>
                                 <?php echo $item['title'] ?>
                             </div>
@@ -69,5 +69,38 @@
                 </div>
             <?php } ?>
         </div>
+    </div> <!--cherry-features-->
+
+    <?php if ($usageList) {?>
+    <div class="usage">
+        <div class="usage-heading">
+            <h2 class="subheadline">ПРИМЕНЕНИЕ</h2>
+        </div>
+
+        <div class="usage-content">
+            <ul>
+                <?php foreach($usageList as $item) { ?>
+                <li>
+                    <div class="usage-content-row">
+                        <div class="usage-text">
+                            <div class="usage-text-title clr-maroon">
+                                <?php echo $item['title'] ?>
+                            </div>
+        
+                            <div class="usage-text-description">
+                                <?php echo $item['description'] ?>
+                            </div>
+                        </div>
+        
+                        <div class="usage-img">
+                            <img src="<?php echo $item['imageUrl'] ?>" />
+                        </div>
+                    </div>
+                </li>
+                <?php } ?>
+            </ul>
+        </div>
     </div>
+
+    <?php } ?>
 </div>
