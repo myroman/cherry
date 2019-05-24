@@ -12,6 +12,11 @@
       <?php echo $content_top; ?>
       <?php echo $content_bottom; ?>
 
+    <div class="banner-wrapper">
+      <a href="<?php echo $baseurl ?>index.php?route=product/product&path=57&product_id=50">
+        <img src="<?php echo $baseurl ?>image/catalog/vishnya-long-banner.jpg" />
+      </a>
+    </div>
 
     <div class="more-info">        
     
