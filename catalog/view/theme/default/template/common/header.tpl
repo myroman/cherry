@@ -100,7 +100,7 @@
         </div>
       </div>
 </header>
-<?php if ($informations) { ?>
+<!-- <?php if ($informations) { ?>
   <div class="container">
     <nav id="menu" class="navbar">
       <div class="navbar-header"><span id="category" class="visible-xs"><?php echo $text_category; ?></span>
@@ -113,6 +113,22 @@
           <?php } ?>
         </ul>
       </div>
+    </nav>
+  </div>
+<?php } ?> -->
+
+<?php if ($informations) { ?>
+  <div class="container">
+    <nav id="top-menu">      
+        <ul class="top-menu-list">
+          <?php foreach ($informations as $information) { ?>
+            <li class="top-menu-item"> 
+              <div >
+                  <a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a>
+              </div>
+            </li>
+          <?php } ?>
+        </ul>
     </nav>
   </div>
 <?php } ?>

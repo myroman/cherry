@@ -21,6 +21,28 @@ table.parcel-shop-hours td {
     color: rgb(152,34,44);
 }
 
+/* menu */
+.top-menu-list {
+	display: flex;    
+    color: black;
+    padding-left: 0;
+}
+
+.top-menu-item {
+    flex: 1 1 auto;
+    list-style-type: none;    
+    height: 4em;
+    line-height: 4em;
+    text-align: center;
+}
+.top-menu-item:hover {
+    background: #d5d5d5;
+}
+.top-menu-item a {
+    font-size: 16px;
+    color: black;
+}
+
 /* landing page, from top to bottom */
 .top-action-logo {
     flex: 1 0 auto;
@@ -74,6 +96,15 @@ table.parcel-shop-hours td {
 .more-info p {
     font-size: 16px;
     color: black;
+}
+
+/* main banner on home screen*/
+.banner-wrapper {
+    padding: 10px;
+}
+
+.banner-wrapper img {
+    width: 100%;
 }
 
 /* how it works section */
