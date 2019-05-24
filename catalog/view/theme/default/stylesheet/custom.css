@@ -23,6 +23,15 @@ table.parcel-shop-hours td {
     color: #fff;
 }
 
+.btn_outlined {
+    background: white;
+    border: solid 1px rgb(178,59,63);
+    border-radius: 2px;
+    font-size: 16px;
+    color: black;
+    width: 150px;
+}
+
 .more-info li {
     list-style-type: none;
 }
@@ -95,7 +104,7 @@ table.parcel-shop-hours td {
     align-items: center;
 }
 
-.more-info h2.subheadline {
+h2.subheadline {
     font-weight: bold;
     font-size: 24px;
     font-family: Futura;
@@ -322,4 +331,17 @@ table.parcel-shop-hours td {
 
 .testing-video-item.filler {
 
+}
+
+
+/* product */
+
+.product-description {
+    font-size: 14px;
+    color: black;
+    margin: 30px 0;
+}
+
+.product-buy {
+    margin-top: 20px;
 }

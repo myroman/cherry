@@ -24,6 +24,7 @@ $_['button_address_add']    = 'Добавить адрес';
 $_['button_back']           = 'Назад';
 $_['button_continue']       = 'Продолжить';
 $_['button_cart']           = 'Купить';
+$_['button_find_dealer']    = 'Найти дилера';
 $_['button_cancel']         = 'Отмена';
 $_['button_compare']        = 'В сравнение';
 $_['button_wishlist']       = 'В закладки';

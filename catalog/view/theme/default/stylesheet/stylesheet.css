@@ -669,6 +669,9 @@ h2.price {
 .thumbnails > img {
 	width: 100%;
 }
+.image-main img {
+	width: 70%;
+}
 .image-additional a {
 	margin-bottom: 20px;
 	padding: 5px;

@@ -252,6 +252,7 @@ class ControllerProductProduct extends Controller {
 			$data['entry_bad'] = $this->language->get('entry_bad');
 
 			$data['button_cart'] = $this->language->get('button_cart');
+			$data['button_find_dealer'] = $this->language->get('button_find_dealer');
 			$data['button_wishlist'] = $this->language->get('button_wishlist');
 			$data['button_compare'] = $this->language->get('button_compare');
 			$data['button_upload'] = $this->language->get('button_upload');
