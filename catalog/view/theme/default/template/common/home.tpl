@@ -14,7 +14,7 @@
 
     <div class="banner-wrapper">
       <a href="<?php echo $baseurl ?>index.php?route=product/product&path=57&product_id=50">
-        <img src="<?php echo $baseurl ?>image/catalog/vishnya-long-banner.jpg" />
+        <img src="<?php echo $baseurl ?>image/catalog/vishnya-banner-white-bg.jpg" />
       </a>
     </div>
 
@@ -29,11 +29,11 @@
                 <div class="cherry-features-img-buy-wrap">
                     <div class="cherry-features-img-buy">
                         <div class="cherry-features-img">
-                            <img src="<?php echo $baseurl ?>image/catalog/cherry-box-blue-bg.jpg" />
+                            <img src="<?php echo $baseurl ?>image/catalog/cherry-box-white-bg.jpg" />
                         </div>
         
                         <div class="cherry-features-buy">
-                            <button type="button" class="btn btn-default btn-med btn-green">Купить</button>
+                            <button type="button" class="btn btn-default btn-med btn-buy_green">Купить</button>
                         </div>
                     </div>
                 </div>
