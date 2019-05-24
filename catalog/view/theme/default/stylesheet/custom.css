@@ -112,12 +112,14 @@ h2.subheadline {
     text-transform: uppercase; 
 }
 
-.more-info span {
+.more-info span,
+.info-block span {
     font-size: 16px;
     color: black;
 }
 
-.more-info p {
+.more-info p,
+.info-block p {
     font-size: 16px;
     color: black;
 }
@@ -344,4 +346,17 @@ h2.subheadline {
 
 .product-buy {
     margin-top: 20px;
+}
+
+.tech-info {
+    font-size: 16px;
+    color: black;    
+}
+.tech-info .subheadline,
+.info-block .subheadline {
+    text-align: center;
+}
+
+.info-block {
+    margin-top: 12px;
 }
