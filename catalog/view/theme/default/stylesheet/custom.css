@@ -296,3 +296,30 @@ table.parcel-shop-hours td {
 .submit-button-wrapper {
     text-align: center;
 }
+
+/* for articles */
+
+.article-wrapper p {
+    font-family: Open Sans, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000;
+}
+
+.testing-video-list {
+    display: flex;
+    flex-direction: column;
+}
+.testing-video-row {
+    flex-direction: row;
+    display: flex;
+}
+.testing-video-item {
+    flex: 1 1 auto;    
+    padding: 12px;
+    width: 50%;
+    min-height: 350px;
+}
+
+.testing-video-item.filler {
+
+}
