@@ -108,6 +108,11 @@ class ControllerCommonHeader extends Controller {
 		$this->load->model('catalog/information');
 
 		$data['informations'] = array();
+		$cherryPageUrl = $this->url->link('product/product', 'product_id=' . 50);
+		array_push($data['informations'], array(
+			'title' => 'О продукте',
+			'href' => $cherryPageUrl
+		));
 
 		foreach ($this->model_catalog_information->getInformations() as $result) {
 			if ($result['bottom']) {
