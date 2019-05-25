@@ -81,7 +81,8 @@
                 </div>
     
                 <div class="top-action">
-                    <button type="button" class="btn btn-default btn-med btn-buy_green">Купить</button>
+                    <button type="button" class="btn btn-default btn-med btn-buy_green" 
+                    onclick="cart.add('50', '1');">Купить</button>
                 </div>
     
                 <div class="top-cart">
