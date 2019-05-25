@@ -12,7 +12,7 @@
       <?php echo $content_top; ?>
       <?php echo $content_bottom; ?>
 
-    <div class="banner-wrapper">
+    <div class="main-page-info-block banner-wrapper">
       <a href="<?php echo $baseurl ?>index.php?route=product/product&path=57&product_id=50">
         <img src="<?php echo $baseurl ?>image/catalog/vishnya-banner-white-bg.jpg" />
       </a>
@@ -20,7 +20,7 @@
 
     <div class="more-info">        
     
-        <div class="cherry-features">
+        <div class="main-page-info-block cherry-features">
             <div class="cherry-features-heading">
                 <h2 class="subheadline">ПРЕИМУЩЕСТВА ВИШНИ</h2>
             </div>
@@ -63,7 +63,7 @@
         </div> <!--cherry-features-->
     
         <?php if ($usageList) {?>
-        <div class="usage">
+        <div class="main-page-info-block usage">
             <div class="usage-heading">
                 <h2 class="subheadline">ПРИМЕНЕНИЕ</h2>
             </div>

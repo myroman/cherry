@@ -127,7 +127,7 @@ h2.subheadline {
 /* main banner on home screen*/
 .banner-wrapper {
     padding: 0px 10px 0 10px;
-
+/* 
     border: 4px solid #fff;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -136,12 +136,18 @@ h2.subheadline {
 	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2);
 	-moz-box-shadow: 0 1px 4px rgba(0,0,0,.2);
 	-o-box-shadow: 0 1px 4px rgba(0,0,0,.2);
-	box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,.2); 
+*/
 }
 
 .banner-wrapper img {
     width: 100%;
 }
+
+.main-page-info-block {
+    border-bottom: 2px solid rgb(235,242,242);
+}
+
 .more-info {
     margin-top: 20px;
 }
