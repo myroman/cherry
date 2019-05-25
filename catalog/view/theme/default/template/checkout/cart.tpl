@@ -97,10 +97,11 @@
           </table>
         </div>
       </form>
-      <?php if ($coupon || $voucher || $reward || $shipping) { ?>
+      <?php if ($shipping) { ?>
       <h2><?php echo $text_next; ?></h2>
       <p><?php echo $text_next_choice; ?></p>
-      <div class="panel-group" id="accordion"><?php echo $coupon; ?><?php echo $voucher; ?><?php echo $reward; ?><?php echo $shipping; ?></div>
+      <div class="panel-group" id="accordion">
+        <?php echo $shipping; ?></div>
       <?php } ?>
       <br />
       <div class="row">
