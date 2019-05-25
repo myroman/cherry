@@ -36,7 +36,7 @@
         <label class="control-label" for="input-payment-telephone"><?php echo $entry_telephone; ?></label>
         <input type="text" name="telephone" value="<?php echo $telephone; ?>" placeholder="<?php echo $entry_telephone; ?>" id="input-payment-telephone" class="form-control" />
       </div>
-      <div class="form-group">
+      <div class="form-group" style="display: none;">
         <label class="control-label" for="input-payment-fax"><?php echo $entry_fax; ?></label>
         <input type="text" name="fax" value="<?php echo $fax; ?>" placeholder="<?php echo $entry_fax; ?>" id="input-payment-fax" class="form-control" />
       </div>
@@ -154,7 +154,7 @@
   <div class="col-sm-6">
     <fieldset id="address">
       <legend><?php echo $text_your_address; ?></legend>
-      <div class="form-group">
+      <div class="form-group" style="display: none;">
         <label class="control-label" for="input-payment-company"><?php echo $entry_company; ?></label>
         <input type="text" name="company" value="<?php echo $company; ?>" placeholder="<?php echo $entry_company; ?>" id="input-payment-company" class="form-control" />
       </div>
@@ -162,7 +162,7 @@
         <label class="control-label" for="input-payment-address-1"><?php echo $entry_address_1; ?></label>
         <input type="text" name="address_1" value="<?php echo $address_1; ?>" placeholder="<?php echo $entry_address_1; ?>" id="input-payment-address-1" class="form-control" />
       </div>
-      <div class="form-group">
+      <div class="form-group" style="display: none;">
         <label class="control-label" for="input-payment-address-2"><?php echo $entry_address_2; ?></label>
         <input type="text" name="address_2" value="<?php echo $address_2; ?>" placeholder="<?php echo $entry_address_2; ?>" id="input-payment-address-2" class="form-control" />
       </div>
