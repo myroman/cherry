@@ -313,13 +313,6 @@
         <h2 class="subheadline">
             Техническая информация
         </h2>
-          <!-- 
-            <div>Классы очагов возгорания: АВСЕ</div>
-          <div>Объем тушения: до 36 куб м</div>
-          <div>Вес огнетушителя: 3,2 кг.</div>
-          <div>Транспортировочные габариты: 200х200 мм.</div>
-          <div>Диаметр огнетушителя: 180 мм</div>
-         -->
          <div class="tech-info-content">
            <div class="tech-info-item">
              <div class="img-wrapper">
@@ -391,6 +384,71 @@
                 </div>
               </div>
          </div>
+      </div>
+
+      <div class="info-block documents">
+        <h2 class="subheadline">Документы</h2>
+
+        <div class="documents-content">
+          <div class="document-item">
+            <div class="icon-wrapper">
+                <a href="<?php echo $baseurl ?>uploaded/cert-powder.pdf" download="Сертификат соответствия на огнетущащий порошок">
+                    <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
+                </a>
+            </div>
+
+            <div class="document-name">
+              <a href="<?php echo $baseurl ?>uploaded/cert-powder.pdf" 
+                download="Сертификат соответствия на огнетущащий порошок">
+                Сертификат соответствия на огнетущащий порошок</a>
+            </div>
+          </div>
+
+          <div class="document-item">
+              <div class="icon-wrapper">
+                  <a href="<?php echo $baseurl ?>uploaded/cert-vishnya.pdf" 
+                    download="Сертификат соответствия на устройство">
+                      <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
+                  </a>
+              </div>
+  
+              <div class="document-name">
+                <a href="<?php echo $baseurl ?>uploaded/cert-vishnya.pdf" 
+                  download="Сертификат соответствия на устройство">
+                  Сертификат соответствия на устройство</a>
+              </div>
+            </div>
+
+            <div class="document-item">
+                <div class="icon-wrapper">
+                    <a href="<?php echo $baseurl ?>uploaded/passport-vishnya.pdf" 
+                      download="Паспорт на устройство ОППС ВИШНЯ">
+                        <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
+                    </a>
+                </div>
+    
+                <div class="document-name">
+                  <a href="<?php echo $baseurl ?>uploaded/passport-vishnya.pdf" 
+                    download="Паспорт на устройство ОППС ВИШНЯ">
+                    Паспорт на устройство ОППС ВИШНЯ</a>
+                </div>
+              </div>
+
+              <div class="document-item">
+                  <div class="icon-wrapper">
+                      <a href="<?php echo $baseurl ?>uploaded/diplom.jpg" 
+                        download="Диплом к медали «Гарантия качества и безопасности»">
+                          <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
+                      </a>
+                  </div>
+      
+                  <div class="document-name">
+                    <a href="<?php echo $baseurl ?>uploaded/diplom.jpg" 
+                      download="Диплом к медали «Гарантия качества и безопасности»">
+                      Диплом к медали «Гарантия качества и безопасности»</a>
+                  </div>
+                </div>
+        </div>
       </div>
 
       <div class="info-block">
