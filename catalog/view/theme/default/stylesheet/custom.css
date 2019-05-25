@@ -105,7 +105,7 @@ table.parcel-shop-hours td {
 }
 
 h2.subheadline {
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: 24px;
     font-family: Futura;
     color: rgba(0,0,0,0.81);
@@ -145,7 +145,7 @@ h2.subheadline {
 }
 
 .main-page-info-block {
-    border-bottom: 2px solid rgb(235,242,242);
+    border-bottom: 4px solid rgb(235,242,242);
 }
 
 .more-info {
@@ -356,15 +356,37 @@ h2.subheadline {
 
 .tech-info {
     font-size: 16px;
-    color: black;    
+    color: black;     
 }
 .tech-info .subheadline,
 .info-block .subheadline {
-    text-align: center;
+    text-align: center;    
 }
 
+.tech-info-content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    padding-bottom: 40px;
+}
+
+.tech-info-item {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tech-info .img-wrapper > img {
+    max-width: 100px;
+}
+
+
 .info-block {
-    margin-top: 12px;
+    margin-top: 40px;
+    border-bottom: 4px solid rgb(235,242,242);
+}
+.info-block-content {
+    margin-top: 20px;
 }
 
 
@@ -378,3 +400,4 @@ h2.subheadline {
 .accord_green .panel-body {
     font-size: 16px;
 }
+

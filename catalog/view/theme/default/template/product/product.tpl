@@ -309,33 +309,102 @@
         </div>
       </div>
 
-      <div class="tech-info">
+      <div class="info-block tech-info">
         <h2 class="subheadline">
             Техническая информация
         </h2>
-          <div>Классы очагов возгорания: АВСЕ</div>
+          <!-- 
+            <div>Классы очагов возгорания: АВСЕ</div>
           <div>Объем тушения: до 36 куб м</div>
           <div>Вес огнетушителя: 3,2 кг.</div>
           <div>Транспортировочные габариты: 200х200 мм.</div>
           <div>Диаметр огнетушителя: 180 мм</div>
+         -->
+         <div class="tech-info-content">
+           <div class="tech-info-item">
+             <div class="img-wrapper">
+               <img src="<?php echo $baseurl ?>image/catalog/icons/fire.jpg" />
+             </div>
+
+             <div class="tech-info-item-value">
+              <b>ABCE</b>
+             </div>
+
+             <div class="tech-info-item-description">
+              <span>Классы очагов возгорания</span>
+             </div>
+           </div>
+
+          <div class="tech-info-item">
+            <div class="img-wrapper">
+              <img src="<?php echo $baseurl ?>image/catalog/icons/volume.jpg" />
+            </div>
+
+            <div class="tech-info-item-value">
+              <b>до 36 куб м</b>
+            </div>
+
+            <div class="tech-info-item-description">
+              <span>Объем тушения</span>
+            </div>
+          </div>
+
+          <div class="tech-info-item">
+              <div class="img-wrapper">
+                <img src="<?php echo $baseurl ?>image/catalog/icons/weight.jpg" />
+              </div>
+  
+              <div class="tech-info-item-value">
+                <b>32 кг</b>
+              </div>
+  
+              <div class="tech-info-item-description">
+                <span>Вес огнетушителя</span>
+              </div>
+            </div>
+
+          <div class="tech-info-item">
+              <div class="img-wrapper">
+                <img src="<?php echo $baseurl ?>image/catalog/icons/radius.jpg" />
+              </div>
+  
+              <div class="tech-info-item-value">
+                <b>180 мм</b>
+              </div>
+  
+              <div class="tech-info-item-description">
+                <span>Диаметр огнетушителя</span>
+              </div>
+            </div>
+
+            <div class="tech-info-item">
+                <div class="img-wrapper">
+                  <img src="<?php echo $baseurl ?>image/catalog/icons/duration.jpg" />
+                </div>
+    
+                <div class="tech-info-item-value">
+                  <b>5 лет</b>
+                </div>
+    
+                <div class="tech-info-item-description">
+                  <span>Срок годности</span>
+                </div>
+              </div>
+         </div>
       </div>
 
       <div class="info-block">
         <h2 class="subheadline">Применение</h2>
-        <div>
-            <span>
+        <div class="info-block-content">
+            <p>
                 ОППС ВИШНЯ предназначен для использования в качестве первичного средства тушения очагов пожаров твёрдых горючих веществ (класс А), жидких горючих материалов (класс В), газообразных веществ (класс С) и электрооборудования (класс Е), находящегося под напряжением.
-            </span>
+            </p>
+            <p>
+                Места применения: квартиры, коттеджи, дачные дома, бани, летние террасы, офисные помещения (устанавливать вблизи дымоходов, печей, газовых баллонов и оборудования, вблизи нагревательных приборов), склады, гаражи, чердачные помещения, кладовки, сараи (устанавливать  в местах хранения и складирования легковоспламеняющихся и горючих веществ), котельные любых типов, места проведения строительных и ремонтных работ, лифтовые шахты, мусоросборные камеры, электрошкафы. Подробнее о применении можно узнать здесь 
+            </p>
         </div>
       </div>
 
-      <div class="info-block">
-        <div>
-          <p>
-              Места применения: квартиры, коттеджи, дачные дома, бани, летние террасы, офисные помещения (устанавливать вблизи дымоходов, печей, газовых баллонов и оборудования, вблизи нагревательных приборов), склады, гаражи, чердачные помещения, кладовки, сараи (устанавливать  в местах хранения и складирования легковоспламеняющихся и горючих веществ), котельные любых типов, места проведения строительных и ремонтных работ, лифтовые шахты, мусоросборные камеры, электрошкафы. Подробнее о применении можно узнать здесь 
-          </p>
-        </div>
-      </div>
       <?php if ($products) { ?>
       <h3><?php echo $text_related; ?></h3>
       <div class="row">
