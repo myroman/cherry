@@ -407,6 +407,7 @@ h2.subheadline {
 }
 .documents-content {
     display: flex;
+    margin-top: 40px;
 }
 
 .document-item {
@@ -425,4 +426,10 @@ h2.subheadline {
 .document-name a:hover {
     font-size: 14px;
     color: black;
+}
+
+/* video */
+
+.video-wrapper {
+    height: 500px;
 }
