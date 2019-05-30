@@ -70,7 +70,7 @@ class ControllerCommonContentTop extends Controller {
 			),
 			array(
 				'title' => 'Самосрабатывающее устройство', 
-				'description'=>'При проявлениях возгорания, огнетушитель ВИШНЯ
+				'description'=>'При проявлениях возгарания, огнетушитель ВИШНЯ
 				срабатывает автоматически, обеспечивая максимальную
 				защиту помещения от пожара.'
 			),
@@ -96,7 +96,7 @@ class ControllerCommonContentTop extends Controller {
 		array_push($usageList,
 			array(
 				'title' => 'Ручной режим:',
-				'description' => 'Огнетушитель следует забросить в очаг возгорания.
+				'description' => 'Огнетушитель следует забросить в очаг возгарания.
 				Активация устройства произойдет автоматически в
 				течении1 сек от прямого контакта с пламенем.',
 				'imageUrl' => '/cherry/image/catalog/usage-1.jpg'
@@ -104,7 +104,7 @@ class ControllerCommonContentTop extends Controller {
 			array(
 				'title' => 'Автоматический режим:',
 				'description' => 'Заранее расположите огнетушитель в потенциально
-				опасном месте возникновения очага возгорания.
+				опасном месте возникновения очага возгарания.
 				Огнетушитель активизируется в течении 1 сек от
 				прямого контакта с пламенем.',
 				'imageUrl' => '/cherry/image/catalog/usage-2.jpg'
