@@ -439,7 +439,7 @@
         <div class="documents-content">
           <div class="document-item">
             <div class="icon-wrapper">
-                <a href="<?php echo $baseurl ?>uploaded/cert-powder.pdf" download="Сертификат соответствия на огнетущащий порошок"
+                <a href="<?php echo $baseurl ?>uploaded/cert-powder.pdf" 
                     target="_blank">
                     <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                 </a>
@@ -447,7 +447,6 @@
 
             <div class="document-name">
               <a href="<?php echo $baseurl ?>uploaded/cert-powder.pdf" 
-                download="Сертификат соответствия на огнетущащий порошок"
                 target="_blank">
                 Сертификат соответствия на огнетущащий порошок</a>
             </div>
@@ -456,7 +455,6 @@
           <div class="document-item">
               <div class="icon-wrapper">
                   <a href="<?php echo $baseurl ?>uploaded/cert-vishnya.pdf" 
-                    download="Сертификат соответствия на устройство"
                     target="_blank">
                       <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                   </a>
@@ -464,7 +462,6 @@
   
               <div class="document-name">
                 <a href="<?php echo $baseurl ?>uploaded/cert-vishnya.pdf" 
-                  download="Сертификат соответствия на устройство"
                   target="_blank">
                   Сертификат соответствия на устройство</a>
               </div>
@@ -473,7 +470,6 @@
             <div class="document-item">
                 <div class="icon-wrapper">
                     <a href="<?php echo $baseurl ?>uploaded/passport-vishnya.pdf" 
-                      download="Паспорт на устройство ОППС ВИШНЯ"
                       target="_blank">
                         <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                     </a>
@@ -481,7 +477,6 @@
     
                 <div class="document-name">
                   <a href="<?php echo $baseurl ?>uploaded/passport-vishnya.pdf" 
-                    download="Паспорт на устройство ОППС ВИШНЯ"
                     target="_blank">
                     Паспорт на устройство ОППС ВИШНЯ</a>
                 </div>
@@ -490,7 +485,6 @@
               <div class="document-item">
                   <div class="icon-wrapper">
                       <a href="<?php echo $baseurl ?>uploaded/diplom.jpg" 
-                        download="Диплом к медали «Гарантия качества и безопасности»"
                         target="_blank">
                           <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                       </a>
@@ -498,7 +492,6 @@
       
                   <div class="document-name">
                     <a href="<?php echo $baseurl ?>uploaded/diplom.jpg" 
-                      download="Диплом к медали «Гарантия качества и безопасности»"
                       target="_blank">
                       Диплом к медали «Гарантия качества и безопасности»</a>
                   </div>
