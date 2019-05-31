@@ -110,7 +110,9 @@
         <?php $class = 'col-sm-6'; ?>
         <?php } ?>
         <div class="<?php echo $class; ?>">          
-          <h2 class="subheadline"><?php echo $heading_title; ?></h2>
+          <h2 class="subheadline">
+              ПИРОТЕХНИЧЕСКИЙ ПОРОШКОВЫЙ САМОСРАБАТЫВАЮЩИЙ <br> ОГНЕТУШИТЕЛЬ ВИШНЯ
+          </h2>
           <div class="product-description">
               <?php echo $description; ?>
           </div>
@@ -128,7 +130,7 @@
           <ul class="list-unstyled">
             <?php if (!$special) { ?>
             <li>
-              <h2><?php echo $price; ?></h2>
+              <h2><?php echo $price; ?>&nbsp;руб</h2>
             </li>
             <?php } else { ?>
             <li><span style="text-decoration: line-through;"><?php echo $price; ?></span></li>
@@ -309,6 +311,47 @@
         </div>
       </div>
 
+    <div class="info-block">
+        <h2 class="subheadline">Применение</h2>
+        <div class="info-block-content">
+            <p>
+                ОППС ВИШНЯ предназначен для использования в качестве первичного средства тушения очагов пожаров твёрдых горючих веществ (класс А), жидких горючих материалов (класс В), газообразных веществ (класс С) и электрооборудования (класс Е), находящегося под напряжением.
+            </p>
+            
+            <div class="usage-places-container">
+                <?php if ($usagePlacesCol1) {?>
+                  <div class="cherry-features-ul">  
+                      <ul>
+                          <?php foreach($usagePlacesCol1 as $item) { ?>
+                          <li class="cherry-features-li">
+                              <div>
+                                  <i class="fa fa-check-circle clr-maroon"></i>
+                                  <span class="cherry-features-li-description"><?php echo $item['title'] ?></span>
+                              </div>
+                          </li>
+                          <?php } ?>
+                      </ul>                
+                  </div>
+              <?php } ?>
+
+              <?php if ($usagePlacesCol2) {?>
+                <div class="cherry-features-ul">  
+                    <ul>
+                        <?php foreach($usagePlacesCol2 as $item) { ?>
+                        <li class="cherry-features-li">
+                            <div>
+                                <i class="fa fa-check-circle clr-maroon"></i>
+                                <span class="cherry-features-li-description"><?php echo $item['title'] ?></span>
+                            </div>
+                        </li>
+                        <?php } ?>
+                    </ul>                
+                </div>
+            <?php } ?>
+            </div>
+        </div>
+      </div>
+
       <div class="info-block tech-info">
         <h2 class="subheadline">
             Техническая информация
@@ -348,7 +391,7 @@
               </div>
   
               <div class="tech-info-item-value">
-                <b>32 кг</b>
+                <b>3,2 кг</b>
               </div>
   
               <div class="tech-info-item-description">
@@ -392,14 +435,16 @@
         <div class="documents-content">
           <div class="document-item">
             <div class="icon-wrapper">
-                <a href="<?php echo $baseurl ?>uploaded/cert-powder.pdf" download="Сертификат соответствия на огнетущащий порошок">
+                <a href="<?php echo $baseurl ?>uploaded/cert-powder.pdf" download="Сертификат соответствия на огнетущащий порошок"
+                    target="_blank">
                     <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                 </a>
             </div>
 
             <div class="document-name">
               <a href="<?php echo $baseurl ?>uploaded/cert-powder.pdf" 
-                download="Сертификат соответствия на огнетущащий порошок">
+                download="Сертификат соответствия на огнетущащий порошок"
+                target="_blank">
                 Сертификат соответствия на огнетущащий порошок</a>
             </div>
           </div>
@@ -407,14 +452,16 @@
           <div class="document-item">
               <div class="icon-wrapper">
                   <a href="<?php echo $baseurl ?>uploaded/cert-vishnya.pdf" 
-                    download="Сертификат соответствия на устройство">
+                    download="Сертификат соответствия на устройство"
+                    target="_blank">
                       <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                   </a>
               </div>
   
               <div class="document-name">
                 <a href="<?php echo $baseurl ?>uploaded/cert-vishnya.pdf" 
-                  download="Сертификат соответствия на устройство">
+                  download="Сертификат соответствия на устройство"
+                  target="_blank">
                   Сертификат соответствия на устройство</a>
               </div>
             </div>
@@ -422,14 +469,16 @@
             <div class="document-item">
                 <div class="icon-wrapper">
                     <a href="<?php echo $baseurl ?>uploaded/passport-vishnya.pdf" 
-                      download="Паспорт на устройство ОППС ВИШНЯ">
+                      download="Паспорт на устройство ОППС ВИШНЯ"
+                      target="_blank">
                         <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                     </a>
                 </div>
     
                 <div class="document-name">
                   <a href="<?php echo $baseurl ?>uploaded/passport-vishnya.pdf" 
-                    download="Паспорт на устройство ОППС ВИШНЯ">
+                    download="Паспорт на устройство ОППС ВИШНЯ"
+                    target="_blank">
                     Паспорт на устройство ОППС ВИШНЯ</a>
                 </div>
               </div>
@@ -437,31 +486,21 @@
               <div class="document-item">
                   <div class="icon-wrapper">
                       <a href="<?php echo $baseurl ?>uploaded/diplom.jpg" 
-                        download="Диплом к медали «Гарантия качества и безопасности»">
+                        download="Диплом к медали «Гарантия качества и безопасности»"
+                        target="_blank">
                           <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                       </a>
                   </div>
       
                   <div class="document-name">
                     <a href="<?php echo $baseurl ?>uploaded/diplom.jpg" 
-                      download="Диплом к медали «Гарантия качества и безопасности»">
+                      download="Диплом к медали «Гарантия качества и безопасности»"
+                      target="_blank">
                       Диплом к медали «Гарантия качества и безопасности»</a>
                   </div>
                 </div>
         </div>
-      </div>
-
-      <div class="info-block">
-        <h2 class="subheadline">Применение</h2>
-        <div class="info-block-content">
-            <p>
-                ОППС ВИШНЯ предназначен для использования в качестве первичного средства тушения очагов пожаров твёрдых горючих веществ (класс А), жидких горючих материалов (класс В), газообразных веществ (класс С) и электрооборудования (класс Е), находящегося под напряжением.
-            </p>
-            <p>
-                Места применения: квартиры, коттеджи, дачные дома, бани, летние террасы, офисные помещения (устанавливать вблизи дымоходов, печей, газовых баллонов и оборудования, вблизи нагревательных приборов), склады, гаражи, чердачные помещения, кладовки, сараи (устанавливать  в местах хранения и складирования легковоспламеняющихся и горючих веществ), котельные любых типов, места проведения строительных и ремонтных работ, лифтовые шахты, мусоросборные камеры, электрошкафы. Подробнее о применении можно узнать здесь 
-            </p>
-        </div>
-      </div>
+      </div>      
 
       <div class="video-wrapper">
           <iframe width="100%" height="100%" 

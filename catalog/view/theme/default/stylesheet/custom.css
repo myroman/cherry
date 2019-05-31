@@ -36,7 +36,7 @@ table.parcel-shop-hours td {
     list-style-type: none;
 }
 
-.more-info .clr-maroon {
+.clr-maroon {
     color: rgb(152,34,44);
 }
 
@@ -223,9 +223,13 @@ h2.subheadline {
 .cherry-features-ul {
     flex: 1 1.3 auto;
 }
+.cherry-features-ul ul {
+    padding-left: 20%;
+}
 
 .cherry-features-li {
     margin-top: 30px;
+    list-style-type: none;
 }
 .cherry-features-li-title {
     font-weight: bold;
@@ -383,6 +387,7 @@ h2.subheadline {
 
 .info-block {
     margin-top: 40px;
+    padding-bottom: 20px;
     border-bottom: 4px solid rgb(235,242,242);
 }
 .info-block-content {
@@ -432,4 +437,9 @@ h2.subheadline {
 
 .video-wrapper {
     height: 500px;
+}
+
+/* places of usage */
+.usage-places-container {
+    display: flex;
 }

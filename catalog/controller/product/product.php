@@ -214,6 +214,34 @@ class ControllerProductProduct extends Controller {
 				'href' => $this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'])
 			);
 
+			$usagePlacesCol1 = array();		
+			array_push($usagePlacesCol1, 
+				array(
+					'title' => 'жилые помещения: квартиры, <br> коттеджи, дачные дома'
+				),
+				array(
+					'title' => 'офисные помещения'
+				),
+				array(
+					'title' => 'складские помещения, <br> сараи, гаражи'
+				)
+			);
+			$data['usagePlacesCol1'] = $usagePlacesCol1;
+
+			$usagePlacesCol2 = array();		
+			array_push($usagePlacesCol2, 
+				array(
+					'title' => 'места проведения <br> строительных и ремонтных работ'
+				),
+				array(
+					'title' => 'транспорт'
+				),
+				array(
+					'title' => 'электрошкафы'
+				)
+			);
+			$data['usagePlacesCol2'] = $usagePlacesCol2;
+
 			$this->document->setTitle($product_info['meta_title']);
 			$this->document->setDescription($product_info['meta_description']);
 			$this->document->setKeywords($product_info['meta_keyword']);
@@ -555,6 +583,8 @@ class ControllerProductProduct extends Controller {
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
+
+			
 
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
 				$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/error/not_found.tpl', $data));
