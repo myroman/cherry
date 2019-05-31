@@ -33,7 +33,8 @@
                         </div>
         
                         <div class="cherry-features-buy">
-                            <button type="button" class="btn btn-default btn-med btn-buy_green">Купить</button>
+                            <button type="button" class="btn btn-default btn-med btn-buy_green"
+                            onclick="cart.add('50', '1', {redirectToUrl: '<?php echo $baseurl; ?>index.php?route=checkout/cart'});">Купить</button>
                         </div>
                     </div>
                 </div>

@@ -131,7 +131,7 @@ $(document).ready(function() {
 
 // Cart add remove functions
 var cart = {
-	'add': function(product_id, quantity) {
+	'add': function(product_id, quantity, opts) {
 		$.ajax({
 			url: 'index.php?route=checkout/cart/add',
 			type: 'post',
@@ -161,6 +161,10 @@ var cart = {
 					$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 					$('#cart > ul').load('index.php?route=common/cart/info ul li');
+
+					if (opts && opts.redirectToUrl) {
+						window.location = opts.redirectToUrl;
+					}
 				}
 			},
 	        error: function(xhr, ajaxOptions, thrownError) {

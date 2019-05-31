@@ -82,7 +82,7 @@
     
                 <div class="top-action">
                     <button type="button" class="btn btn-default btn-med btn-buy_green" 
-                    onclick="cart.add('50', '1');">Купить</button>
+                    onclick="cart.add('50', '1', {redirectToUrl: '<?php echo $baseurl; ?>index.php?route=checkout/cart'});">Купить</button>
                 </div>
     
                 <div class="top-cart">
