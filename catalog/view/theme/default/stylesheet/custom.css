@@ -443,3 +443,8 @@ h2.subheadline {
 .usage-places-container {
     display: flex;
 }
+
+/* checkout */
+.panel-checkout-options {
+    display: none;
+}

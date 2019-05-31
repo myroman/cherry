@@ -21,7 +21,7 @@
     <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
       <h1><?php echo $heading_title; ?></h1>
       <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
+        <div class="panel panel-default panel-checkout-options">
           <div class="panel-heading">
             <h4 class="panel-title"><?php echo $text_checkout_option; ?></h4>
           </div>
@@ -103,44 +103,59 @@ $(document).on('change', 'input[name=\'account\']', function() {
 	}
 });
 
-<?php if (!$logged) { ?>
 $(document).ready(function() {
-    $.ajax({
-        url: 'index.php?route=checkout/login',
-        dataType: 'html',
-        success: function(html) {
-           $('#collapse-checkout-option .panel-body').html(html);
+    var logged = '<?php echo $logged; ?>';
+    console.log('logged:',logged);
+    if (logged == '') {
+        $.ajax({
+            url: 'index.php?route=checkout/login',
+            dataType: 'html',
+            success: function(html) {
+                $('#collapse-checkout-option .panel-body').html(html);
 
-			$('#collapse-checkout-option').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-option" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_option; ?> <i class="fa fa-caret-down"></i></a>');
+                $('#collapse-checkout-option').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-option" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_option; ?> <i class="fa fa-caret-down"></i></a>');
 
-			$('a[href=\'#collapse-checkout-option\']').trigger('click');
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-        }
-    });
+                getLoginInfo({
+                    success: function() {
+                        $('a[href=\'#collapse-checkout-option\']').trigger('click');
+                    }
+                });
+                
+                //  openPaymentInfo();
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    } else {
+        console.log('clear your cookies, you only can checkout as a guest')
+    }
+
+    function openPaymentInfo() {
+        $.ajax({
+            url: 'index.php?route=checkout/payment_address',
+            dataType: 'html',
+            success: function(html) {
+                $('#collapse-payment-address .panel-body').html(html);
+
+                $('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_payment_address; ?> <i class="fa fa-caret-down"></i></a>');
+
+                $('a[href=\'#collapse-payment-address\']').trigger('click');
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
 });
-<?php } else { ?>
-$(document).ready(function() {
-    $.ajax({
-        url: 'index.php?route=checkout/payment_address',
-        dataType: 'html',
-        success: function(html) {
-            $('#collapse-payment-address .panel-body').html(html);
-
-			$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_payment_address; ?> <i class="fa fa-caret-down"></i></a>');
-
-			$('a[href=\'#collapse-payment-address\']').trigger('click');
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-        }
-    });
-});
-<?php } ?>
 
 // Checkout
 $(document).delegate('#button-account', 'click', function() {
+    console.log('button account click');
+    getLoginInfo();
+});
+
+function getLoginInfo(opts) {
     $.ajax({
         url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').val(),
         dataType: 'html',
@@ -161,13 +176,16 @@ $(document).delegate('#button-account', 'click', function() {
 				$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_payment_address; ?> <i class="fa fa-caret-down"></i></a>');
 			}
 
-			$('a[href=\'#collapse-payment-address\']').trigger('click');
+            $('a[href=\'#collapse-payment-address\']').trigger('click');
+            if (opts && opts.success) {
+                opts.success();
+            }
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
         }
     });
-});
+}
 
 // Login
 $(document).delegate('#button-login', 'click', function() {
