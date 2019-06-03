@@ -1,8 +1,36 @@
-<footer>
+<footer class="my-footer">
   <div class="container">
     <div class="row">
+
+      <div class="col-sm-4">
+          <div id="logo" class="top-action-logo">
+              <?php if ($logo) { ?>
+              <a href="<?php echo $home; ?>">
+                <img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" 
+                alt="<?php echo $name; ?>" class="img-responsive" />
+              </a>
+              <?php } else { ?>
+              <h1><a href="<?php echo $home; ?>"><?php echo $name; ?></a></h1>
+              <?php } ?>
+          </div>
+
+          <p>
+              © ООО “Первый Легион” | 2019
+              <br>
+              Все права защищены.
+              <br>
+               Продукция запатентована. Полное или 
+               <br>
+               частичное копирование материалов сайта в 
+               <br>
+               коммерческих целях разрешено только с 
+               <br>
+               письменного согласия ООО Первый Легион.
+          </p>
+      </div>
+
       <?php if ($informations) { ?>
-      <div class="col-sm-3">
+      <div class="col-sm-2 pad-column">
         <h5><?php echo $text_information; ?></h5>
         <ul class="list-unstyled">
           <?php foreach ($informations as $information) { ?>
@@ -11,22 +39,34 @@
         </ul>
       </div>
       <?php } ?>
-      <div class="col-sm-3">
+      <div class="col-sm-2 pad-column">
         <h5><?php echo $text_service; ?></h5>
         <ul class="list-unstyled">
           <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
-          <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
-          <li><a href="<?php echo $sitemap; ?>"><?php echo $text_sitemap; ?></a></li>
+          <li><a href="<?php echo $delivery_and_payment; ?>" title="Доставка и оплата"> <span>Доставка и оплата</span></a></li>
+        <li><a href="<?php echo $refunds; ?>" title="Возврат"><span>Возврат</span></a></li>
         </ul>
       </div>
-    </div>
-    <hr>
 
-    <p>
-        © ООО “Первый Легион” | 2019
-        <br>
-        Все права защищены. Продукция запатентована. Полное или частичное копирование материалов сайта в коммерческих целях разрешено только с письменного согласия ООО Первый Легион.
-    </p>
+      <div class="col-sm-3 pad-column-contacts">
+          <div class="footer-contacts">
+              <div class="footer-contacts-bl">
+                  <a href="tel:8 800 500-67-46">8 800 500-67-46</a> (звонок бесплатный)
+              </div>
+
+              <div class="footer-contacts-bl">
+                  <div>Центральный офис:</div>
+                  <div>192012, Санкт-Петербург, пр. Обуховской об, 120 лит. Л</div>
+              </div>
+
+              <div class="footer-contacts-bl">
+                  <div>тел: +7 (812) 407-38-41</div>
+                  <div>e-mail: info@legionfirst.ru</div>
+              </div>
+          </div>
+      </div>
+    </div>
+    
   </div>
 </footer>
 

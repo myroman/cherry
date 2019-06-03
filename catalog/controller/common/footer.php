@@ -3,6 +3,12 @@ class ControllerCommonFooter extends Controller {
 	public function index() {
 		$this->load->language('common/footer');
 
+		if ($this->request->server['HTTPS']) {
+			$server = $this->config->get('config_ssl');
+		} else {
+			$server = $this->config->get('config_url');
+		}
+
 		$data['scripts'] = $this->document->getScripts('footer');
 
 		$data['text_information'] = $this->language->get('text_information');
@@ -35,6 +41,8 @@ class ControllerCommonFooter extends Controller {
 
 		$data['contact'] = $this->url->link('information/contact');
 		$data['return'] = $this->url->link('account/return/add', '', 'SSL');
+		$data['delivery_and_payment'] = $this->url->link('information/information','information_id=10');
+		$data['refunds'] = $this->url->link('information/information','information_id=11');
 		$data['sitemap'] = $this->url->link('information/sitemap');
 		$data['manufacturer'] = $this->url->link('product/manufacturer');
 		$data['voucher'] = $this->url->link('account/voucher', '', 'SSL');
@@ -46,6 +54,15 @@ class ControllerCommonFooter extends Controller {
 		$data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
 
 		$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+
+		$data['home'] = $this->url->link('common/home');
+		$data['name'] = $this->config->get('config_name');
+
+		if (is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
+			$data['logo'] = $server . 'image/catalog/logo-transparent.png';
+		} else {
+			$data['logo'] = '';
+		}
 
 		// Whos Online
 		if ($this->config->get('config_customer_online')) {

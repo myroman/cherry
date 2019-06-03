@@ -474,3 +474,15 @@ h2.subheadline {
     display: none; /* to do */
 }
 
+/* footer */
+.my-footer {
+    padding-top: 0;
+}
+
+.my-footer .pad-column {
+    padding-top: 90px;
+}
+
+.pad-column-contacts {
+    padding-top: 100px;
+}
