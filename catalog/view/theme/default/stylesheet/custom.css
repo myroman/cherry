@@ -277,6 +277,9 @@ h2.subheadline {
 }
 
 /* feedback section */
+.ctl-feedback {
+    width: 100%;
+}
 .feedback-box {
     display: flex;
     flex-direction: column;
@@ -328,6 +331,10 @@ h2.subheadline {
     font-family: Open Sans, Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #000;
+}
+
+.article-wrapper .subheadline {
+    margin-top: 30px;
 }
 
 .testing-video-list {
@@ -466,3 +473,4 @@ h2.subheadline {
     margin: 40px 0 10px 0;
     display: none; /* to do */
 }
+

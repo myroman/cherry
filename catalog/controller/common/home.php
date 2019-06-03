@@ -17,6 +17,8 @@ class ControllerCommonHome extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		$data['feedback'] = $this->load->controller('common/feedback');
+
 		$cherryFeatures = array();		
 		array_push($cherryFeatures, 
 			array(
@@ -68,7 +70,7 @@ class ControllerCommonHome extends Controller {
 		);
 
 		$data['usageList'] = $usageList;
-
+		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
 			$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/common/home.tpl', $data));
 		} else {
