@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-12">
     <fieldset id="account">
       <legend><?php echo $text_your_details; ?></legend>
       <div class="form-group" style="display: <?php echo (count($customer_groups) > 1 ? 'block' : 'none'); ?>;">
@@ -151,7 +151,7 @@
       <?php } ?>
     </fieldset>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-6" style="display: none;">
     <fieldset id="address">
       <legend><?php echo $text_your_address; ?></legend>
       <div class="form-group" style="display: none;">
@@ -160,7 +160,7 @@
       </div>
       <div class="form-group required">
         <label class="control-label" for="input-payment-address-1"><?php echo $entry_address_1; ?></label>
-        <input type="text" name="address_1" value="<?php echo $address_1; ?>" placeholder="<?php echo $entry_address_1; ?>" id="input-payment-address-1" class="form-control" />
+        <input type="text" name="address_1" value="N/A" placeholder="<?php echo $entry_address_1; ?>" id="input-payment-address-1" class="form-control" />
       </div>
       <div class="form-group" style="display: none;">
         <label class="control-label" for="input-payment-address-2"><?php echo $entry_address_2; ?></label>
@@ -168,11 +168,11 @@
       </div>
       <div class="form-group required">
         <label class="control-label" for="input-payment-city"><?php echo $entry_city; ?></label>
-        <input type="text" name="city" value="<?php echo $city; ?>" placeholder="<?php echo $entry_city; ?>" id="input-payment-city" class="form-control" />
+        <input type="text" name="city" value="N/A" placeholder="<?php echo $entry_city; ?>" id="input-payment-city" class="form-control" />
       </div>
       <div class="form-group required">
         <label class="control-label" for="input-payment-postcode"><?php echo $entry_postcode; ?></label>
-        <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-payment-postcode" class="form-control" />
+        <input type="text" name="postcode" value="N/A" placeholder="<?php echo $entry_postcode; ?>" id="input-payment-postcode" class="form-control" />
       </div>
       <div class="form-group required">
         <label class="control-label" for="input-payment-country"><?php echo $entry_country; ?></label>
@@ -307,7 +307,7 @@
   </div>
 </div>
 <?php if ($shipping_required) { ?>
-<div class="checkbox">
+<div class="checkbox" style="display: none;" x>
   <label>
     <?php if ($shipping_address) { ?>
     <input type="checkbox" name="shipping_address" value="1" checked="checked" />
@@ -481,7 +481,8 @@ $('#collapse-payment-address select[name=\'country_id\']').on('change', function
 				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 
-			$('#collapse-payment-address select[name=\'zone_id\']').html(html);
+      $('#collapse-payment-address select#input-payment-zone').html(html);
+      $('#input-payment-zone').val(2785);//saint petersburg
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

@@ -49,14 +49,14 @@
         </div>
         <?php } ?>
         <?php if ($shipping_required) { ?>
-        <div class="panel panel-default">
+        <!-- <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title"><?php echo $text_checkout_shipping_address; ?></h4>
           </div>
           <div class="panel-collapse collapse" id="collapse-shipping-address">
             <div class="panel-body"></div>
           </div>
-        </div>
+        </div> -->
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title"><?php echo $text_checkout_shipping_method; ?></h4>
@@ -601,18 +601,18 @@ $(document).delegate('#button-guest', 'click', function() {
                         },
                         success: function(html) {
 							// Add the shipping address
-                            $.ajax({
-                                url: 'index.php?route=checkout/guest_shipping',
-                                dataType: 'html',
-                                success: function(html) {
-                                    $('#collapse-shipping-address .panel-body').html(html);
+                            // $.ajax({
+                            //     url: 'index.php?route=checkout/guest_shipping',
+                            //     dataType: 'html',
+                            //     success: function(html) {
+                            //         $('#collapse-shipping-address .panel-body').html(html);
 
-									$('#collapse-shipping-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_shipping_address; ?> <i class="fa fa-caret-down"></i></a>');
-                                },
-                                error: function(xhr, ajaxOptions, thrownError) {
-                                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                                }
-                            });
+							// 		$('#collapse-shipping-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_shipping_address; ?> <i class="fa fa-caret-down"></i></a>');
+                            //     },
+                            //     error: function(xhr, ajaxOptions, thrownError) {
+                            //         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                            //     }
+                            // });
 
 						    $('#collapse-shipping-method .panel-body').html(html);
 
