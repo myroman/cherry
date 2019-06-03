@@ -359,6 +359,8 @@ class ControllerExtensionPaymentYandexMoney extends Controller
         }
 
         $orderId   = (int)$_GET['order_id'];
+        $this->session->data['order_id'] = $orderId;
+        
         $paymentId = $this->getModel()->findPaymentIdByOrderId($orderId);
 
         if (empty($paymentId)) {

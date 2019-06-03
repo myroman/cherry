@@ -40,6 +40,10 @@ table.parcel-shop-hours td {
     color: rgb(152,34,44);
 }
 
+p.msg, span.msg {
+    font-size: 16px;
+}
+
 /* menu */
 .top-menu-list {
 	display: flex;    
@@ -447,4 +451,18 @@ h2.subheadline {
 /* checkout */
 .panel-checkout-options {
     display: none;
+}
+
+/*checkout cart*/
+.welcome-note {
+    margin: 40px 0 10px 0;
+}
+
+.shipping-msg {
+    margin: 40px 0 10px 0;
+}
+
+.dealers-mention {
+    margin: 40px 0 10px 0;
+    display: none; /* to do */
 }

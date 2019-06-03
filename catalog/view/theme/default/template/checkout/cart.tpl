@@ -34,6 +34,11 @@
         &nbsp;(<?php echo $weight; ?>)
         <?php } ?>
       </h1>
+
+      <p class="msg welcome-note">
+          Здравствуйте! Заказ оформляется в несколько шагов. Пожалуйста, следуйте инструкции.
+      </p>
+
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
         <div class="table-responsive">
           <table class="table table-bordered">
@@ -98,6 +103,10 @@
         </div>
       </form>
       <?php if ($shipping) { ?>
+
+        <p class="msg shipping-msg">
+          Здесь вы можете рассчитать стоимость доставки до вашего населенного пункта.
+        </p>
       
       <div class="panel-group" id="accordion">
         <?php echo $shipping; ?></div>
@@ -115,10 +124,15 @@
           </table>
         </div>
       </div>
-      <div class="buttons">
+
+      <div class="buttons clearfix">
         <div class="pull-left"><a href="<?php echo $continue; ?>" class="btn btn-default"><?php echo $button_shopping; ?></a></div>
         <div class="pull-right"><a href="<?php echo $checkout; ?>" class="btn btn-primary"><?php echo $button_checkout; ?></a></div>
       </div>
+
+      <p class="msg dealers-mention">
+          Вы также можете заказать огнетушитель ВИШНЯ у одного из наших дилеров.
+      </p>
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>

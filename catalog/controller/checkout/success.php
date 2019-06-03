@@ -3,7 +3,12 @@ class ControllerCheckoutSuccess extends Controller {
 	public function index() {
 		$this->load->language('checkout/success');
 
+		// if (isset($this->request->get['order_id'])) {
+		// 	$url .= '&sort=' . $this->request->get['sort'];
+		// }
+
 		if (isset($this->session->data['order_id'])) {
+			$data['order_id'] = $this->session->data['order_id'];
 			$this->cart->clear();
 
 			// Add to activity log
