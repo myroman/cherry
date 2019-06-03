@@ -15,9 +15,9 @@
     <div class="radio">
       <label>
         <?php if ($account == 'guest') { ?>
-        <input type="radio" name="account" value="guest" checked="checked" />
+        <input id='radCheckoutGuest' type="radio" name="account" value="guest" checked="checked" />
         <?php } else { ?>
-        <input type="radio" name="account" value="guest" />
+        <input id='radCheckoutGuest' type="radio" name="account" value="guest" />
         <?php } ?>
         <?php echo $text_guest; ?></label>
     </div>

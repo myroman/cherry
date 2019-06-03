@@ -111,9 +111,13 @@ $(document).ready(function() {
             url: 'index.php?route=checkout/login',
             dataType: 'html',
             success: function(html) {
+                
                 $('#collapse-checkout-option .panel-body').html(html);
 
-                $('#collapse-checkout-option').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-option" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_option; ?> <i class="fa fa-caret-down"></i></a>');
+                $('#radCheckoutGuest').click();
+                $('#collapse-checkout-option').parent()
+                    .find('.panel-heading .panel-title')
+                    .html('<a href="#collapse-checkout-option" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_option; ?> <i class="fa fa-caret-down"></i></a>');
 
                 getLoginInfo({
                     success: function() {
@@ -129,6 +133,25 @@ $(document).ready(function() {
         });
     } else {
         console.log('clear your cookies, you only can checkout as a guest')
+    }
+
+    function loadOldLoginForm() {
+        $.ajax({
+            url: 'index.php?route=checkout/login',
+            dataType: 'html',
+            success: function(html) {
+            $('#collapse-checkout-option .panel-body').html(html);
+            $('#collapse-checkout-option').parent()
+                .find('.panel-heading .panel-title')
+                .html('<a href="#collapse-checkout-option" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_option; ?> <i class="fa fa-caret-down"></i></a>');
+
+                // $('a[href=\'#collapse-checkout-option\']').trigger('click');
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+
     }
 
     function openPaymentInfo() {
