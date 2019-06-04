@@ -62,6 +62,7 @@ $_['text_report_affiliate_commission'] = 'Комиссия';
 $_['text_report_affiliate']            = 'Партнерская программа';
 $_['text_report_affiliate_activity']   = 'Активность партнеров';
 $_['text_review']                      = 'Отзывы';
+$_['text_feedback']                      = 'Обратная связь';
 $_['text_return']                      = 'Возвраты';
 $_['text_return_action']               = 'Операции возврата';
 $_['text_return_reason']               = 'Причины возврат';

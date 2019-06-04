@@ -18,21 +18,46 @@ class ControllerCommonFeedback extends Controller {
     }
 
     public function send() {
-        $log = new Log('test.log');       
-
+        $log = new Log('test.log');   
+        
         if ($this->request->server['REQUEST_METHOD'] == 'POST') {
             $log->write('posting feedback');
+            $jsonstr = file_get_contents('php://input');
+            $data = json_decode($jsonstr, true);       
 
-            if (isset($this->request->post['fullname'])) {
-                $log->write('fullname:' . $this->request->post['fullname']);
-            }
+            $error = $this->validateRequest($data);
+            if ($error != '') {
+                $this->response->addHeader('Content-Type: application/json');
+		        $this->response->setOutput(json_encode(array('error' => $error)));
+                return;
+            }           
+
+            $log->write('Adding feedback: ' . json_encode($jsonstr));
+            $this->load->model('catalog/feedback');
+            $this->model_catalog_feedback->addFeedback($data);
+
+            $this->response->addHeader('Content-Type: application/json');
+            $this->response->setOutput(json_encode(array('success' => true)));
+
+            return;
+        }
+    }
+
+    function validateRequest($data) {
+        if (!isset($data['fullname']) || $data['fullname'] == '') {
+            return 'Введите свое имя';
+        }
+        if (!isset($data['email']) || $data['email'] == '') {
+            return 'Введите email';
         }
 
-        $result = array(
-            'success' => 'true'
-        );
+        if (!isset($data['phone']) || $data['phone'] == '') {
+            return 'Введите телефон';
+        }
 
-        $this->response->addHeader('Content-Type: application/json');
-        $this->response->setOutput(json_encode($result));
+        if (!isset($data['message']) || $data['message'] == '') {
+            return 'Введите сообщение';
+        }
+        return '';
     }
 }

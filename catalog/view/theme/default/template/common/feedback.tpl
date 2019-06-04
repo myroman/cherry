@@ -35,26 +35,47 @@
 </div>
 
 <script type="text/javascript">
+    function objectifyForm(formArray) {//serialize data function
+
+        var returnArray = {};
+        for (var i = 0; i < formArray.length; i++){
+            returnArray[formArray[i]['name']] = formArray[i]['value'];
+        }
+        return returnArray;
+    }
+
     $(document).delegate('#btnSendFeedback', 'click', function() {
+        var array = $('.feedback-form > form').serializeArray();
+        var payload = objectifyForm(array);
+        
         $.ajax({
             url: 'index.php?route=common/feedback/send',
-            method: 'post',
-            data: $('.feedback-form :input'),
-            dataType: 'json',
-            contentType: false,
+            type: 'POST',
+            data: JSON.stringify(payload),
+            //dataType: 'json',
+            contentType: "application/json",
             beforeSend: function() {
                 $('#btnSendFeedback').button('loading');
             },
             complete: function() {
                 $('#btnSendFeedback').button('reset');
             },
-            success: function(json) {
+            success: function(resp) {
                 console.log('success feedback');
-                $('.alert, .text-danger').remove();
-                $('.form-group').removeClass('has-error');
+                // $('.alert, .text-danger').remove();
+                // $('.form-group').removeClass('has-error');
 
-                $('.feedback-form').hide();
-                $('.feedback-sent').show();                               
+                if (resp.success) {
+                    $('.feedback-form').hide();
+                    $('.feedback-sent').show();      
+                    
+                    $('#btnSendFeedback').button('reset');
+                    return;
+                }
+
+                if (resp.error) {
+                    alert(resp.error);
+                }
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 console.log('error feedback');

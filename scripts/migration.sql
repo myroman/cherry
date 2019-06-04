@@ -86,3 +86,14 @@ INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
 (7, 0),
 (8, 0),
 (9, 0);
+
+/* feedback */
+CREATE TABLE IF NOT EXISTS `oc_feedback` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `createdate` datetime NOT NULL,
+ `fullname` varchar(100) CHARACTER SET utf8 NOT NULL,
+ `email` varchar(100) COLLATE utf8_bin NOT NULL,
+ `phone` varchar(20) COLLATE utf8_bin NOT NULL,
+ `message` varchar(1000) CHARACTER SET utf8 NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=876 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
