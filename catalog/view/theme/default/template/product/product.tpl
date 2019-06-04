@@ -304,8 +304,8 @@
               <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" 
                 class="btn btn-default btn-med btn-buy_green btn-buy_green"><?php echo $button_cart; ?></button>
 
-              <button type="button" id="button-find-dealer" data-loading-text="<?php echo $text_loading; ?>" 
-                class="btn btn-default btn-med btn_outlined" style="margin-left: 10px;"><?php echo $button_find_dealer; ?></button>
+              <!-- <button type="button" id="button-find-dealer" data-loading-text="<?php echo $text_loading; ?>" 
+                class="btn btn-default btn-med btn_outlined" style="margin-left: 10px;"><?php echo $button_find_dealer; ?></button> -->
             </div>
             <?php if ($minimum > 1) { ?>
             <div class="alert alert-info"><i class="fa fa-info-circle"></i> <?php echo $text_minimum; ?></div>

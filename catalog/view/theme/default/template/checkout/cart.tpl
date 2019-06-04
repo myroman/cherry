@@ -129,10 +129,6 @@
         <div class="pull-left"><a href="<?php echo $continue; ?>" class="btn btn-default"><?php echo $button_shopping; ?></a></div>
         <div class="pull-right"><a href="<?php echo $checkout; ?>" class="btn btn-primary"><?php echo $button_checkout; ?></a></div>
       </div>
-
-      <p class="msg dealers-mention">
-          Вы также можете заказать огнетушитель ВИШНЯ у одного из наших дилеров.
-      </p>
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>
