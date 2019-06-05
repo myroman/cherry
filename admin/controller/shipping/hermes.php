@@ -10,12 +10,10 @@ class ControllerShippingHermes extends Controller {
 		$this->load->model('setting/setting');
 		$this->load->model('shipping/hermes');
 		$log = new Log('test.log');
-		$log->write('updating form: ' . isset($this->request->post['hermes_updateprices']));
 		
 		if ($this->request->server['REQUEST_METHOD'] == 'POST' && isset($this->request->post['hermes_updateprices'])) {
-			$log->write('updating parcels');
-			//$this->model_shipping_hermes->populateParcelShops();
-			// $this->model_shipping_hermes->updatePrices();
+			$log->write('updating prices');
+			$this->model_shipping_hermes->updatePrices();
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 

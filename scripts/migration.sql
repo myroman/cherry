@@ -97,3 +97,9 @@ CREATE TABLE IF NOT EXISTS `oc_feedback` (
  `message` varchar(1000) CHARACTER SET utf8 NOT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=876 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
+/* add number column to prices*/
+
+ALTER TABLE oc_hermes_price
+ADD COLUMN `configNumber` int(11) NULL AFTER `currencyCode`;
