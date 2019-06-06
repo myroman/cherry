@@ -39,6 +39,14 @@
             </div>
           </div>
           <div class="form-group">
+              <label class="col-sm-2 control-label" for="hermes_updateparcelshops">
+                <span data-toggle="tooltip"
+                  title="<?php echo $help_updateparcelshops; ?>"><?php echo $entry_updateparcelshops; ?></span></label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="hermes_updateparcelshops" name="hermes_updateparcelshops" />
+              </div>
+            </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status; ?></label>
             <div class="col-sm-10">
               <select name="hermes_status" id="input-status" class="form-control">

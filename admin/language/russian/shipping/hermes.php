@@ -9,11 +9,14 @@ $_['text_edit']               = 'Изменить доставку через Г
 
 // Entry
 $_['entry_updateprices']              = 'Обновить цены';
+$_['entry_updateparcelshops']              = 'Обновить пункты выдачи заказов';
 $_['entry_status']            = 'Статус';
 $_['entry_sort_order']        = 'Порядок сортировки';
 
 // Help
 $_['help_updateprices']		= 'Закачать обновленные цены из Гермеса';
+$_['help_updateparcelshops']		= 'Закачать обновленные пункты выдачи заказов из Гермеса';
+
 
 // Error
-$_['error_permission']        = 'Warning: У вас нет полномочий изменять настройки Гермеса!';
+$_['error_permission']        = 'У вас нет полномочий изменять настройки Гермеса!';

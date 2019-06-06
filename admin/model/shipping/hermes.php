@@ -395,7 +395,7 @@ class ModelShippingHermes extends Model
         return $result;
     }
 
-    public function populateParcelShops()
+    public function updateParcelShops()
     {
         $this->log = new Log('test.log');
         $this->dumplog = new Log('dump.log');
@@ -424,22 +424,54 @@ class ModelShippingHermes extends Model
           )
           CHARACTER SET utf8 COLLATE utf8_bin");
 
-        // request hermes API or load json
-        $filepath = DIR_JSONFILES . 'parcelShops.json';
-
-        if (!file_exists($filepath)) {
-            $this->log->write('cannot find the json ' . $filepath);
-            return;
-        }
-
-        $jsondata = file_get_contents($filepath);
-
-        $json = json_decode($jsondata);
-        foreach ($json->GetParcelShopsResult as $item) {
+        $resp = $this->getParcelShopsFromApi('1000');
+        $json = json_decode($resp);
+        foreach ($json->GetParcelShopsResult as $item) {            
             $sql = $this->createInsertParcelEntrySql($item);
+            // $this->log->write('sql: ' . $sql);
             $this->db->query($sql);
         }
         $this->log->write('filled new parcel shops');
+    }
+
+    private function getParcelShopsFromApi($businessUnitCode)
+    {
+        $payload = array(
+            'businessUnitCode' => $businessUnitCode
+        );
+        $url = "https://test-api.hermes-dpd.ru/WS/RestService.svc/rest/GetParcelShops";
+        $this->log->write("Request to GetParcelShops");
+        $this->dumplog->write("Request to GetParcelShops:\n" . json_encode($payload));
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json; charset=utf-8',
+            'Authorization: Basic dGVzdGxvZ2luOnRlc3RwYXNzd29yZA==')
+        );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+        curl_setopt($ch, CURLOPT_ENCODING, '');
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        $response = curl_exec($ch);
+        if (curl_errno($ch)) {
+            $this->log->write('Request failed: ' . curl_error($ch));
+            return null;
+        }
+        curl_close($ch);
+
+        //Hermes replies with BOM, which we should trim
+        //https://stackoverflow.com/questions/12509855/curl-gets-response-with-utf-8-bom
+        $__BOM = pack('CCC', 239, 187, 191);
+        while (0 === strpos($response, $__BOM)) {
+            $response = substr($response, 3);
+        }
+        $this->dumplog->write("Response GetParcelShops:\n" . $response);
+        return $response;
     }
 
     private function extractNotes($params)

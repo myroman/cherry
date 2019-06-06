@@ -11,9 +11,15 @@ class ControllerShippingHermes extends Controller {
 		$this->load->model('shipping/hermes');
 		$log = new Log('test.log');
 		
-		if ($this->request->server['REQUEST_METHOD'] == 'POST' && isset($this->request->post['hermes_updateprices'])) {
-			$log->write('updating prices');
-			$this->model_shipping_hermes->updatePrices();
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+
+			if (isset($this->request->post['hermes_updateprices'])) {
+				$log->write('updating prices');
+				$this->model_shipping_hermes->updatePrices();
+			} else if (isset($this->request->post['hermes_updateparcelshops'])) {
+				$log->write('updating parcel shops');
+				$this->model_shipping_hermes->updateParcelShops();
+			}
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -40,10 +46,12 @@ class ControllerShippingHermes extends Controller {
 
 
 		$data['entry_updateprices'] = $this->language->get('entry_updateprices');
+		$data['entry_updateparcelshops'] = $this->language->get('entry_updateparcelshops');
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
 		$data['help_updateprices'] = $this->language->get('help_updateprices');
+		$data['help_updateparcelshops'] = $this->language->get('help_updateparcelshops');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_refresh_handout'] = $this->language->get('button_refresh_handout');
