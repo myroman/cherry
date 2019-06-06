@@ -28,36 +28,40 @@ class ModelShippingHermes extends Model
 		return $query->row;
     }
 
-    public function getPriceByParcelShop($parcelShopCode) {
-        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_price WHERE `parcelShopCode`=" . $parcelShopCode;
+    public function getPriceByParcelShop($parcelShopCode, $configNumber) {
+        $sql = "SELECT * FROM " . DB_PREFIX . "hermes_price WHERE `parcelShopCode`=" . $parcelShopCode . " AND `configNumber` = " . $configNumber;
         $query = $this->db->query($sql);
 		return $query->row;
     }
 
-    //TODO: implement
     public function getQuote($address)
-    {
+    {        
         $log = new Log('test.log');
-        $log->write(json_encode($address));
+        $log->write('product quantity: ' . $address['productQuantity']);
 
         if (!isset($address['parcelshopid']) || $address['parcelshopid'] == 0) {
             return NULL;
         }
 
+        //config number is basically number of product items
+        $configNumber = $address['productQuantity'];
+
         $parcelShop = $this->getParcelShopById($address['parcelshopid']);
-        if ($parcelShop == NULL) {
+        if ($parcelShop == NULL) {            
             return NULL;
         }
 
-        $priceRecord = $this->getPriceByParcelShop($parcelShop['parcelShopCode']);
-        $log->write('Got price record' . json_encode($priceRecord));
-        $log->write($priceRecord['price']);
+        $priceRecord = $this->getPriceByParcelShop($parcelShop['parcelShopCode'], $address['productQuantity']);
+        if ($priceRecord == NULL) {
+            $log->write('INFO: cannot lookup for parce code ' . $parcelShop['parcelShopCode'] . ' and quantity ' . $address['productQuantity']);
+            return NULL;
+        }
+        $log->write('Got price ' . $priceRecord['price'] . ', details' . json_encode($priceRecord));
         $cost = $priceRecord['price'];
 
         $this->load->language('shipping/hermes');
         $title = $this->language->get('text_description');
         $method_data = array();
-        //$description = $this->currency->format($this->tax->calculate($cost, $this->config->get('hermes_tax_class_id'), $this->config->get('config_tax')));
         $quote_data['hermes'] = array(
             'code' => 'hermes.hermes',
             'title' => $title,
@@ -72,76 +76,6 @@ class ModelShippingHermes extends Model
             'sort_order' => $this->config->get('hermes_sort_order'),
             'error' => false
         );
-        return $method_data;
-
-        // if ($status) {
-        //     $cost = 0;
-        //     $weight = $this->cart->getWeight();
-        //     $sub_total = $this->cart->getSubTotal();
-
-        //     $rates = explode(',', $this->config->get('hermes_rate'));
-
-        //     foreach ($rates as $rate) {
-        //         $data = explode(':', $rate);
-
-        //         if ($data[0] >= $weight) {
-        //             if (isset($data[1])) {
-        //                 $cost = $data[1];
-        //             }
-
-        //             break;
-        //         }
-        //     }
-
-        //     $rates = explode(',', $this->config->get('hermes_insurance'));
-
-        //     foreach ($rates as $rate) {
-        //         $data = explode(':', $rate);
-
-        //         if ($data[0] >= $sub_total) {
-        //             if (isset($data[1])) {
-        //                 $insurance = $data[1];
-        //             }
-
-        //             break;
-        //         }
-        //     }
-
-        //     $quote_data = array();
-
-        //     if ((float) $cost) {
-        //         $text = $this->language->get('text_description');
-
-        //         if ($this->config->get('hermes_display_weight')) {
-        //             $text .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
-        //         }
-
-        //         if ($this->config->get('hermes_display_insurance') && (float) $insurance) {
-        //             $text .= ' (' . $this->language->get('text_insurance') . ' ' . $this->currency->format($insurance) . ')';
-        //         }
-
-        //         if ($this->config->get('hermes_display_time')) {
-        //             $text .= ' (' . $this->language->get('text_time') . ')';
-        //         }
-
-        //         $quote_data['hermes'] = array(
-        //             'code' => 'hermes.hermes',
-        //             'title' => $text,
-        //             'cost' => $cost,
-        //             'tax_class_id' => $this->config->get('hermes_tax_class_id'),
-        //             'text' => $this->currency->format($this->tax->calculate($cost, $this->config->get('hermes_tax_class_id'), $this->config->get('config_tax'))),
-        //         );
-
-        //         $method_data = array(
-        //             'code' => 'hermes',
-        //             'title' => $this->language->get('text_title'),
-        //             'quote' => $quote_data,
-        //             'sort_order' => $this->config->get('hermes_sort_order'),
-        //             'error' => false,
-        //         );
-        //     }
-        // }
-
         return $method_data;
     }
 

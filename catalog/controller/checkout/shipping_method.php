@@ -163,7 +163,12 @@ class ControllerCheckoutShippingMethod extends Controller {
 		} else if (!isset($this->request->post['shipping_method'])) {
 			$log->write('no shipping_method');
 			$json['error']['warning'] = $this->language->get('error_shipping');
-		} else {
+		} 
+		else if (!isset($this->session->data['shipping_methods'])) {
+			$log->write('no shipping_methods');
+			$json['error']['warning'] = $this->language->get('error_no_shipping');
+		}
+		else {
 			$shipping = explode('.', $this->request->post['shipping_method']);
 			$log->write('shipping_methods:' . json_encode($this->session->data['shipping_methods']));
 			if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]])) {

@@ -4,6 +4,7 @@
   </div>
   <div id="collapse-shipping" class="panel-collapse collapse">
     <div class="panel-body">
+	  <p class="" id="txtShippingError"></p>
       <p><?php echo $text_shipping; ?></p>
       <div class="form-horizontal">
         <div class="form-group required">
@@ -60,6 +61,8 @@
 						</div>
 					</div>
 				</div>
+
+				
         <button type="button" id="button-quote" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_quote; ?></button>
       </div>
       <script type="text/javascript"><!--
@@ -80,10 +83,10 @@ $('#button-quote').on('click', function() {
 
 			if (json['error']) {
 				if (json['error']['warning']) {
-					$('.breadcrumb').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					$('#txtShippingError').html('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
 					$('html, body').animate({ scrollTop: 0 }, 'slow');
-				}
+				} 
 
 				if (json['error']['country']) {
 					$('select[name=\'country_id\']').after('<div class="text-danger">' + json['error']['country'] + '</div>');
@@ -173,7 +176,7 @@ $(document).delegate('#button-shipping', 'click', function() {
 			$('.alert').remove();
 
 			if (json['error']) {
-				$('.breadcrumb').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				$('#txtShippingError').html('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
 			}

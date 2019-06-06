@@ -73,6 +73,16 @@ class ControllerTotalShipping extends Controller
         if (!$this->cart->hasProducts()) {
             $json['error']['warning'] = $this->language->get('error_product');
         }
+        $products = $this->cart->getProducts();
+        $quantity = 0;
+        foreach($products as $product) {
+            $quantity += $products[0]['quantity'];
+        }
+
+        if ($quantity > 18) {
+            $json['error']['warning'] = $this->language->get('error_max_parcel_reached');
+        }
+
         if (!$this->cart->hasShipping()) {
             $json['error']['warning'] = sprintf($this->language->get('error_no_shipping'), $this->url->link('information/contact'));
         }
@@ -135,6 +145,10 @@ class ControllerTotalShipping extends Controller
                 
                 if ($this->config->get($result['code'] . '_status')) {
                     $this->load->model('shipping/' . $result['code']);
+
+                    
+
+                    $this->session->data['shipping_address']['productQuantity'] = $quantity;
                     
                     try {
                         $quote = $this->{'model_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
