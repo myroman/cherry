@@ -4,8 +4,8 @@ class ModelShippingHermes extends Model
 {
     private $log;
     private $dumplog;
-    const MAX_CONFIGS = 8;
-    const PARCEL_PAGE_SIZE = 2;
+    const MAX_CONFIGS = 18;
+    const PARCEL_PAGE_SIZE = 10;
     const CHERRY_WEIGHT = 3300;
     public function updatePrices()
     {
@@ -21,6 +21,7 @@ class ModelShippingHermes extends Model
 			`parcelShopCode` VARCHAR(100) NOT NULL,
             `price` DECIMAL(8, 2) NULL,
             `currencyCode` VARCHAR(3) NULL,
+            `configNumber` int(11) NULL,
             `error` BIT(1) NULL,
             `errorMsg` VARCHAR(1000) NULL,
             `errorCategory` INT(11) NULL,
@@ -62,6 +63,7 @@ class ModelShippingHermes extends Model
             }
 
             $totalPricesPerParcel = $this->_group_by($models, 'parcelcode_confignumber');
+            // $this->log->write('groups: ' . json_encode($totalPricesPerParcel));
             foreach ($totalPricesPerParcel as $key => $prices) {
                 $totalPrice = 0;
 
@@ -76,23 +78,23 @@ class ModelShippingHermes extends Model
                 }
 
                 if (sizeof($badEntries) == 0) {
-                    $this->log->write('no bad entries tottal price = ' . $totalPrice);
                     $totalPriceModel = $prices[0]; //prices belong to the same group, so all except amount is the same
                     $totalPriceModel['price'] = $totalPrice;
                     $sql = $this->createInsertPriceSql($totalPriceModel, $requestToParcelShopCodes);
-                    $this->log->write('sql: ' . $sql);
+                    // $this->log->write('sql: ' . $sql);
                     $this->db->query($sql);
                 } else {
+                    $this->log->write('bad entries:' . json_encode($badEntries));
                     foreach ($badEntries as $item) {
                         $sql = $this->createInsertPriceSql($item, $requestToParcelShopCodes);
-                        $this->log->write('sql: ' . $sql);
+                        // $this->log->write('sql: ' . $sql);
                         $this->db->query($sql);
                     }
                 }
             }
 
             $pageNumber = $pageNumber + 1;
-            break;
+            // break;
         } while (count($parcelShops) == self::PARCEL_PAGE_SIZE);
 
         $this->log->write('Updated all prices');
@@ -128,14 +130,20 @@ class ModelShippingHermes extends Model
 
     private function getBox4Info($cherriesInside)
     {
-        $box4Width = 44;
-        $box4Height = 22;
-        $box4Length = 44;
-
         return array(
-            'width' => $box4Width,
-            'height' => $box4Height,
-            'length' => $box4Length,
+            'width' => 44,
+            'height' => 22,
+            'length' => 44,
+            'weight' => self::CHERRY_WEIGHT * $cherriesInside,
+        );
+    }
+
+    private function getBox9Info($cherriesInside)
+    {
+        return array(
+            'width' => 65,
+            'height' => 65,
+            'length' => 23,
             'weight' => self::CHERRY_WEIGHT * $cherriesInside,
         );
     }
@@ -170,13 +178,34 @@ class ModelShippingHermes extends Model
             case 4:
                 return array($this->getBox4Info(4));
             case 5:
-                return array($this->getBox4Info(4), $oneCherry);
+                return array($this->getBox4Info(3), $twoCherries);
             case 6:
                 return array($this->getBox4Info(4), $twoCherries);
             case 7:
                 return array($this->getBox4Info(4), $this->getBox4Info(3));
             case 8:
                 return array($this->getBox4Info(4), $this->getBox4Info(4));
+            case 9:
+                return array($this->getBox9Info(9));
+            case 10:
+                return array($this->getBox9Info(9), $oneCherry);
+            case 11:
+                return array($this->getBox9Info(9), $twoCherries);
+            case 12:
+                return array($this->getBox9Info(9), $this->getBox4Info(3));
+            case 13:
+                return array($this->getBox9Info(9), $this->getBox4Info(4));
+            case 14:
+                return array($this->getBox4Info(4), $this->getBox4Info(4), $this->getBox4Info(4), $twoCherries);
+            case 15:
+                return array($this->getBox4Info(4), $this->getBox4Info(4), $this->getBox4Info(4), $this->getBox4Info(3));
+            case 16:
+                return array($this->getBox4Info(4), $this->getBox4Info(4), $this->getBox4Info(4), $this->getBox4Info(4));
+            case 17:
+                return array($this->getBox9Info(9), $this->getBox9Info(8));
+            case 18:
+                return array($this->getBox9Info(9), $this->getBox9Info(9));
+
             default:{
                     $this->log->write('ERROR: No configuration for number' . $cherriesNumber);
                     throw new Exception('Error when updating hermes prices. No configuration for number' . $cherriesNumber);
@@ -332,7 +361,7 @@ class ModelShippingHermes extends Model
             'parcelShopCode' => $parcelShopCode,
             'configNumber' => $configNumber,
             'price' => $productPrice->Price->Value,
-            'currencyCode' => $productPrice->Price->CurrencyCode,
+            'currencyCode' => $productPrice->Price->CurrencyCode
         );
 
         return $result;
@@ -344,8 +373,8 @@ class ModelShippingHermes extends Model
         $parcelShopCode = $requestInfo['parcelShopCode'];
         $configNumber = $requestInfo['configNumber'];
 
-        if ($entry['errorCode'] != 0) {
-            $this->log->write("error cat1: " . $entry['errorMessage']);
+        if (isset($entry['errorCode'])) {
+            // $this->log->write("error cat1: " . $entry['errorMessage']);
             return "INSERT INTO `oc_hermes_price` (`createdate`,`parcelshopcode`,`configNumber`,`error`,`errormsg`,`errorCategory`)" .
                 "SELECT UTC_TIMESTAMP()" .
                 ",'" . $entry['parcelShopCode'] .
