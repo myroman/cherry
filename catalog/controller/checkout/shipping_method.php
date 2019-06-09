@@ -28,10 +28,21 @@ class ControllerCheckoutShippingMethod extends Controller {
 		} else {
 			$data['country_id'] = $this->config->get('config_country_id');
 		}
+		if (isset($this->session->data['shipping_address']['parcelshopcityid'])) {
+			$data['parcelshopcityid'] = $this->session->data['shipping_address']['parcelshopcityid'];
+		} else {
+			$data['parcelshopcityid'] = '';
+		}
+		if (isset($this->session->data['shipping_address']['parcelshopid'])) {
+			$data['parcelshopid'] = $this->session->data['shipping_address']['parcelshopid'];
+		} else {
+			$data['parcelshopid'] = '';
+		}
 
 		$this->load->model('localisation/country');
 
 		$data['countries'] = $this->model_localisation_country->getCountries();
+
 		$data['error_warning'] = '';
 		if (isset($this->session->data['shipping_address']['zone_id'])) {
 			$data['zone_id'] = $this->session->data['shipping_address']['zone_id'];
@@ -119,6 +130,11 @@ class ControllerCheckoutShippingMethod extends Controller {
 	}
 
 	public function save() {
+		$log = new Log('test.log');
+		$log->write('parcel shop selection: ');
+		$log->write('parcelshopcityid: ' . $this->request->post['parcelshopcityid']);		
+		$log->write('parcelshopid: ' . $this->request->post['parcelshopid']);
+
 		$this->load->language('checkout/checkout');
 
 		$json = array();
@@ -140,7 +156,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 
 		// Validate minimum quantity requirements.
 		$products = $this->cart->getProducts();
-		$log = new Log('test.log');
+		
 		foreach ($products as $product) {
 			$product_total = 0;
 
@@ -175,8 +191,9 @@ class ControllerCheckoutShippingMethod extends Controller {
 				$json['error']['warning'] = $this->language->get('error_shipping');
 			}
 		}
-		
-		$log->write('parcelshopid=',$this->request->post['parcelshopid']);
+
+		$this->session->data['shipping_address']['parcelshopcityid'] = $this->request->post['parcelshopcityid'];
+		$this->session->data['shipping_address']['parcelshopid'] = $this->request->post['parcelshopid'];
 		$this->session->data['parcelshopid'] = $this->request->post['parcelshopid'];
 		if (!$json) {
 			$this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]];

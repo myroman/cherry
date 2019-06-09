@@ -24,7 +24,7 @@
       <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
       <div class="col-sm-10">
         <select name="parcelshopcity" id="input-parcelshopcity" class="form-control">
-          </select>
+        </select>
       </div>
     </div>
     
@@ -62,6 +62,7 @@
     <p>
         <span id="calc-quote-title"></span>&nbsp;-&nbsp;<span id="calc-quote-amount"></span>
         <input type="hidden" id="parcelshopid" name="parcelshopid" value="12" />
+        <input type="hidden" id="parcelshopcityid" name="parcelshopcityid" />
         <input type="hidden" id="shipping_method" name="shipping_method" />
     </p>
     <p><strong><?php echo $text_comments; ?></strong></p>
@@ -99,20 +100,26 @@
         html = '<option value=""><?php echo $text_select; ?></option>';
         
         if (json['cities'] && json['cities'] != '') {
+          var selectedCity = '<?php echo $parcelshopcityid; ?>';
           for (i = 0; i < json['cities'].length; i++) {
-            html += '<option value="' + json['cities'][i] + '"';
+            var cityName = json['cities'][i];
+            html += '<option value="' + cityName + '"';
   
-            // if (json['cities'][i]['city'] == '<?php echo $parcelshopcity; ?>') {
-            // 	html += ' selected="selected"';
-            // }
+            if (cityName == selectedCity) {
+            	html += ' selected="selected"';
+            }
   
-            html += '>' + json['cities'][i] + '</option>';
+            html += '>' + cityName + '</option>';
           }
         } else {
           html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
         }
   
         $('select[name=\'parcelshopcity\']').html(html);
+
+        if (selectedCity) {
+          $('select[name=\'parcelshopcity\']').trigger('change');
+        }
       },
       error: function(xhr, ajaxOptions, thrownError) {
         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -122,6 +129,8 @@
   
   // //get list of parcel shops by city
   $('select[name=\'parcelshopcity\']').on('change', function() {
+    $('#parcelshopcityid').val(this.value);
+    
     $.ajax({
       url: 'index.php?route=total/shipping/parcelshops&city=' + this.value,
       dataType: 'json',
@@ -137,9 +146,14 @@
         html = '<option value=""><?php echo $text_select; ?></option>';
         
         if (json && json.length) {
+          var selectedParcelShop = '<?php echo $parcelshopid; ?>';
           for (i = 0; i < json.length; i++) {
-            html += '<option value="' + json[i]['id'] + '"';
-  
+            var shopId = json[i]['id'];
+            html += '<option value="' + shopId + '"';
+            if (shopId == selectedParcelShop) {
+            	html += ' selected="selected"';
+            }
+
             html += '>' + json[i]['address'] + '</option>';
           }
         } else {
@@ -147,6 +161,7 @@
         }
   
         $('select[name=\'parcelshop\']').html(html);
+        $('select[name=\'parcelshop\']').trigger('change');
       },
       error: function(xhr, ajaxOptions, thrownError) {
         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
