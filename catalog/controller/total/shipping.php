@@ -133,7 +133,8 @@ class ControllerTotalShipping extends Controller
                 'iso_code_3' => $iso_code_3,
                 'address_format' => $address_format,
                 'parcelshopid' => $this->request->post['parcelshopid'],
-                'zone_id' => 1
+                'zone_id' => 1,
+                'zone' => $zone
             );
 
             $quote_data = array();
@@ -145,9 +146,6 @@ class ControllerTotalShipping extends Controller
                 
                 if ($this->config->get($result['code'] . '_status')) {
                     $this->load->model('shipping/' . $result['code']);
-
-                    
-
                     $this->session->data['shipping_address']['productQuantity'] = $quantity;
                     
                     try {
