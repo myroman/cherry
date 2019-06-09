@@ -33,6 +33,17 @@ class ControllerTotalShipping extends Controller
                 $data['country_id'] = $this->config->get('config_country_id');
             }
 
+            if (isset($this->session->data['shipping_address']['parcelshopcityid'])) {
+                $data['parcelshopcityid'] = $this->session->data['shipping_address']['parcelshopcityid'];
+            } else {
+                $data['parcelshopcityid'] = '';
+            }
+            if (isset($this->session->data['shipping_address']['parcelshopid'])) {
+                $data['parcelshopid'] = $this->session->data['shipping_address']['parcelshopid'];
+            } else {
+                $data['parcelshopid'] = '';
+            }
+
             $this->load->model('localisation/country');
 
             $data['countries'] = $this->model_localisation_country->getCountries();
@@ -275,6 +286,22 @@ class ControllerTotalShipping extends Controller
             'schedulejson' => $model['schedulejson']
         );
         $this->response->setOutput(json_encode($json));
+    }
+
+    public function saveParcelShop() {
+        $log = new Log('test.log');
+
+        if (isset($this->request->post['parcelshopcityid']) && isset($this->request->post['parcelshopid'])) {
+            $log->write('total selected'); 
+            $log->write('parcelshopcityid: ' . $this->request->post['parcelshopcityid']);		
+            $log->write('parcelshopid: ' . $this->request->post['parcelshopid']);
+    
+            $this->session->data['shipping_address']['parcelshopcityid'] = $this->request->post['parcelshopcityid'];
+            $this->session->data['shipping_address']['parcelshopid'] = $this->request->post['parcelshopid'];          
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode(array()));
     }
 
 }

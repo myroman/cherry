@@ -65,6 +65,8 @@
 					</div>
 				</div>
 
+				<input type="hidden" id="parcelshopid" name="parcelshopid" />
+      			<input type="hidden" id="parcelshopcityid" name="parcelshopcityid" />
 
 				<button type="button" id="button-quote" data-loading-text="<?php echo $text_loading; ?>"
 					class="btn btn-primary"><?php echo $button_quote; ?></button>
@@ -163,20 +165,18 @@
 								html += '      <div class="modal-footer">';
 								html +=
 									'        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $button_cancel; ?></button>';
-
-								<
-								? php
+ 
+								<?php
 								if ($shipping_method) {
-									? >
-									html +=
-										'        <input type="button" value="<?php echo $button_shipping; ?>" id="button-shipping" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary" />'; <
-									? php
+									?>
+									html += '        <input type="button" value="<?php echo $button_shipping; ?>" id="button-shipping" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary" />'; 
+									<?php
 								} else {
-									? >
+									?>
 									html +=
-										'        <input type="button" value="<?php echo $button_shipping; ?>" id="button-shipping" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary" disabled="disabled" />'; <
-									? php
-								} ? >
+										'        <input type="button" value="<?php echo $button_shipping; ?>" id="button-shipping" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary" disabled="disabled" />'; 
+										<?php
+								} ?>
 
 								html += '      </div>';
 								html += '    </div>';
@@ -257,15 +257,18 @@
 
 							html = '<option value=""><?php echo $text_select; ?></option>';
 
-							if (json['cities'] && json['cities'] != '') {
+							var selectedCity = '<?php echo $parcelshopcityid; ?>';
+							if (json['cities'] && json['cities'] != '') {								
+
 								for (i = 0; i < json['cities'].length; i++) {
-									html += '<option value="' + json['cities'][i] + '"';
+									var cityName = json['cities'][i];
+									html += '<option value="' + cityName + '"';
 
-									// if (json['cities'][i]['city'] == '<?php echo $parcelshopcity; ?>') {
-									// 	html += ' selected="selected"';
-									// }
+									if (cityName == selectedCity) {
+										html += ' selected="selected"';
+									}
 
-									html += '>' + json['cities'][i] + '</option>';
+									html += '>' + cityName + '</option>';
 								}
 							} else {
 								html +=
@@ -273,6 +276,10 @@
 							}
 
 							$('select[name=\'parcelshopcity\']').html(html);
+
+							if (selectedCity) {
+								$('select[name=\'parcelshopcity\']').trigger('change');
+							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
 							alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -282,6 +289,7 @@
 
 				//get list of parcel shops by city
 				$('select[name=\'parcelshopcity\']').on('change', function () {
+					$('#parcelshopcityid').val(this.value);
 					$.ajax({
 						url: 'index.php?route=total/shipping/parcelshops&city=' + this.value,
 						dataType: 'json',
@@ -296,10 +304,15 @@
 							$('.parcel-shop-details').hide();
 
 							html = '<option value=""><?php echo $text_select; ?></option>';
+							var selectedParcelShop = '<?php echo $parcelshopid; ?>';
 
 							if (json && json.length) {
 								for (i = 0; i < json.length; i++) {
-									html += '<option value="' + json[i]['id'] + '"';
+									var shopId = json[i]['id'];
+									html += '<option value="' + shopId + '"';
+									if (shopId == selectedParcelShop) {
+										html += ' selected="selected"';
+									}
 
 									html += '>' + json[i]['address'] + '</option>';
 								}
@@ -309,6 +322,9 @@
 							}
 
 							$('select[name=\'parcelshop\']').html(html);
+
+							if (selectedParcelShop)
+            					$('select[name=\'parcelshop\']').trigger('change');
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
 							alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -321,6 +337,7 @@
 					if (!this.value) {
 						return;
 					}
+					$('#parcelshopid').val(this.value);
 					$.ajax({
 						url: 'index.php?route=total/shipping/parcelShopDetails&id=' + this.value,
 						dataType: 'json',
@@ -332,6 +349,23 @@
 							$('.fa-spin').remove();
 						},
 						success: function (json) {
+							var parcelShopSelection = {
+								parcelshopcityid: $('#parcelshopcityid').val(),
+								parcelshopid: $('#parcelshopid').val()
+							};
+							$.ajax({
+								url: 'index.php?route=total/shipping/saveParcelShop',
+								type: "POST",
+								data: 'parcelshopcityid=' + $('#parcelshopcityid').val() + 
+								'&parcelshopid=' + encodeURIComponent($('#parcelshopid').val()),
+								dataType: 'json',
+								success: function(resp) {
+									console.log('success');
+								},
+								error: function(resp) {
+									console.error('error');
+								}
+							});
 
 							$('.parcel-shop-details').show();
 

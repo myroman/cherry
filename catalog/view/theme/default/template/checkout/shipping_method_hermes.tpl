@@ -100,8 +100,9 @@
 
           html = '<option value=""><?php echo $text_select; ?></option>';
 
+          var selectedCity = '<?php echo $parcelshopcityid; ?>';
           if (json['cities'] && json['cities'] != '') {
-            var selectedCity = '<?php echo $parcelshopcityid; ?>';
+            
             for (i = 0; i < json['cities'].length; i++) {
               var cityName = json['cities'][i];
               html += '<option value="' + cityName + '"';
@@ -145,9 +146,10 @@
           $('.parcel-shop-details').hide();
 
           html = '<option value=""><?php echo $text_select; ?></option>';
+          var selectedParcelShop = '<?php echo $parcelshopid; ?>';
 
           if (json && json.length) {
-            var selectedParcelShop = '<?php echo $parcelshopid; ?>';
+            
             for (i = 0; i < json.length; i++) {
               var shopId = json[i]['id'];
               html += '<option value="' + shopId + '"';
@@ -162,7 +164,8 @@
           }
 
           $('select[name=\'parcelshop\']').html(html);
-          $('select[name=\'parcelshop\']').trigger('change');
+          if (selectedParcelShop)
+            $('select[name=\'parcelshop\']').trigger('change');
         },
         error: function (xhr, ajaxOptions, thrownError) {
           alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
