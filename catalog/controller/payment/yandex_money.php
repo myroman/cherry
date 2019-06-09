@@ -89,6 +89,7 @@ class ControllerExtensionPaymentYandexMoney extends Controller
         $orderInfo = $this->model_checkout_order->getOrder($this->session->data['order_id']);
         $template  = $model->applyTemplateVariables($this, $data, $orderInfo);
 
+
         $data['language'] = $this->language;
         $shopId           = $this->config->get('yandex_money_kassa_shop_id');
 
@@ -118,6 +119,7 @@ class ControllerExtensionPaymentYandexMoney extends Controller
         }
 
         $data['fullView'] = false;
+        $data['default_payment_method'] = 'bank_card';//take from settings
 
         $data['column_left']    = $this->load->controller('common/column_left');
         $data['column_right']   = $this->load->controller('common/column_right');

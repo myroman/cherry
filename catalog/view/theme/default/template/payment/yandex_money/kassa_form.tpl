@@ -81,7 +81,7 @@
                     </label>
                 <?else: ?>
                     <label>
-                        <input type="radio" name="kassa_payment_method" value="<?php echo $method ?>"<?php echo ($index == 0 ? ' checked' : ''); ?> />
+                        <input type="radio" name="kassa_payment_method" value="<?php echo $method ?>"<?php echo ($method == $default_payment_method ? ' checked' : ''); ?> />
                         <img src="<?php echo $image_base_path . '/' . $method; ?>.png" alt="<?php echo $language->get($key); ?>" />
                         <?php echo $language->get($key);?>
                     </label>
