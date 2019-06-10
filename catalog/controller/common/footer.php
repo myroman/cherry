@@ -29,6 +29,11 @@ class ControllerCommonFooter extends Controller {
 		$this->load->model('catalog/information');
 
 		$data['informations'] = array();
+		$cherryPageUrl = $this->url->link('product/product', 'product_id=' . 50);
+		array_push($data['informations'], array(
+			'title' => 'О продукте',
+			'href' => $cherryPageUrl
+		));
 
 		foreach ($this->model_catalog_information->getInformations() as $result) {
 			if ($result['bottom']) {
@@ -38,6 +43,11 @@ class ControllerCommonFooter extends Controller {
 				);
 			}
 		}
+
+		array_push($data['informations'], array(
+			'title' => 'Контакты',
+			'href' => $this->url->link('information/contacts')
+		));		
 
 		$data['contact'] = $this->url->link('information/contact');
 		$data['return'] = $this->url->link('account/return/add', '', 'SSL');
