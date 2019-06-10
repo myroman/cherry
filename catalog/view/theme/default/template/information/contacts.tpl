@@ -268,8 +268,9 @@
 
         </div>
 
-        <?php echo $feedback; ?>
-
+        <div class="contacts-feedback-box">
+          <?php echo $feedback; ?>
+        </div>
       </div>
 
       <?php echo $content_bottom; ?>

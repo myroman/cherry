@@ -277,8 +277,12 @@ h2.subheadline {
 }
 
 /* feedback section */
-.ctl-feedback {
-    width: 100%;
+.feedback-box .ctl-feedback {
+    width: 60%;
+}
+.contacts-feedback-box .ctl-feedback {
+    width: auto;
+    margin: 0 20% 0 20%;
 }
 .feedback-box {
     display: flex;
@@ -300,11 +304,11 @@ h2.subheadline {
 
 .feedback-header {
     margin-top: 20px;
+    text-align: center;
 }
 
 .feedback-form {
     margin-top: 20px;
-    width: 40%;
 }
 .feedback-form > form > div {
     margin-top: 14px;
@@ -315,6 +319,7 @@ h2.subheadline {
     border: 1px solid rgb(59,123,124);
     width: 100%;
     padding: 4px 10px;
+    margin-top: 10px;
 }
 
 .feedback-form textarea {
