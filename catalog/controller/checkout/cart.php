@@ -37,8 +37,10 @@ class ControllerCheckoutCart extends Controller {
 			$data['button_remove'] = $this->language->get('button_remove');
 			$data['button_shopping'] = $this->language->get('button_shopping');
 			$data['button_checkout'] = $this->language->get('button_checkout');
-			$data['error_max_parcel_reached'] = $this->language->get('error_max_parcel_reached');
 
+			$contactsUrl = $this->url->link('information/contacts');
+			$feedbackContactsUrl = $contactsUrl . '#feedback';
+			$data['error_max_parcel_reached'] = sprintf($this->language->get('error_max_parcel_reached'), $contactsUrl,$feedbackContactsUrl);
 			if (!$this->cart->hasStock() && (!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning'))) {
 				$data['error_warning'] = $this->language->get('error_stock');
 			} elseif (isset($this->session->data['error'])) {

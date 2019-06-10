@@ -1,14 +1,10 @@
 <?php
 class ControllerCommonFeedback extends Controller {
 	public function index() {
-        $data['abc'] = 1;
         $this->load->language('common/feedback');
         $data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
         $data['heading_title'] = $this->language->get('heading_title');
-
-        $log = new Log('test.log');
-        $log->write('rendering');       
 
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/feedback.tpl')) {
 			return $this->load->view($this->config->get('config_template') . '/template/common/feedback.tpl', $data);

@@ -269,6 +269,7 @@
           </div>
         </div>
 
+        <a href="#feedback"></a>
         <div class="contacts-feedback-box">
           <?php echo $feedback; ?>
         </div>
