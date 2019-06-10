@@ -126,6 +126,11 @@ class ControllerCommonHeader extends Controller {
 			}
 		}
 
+		array_push($data['informations'], array(
+			'title' => 'Контакты',
+			'href' => $this->url->link('information/contacts')
+		));		
+
 		//load categories
 		$data['categories'] = array();
 
