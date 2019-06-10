@@ -17,6 +17,8 @@ class ControllerCheckoutCart extends Controller {
 			'text' => $this->language->get('heading_title')
 		);
 
+		$data['exceeds_max_quantity'] = false;
+
 		if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {
 			$data['heading_title'] = $this->language->get('heading_title');
 
@@ -35,6 +37,7 @@ class ControllerCheckoutCart extends Controller {
 			$data['button_remove'] = $this->language->get('button_remove');
 			$data['button_shopping'] = $this->language->get('button_shopping');
 			$data['button_checkout'] = $this->language->get('button_checkout');
+			$data['error_max_parcel_reached'] = $this->language->get('error_max_parcel_reached');
 
 			if (!$this->cart->hasStock() && (!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning'))) {
 				$data['error_warning'] = $this->language->get('error_stock');
@@ -82,6 +85,10 @@ class ControllerCheckoutCart extends Controller {
 					if ($product_2['product_id'] == $product['product_id']) {
 						$product_total += $product_2['quantity'];
 					}
+				}
+
+				if ($product_total > 18) {
+					$data['exceeds_max_quantity'] = true;
 				}
 
 				if ($product['minimum'] > $product_total) {
@@ -397,12 +404,13 @@ class ControllerCheckoutCart extends Controller {
 
 	public function edit() {
 		$this->load->language('checkout/cart');
-
+		$log = new Log('test.log');
+		
 		$json = array();
 
 		// Update
 		if (!empty($this->request->post['quantity'])) {
-			foreach ($this->request->post['quantity'] as $key => $value) {
+			foreach ($this->request->post['quantity'] as $key => $value) {				; 
 				$this->cart->update($key, $value);
 			}
 

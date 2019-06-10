@@ -90,10 +90,6 @@ class ControllerTotalShipping extends Controller
             $quantity += $products[0]['quantity'];
         }
 
-        if ($quantity > 18) {
-            $json['error']['warning'] = $this->language->get('error_max_parcel_reached');
-        }
-
         if (!$this->cart->hasShipping()) {
             $json['error']['warning'] = sprintf($this->language->get('error_no_shipping'), $this->url->link('information/contact'));
         }
@@ -110,11 +106,13 @@ class ControllerTotalShipping extends Controller
             $json['error']['parcelshop'] = $this->language->get('error_parcelshop');
         }
 
-        $this->load->model('localisation/country');
+        if ($quantity > 18) {
+            $json['error']['warning'] = $this->language->get('error_max_parcel_reached');
+        }                
 
-        $country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-        
         if (!$json) {
+            $this->load->model('localisation/country');
+            $country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
             if ($country_info) {
                 $country = $country_info['name'];
                 $iso_code_2 = $country_info['iso_code_2'];

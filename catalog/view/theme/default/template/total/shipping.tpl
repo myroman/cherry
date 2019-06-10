@@ -5,7 +5,7 @@
 	</div>
 	<div id="collapse-shipping" class="panel-collapse collapse">
 		<div class="panel-body">
-			<p class="" id="txtShippingError"></p>
+			
 			<p><?php echo $text_shipping; ?></p>
 			<div class="form-horizontal">
 				<div class="form-group required">
@@ -213,7 +213,7 @@
 
 							if (json['error']) {
 								$('#txtShippingError').html(
-									'<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' +
+									' ' +
 									json['error'] +
 									'<button type="button" class="close" data-dismiss="alert">&times;</button></div>'
 									);

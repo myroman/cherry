@@ -102,33 +102,48 @@
           </table>
         </div>
       </form>
-      <?php if ($shipping) { ?>
 
-        <p class="msg shipping-msg">
-          Здесь вы можете рассчитать стоимость доставки до вашего населенного пункта.
-        </p>
-      
-      <div class="panel-group" id="accordion">
-        <?php echo $shipping; ?></div>
-      <?php } ?>
-      <br />
-      <div class="row">
-        <div class="col-sm-4 col-sm-offset-8">
-          <table class="table table-bordered">
-            <?php foreach ($totals as $total) { ?>
-            <tr>
-              <td class="text-right"><strong><?php echo $total['title']; ?>:</strong></td>
-              <td class="text-right"><?php echo $total['text']; ?></td>
-            </tr>
-            <?php } ?>
-          </table>
+      <?php if ($exceeds_max_quantity) { ?>
+        <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>
+          <?php echo $error_max_parcel_reached; ?>
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
-      </div>
+      <?php } ?>
 
-      <div class="buttons clearfix">
-        <div class="pull-left"><a href="<?php echo $continue; ?>" class="btn btn-default"><?php echo $button_shopping; ?></a></div>
-        <div class="pull-right"><a id="lnkCheckout" href="<?php echo $checkout; ?>" class="btn btn-primary"><?php echo $button_checkout; ?></a></div>
-      </div>
+      
+      <?php if (!$exceeds_max_quantity) { ?>
+        <?php if ($shipping) { ?>
+
+          <p class="msg shipping-msg">
+            Здесь вы можете рассчитать стоимость доставки до вашего населенного пункта.
+          </p>
+        
+        <div class="panel-group" id="accordion">
+          <?php echo $shipping; ?></div>
+        <?php } ?>
+        
+        <br />
+        
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-8">
+            <table class="table table-bordered">
+              <?php foreach ($totals as $total) { ?>
+              <tr>
+                <td class="text-right"><strong><?php echo $total['title']; ?>:</strong></td>
+                <td class="text-right"><?php echo $total['text']; ?></td>
+              </tr>
+              <?php } ?>
+            </table>
+          </div>
+        </div>
+
+        <div class="buttons clearfix">
+          <div class="pull-left"><a href="<?php echo $continue; ?>" class="btn btn-default"><?php echo $button_shopping; ?></a></div>
+          <div class="pull-right"><a id="lnkCheckout" href="<?php echo $checkout; ?>" class="btn btn-primary"><?php echo $button_checkout; ?></a></div>
+        </div>
+
+      <?php } ?>
+
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>
