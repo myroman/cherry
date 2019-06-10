@@ -491,3 +491,13 @@ h2.subheadline {
 .pad-column-contacts {
     padding-top: 100px;
 }
+
+/* contacts  */
+.contacts-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.contacts-vert-block {
+    margin-top: 20px;
+}
