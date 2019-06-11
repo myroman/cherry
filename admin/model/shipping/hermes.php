@@ -13,6 +13,8 @@ class ModelShippingHermes extends Model
         $this->dumplog = new Log('dump-update-prices.log');
         $this->log->write('Updating prices');
 
+        $this->log->write('Test? ' . $this->config->get('hermes_test'));
+
         $this->log->write('Create table and/or delete rows');
         // create tables oc_hermes_delivery_price
         $this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "hermes_price` (
@@ -94,7 +96,7 @@ class ModelShippingHermes extends Model
             }
 
             $pageNumber = $pageNumber + 1;
-            break;
+            // break;
         } while (count($parcelShops) == self::PARCEL_PAGE_SIZE);
 
         $this->log->write('Updated all prices');
@@ -215,13 +217,14 @@ class ModelShippingHermes extends Model
 
     private function downloadPricesForParcelShops($parcelShopCodes, $shippingConfigs)
     {
-        $pickupCode = "437";
+        $pickupCode = $this->config->get('hermes_pickup_location');
         $deliveryProductId = "1";
         $cashOnDelivery = "3200";
         $insuranceAmount = "500";
         $now = date(DATE_ATOM, time());
         $payloadRequests = array();
         $requestId = time();
+        $businessUnitCode = $this->config->get('hermes_bu_code');
 
         foreach ($parcelShopCodes as $parcelShopCode) {
             $productApps = array();
@@ -246,7 +249,7 @@ class ModelShippingHermes extends Model
                     $req = array(
                         'RequestId' => $requestId,
                         'ProductApplications' => $productApps,
-                        'BusinessUnitCode' => "1000",
+                        'BusinessUnitCode' => $businessUnitCode,
                         'CashOnDelivery' => array(
                             'Value' => $cashOnDelivery,
                             'CurrencyCode' => 'RUB',
@@ -287,7 +290,7 @@ class ModelShippingHermes extends Model
 
     private function calculateHermesApi($payload)
     {
-        $url = "https://test-api.hermesrussia.ru/Calculator/RestService.svc/rest/CalculateProductPrice";
+        $url = $this->getPricesUrl();
         $this->log->write("Request to hermes API");
         $this->dumplog->write("Request to hermes API:\n" . json_encode($payload));
 
@@ -297,7 +300,7 @@ class ModelShippingHermes extends Model
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json; charset=utf-8',
-            'Authorization: Basic dGVzdGxvZ2luOnRlc3RwYXNzd29yZA==')
+            'Authorization: ' . $this->getAuthHeader())
         );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -400,6 +403,7 @@ class ModelShippingHermes extends Model
         $this->log = new Log('update-parcels.log');
         $this->dumplog = new Log('dump-update-parcels.log');
         $this->log->write('populating parcel shops');
+        $this->log->write('Test? ' . $this->config->get('hermes_test'));
 
         // create tables oc_hermes_parcelshops
         $this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "hermes_parcelshops` (
@@ -424,22 +428,60 @@ class ModelShippingHermes extends Model
           )
           CHARACTER SET utf8 COLLATE utf8_bin");
 
-        $resp = $this->getParcelShopsFromApi('1000');
+        $resp = $this->getParcelShopsFromApi();
         $json = json_decode($resp);
+        // $i = 0;
         foreach ($json->GetParcelShopsResult as $item) {            
             $sql = $this->createInsertParcelEntrySql($item);
             // $this->log->write('sql: ' . $sql);
             $this->db->query($sql);
+            // $i = $i + 1;
+            // if ($i == 10)
+            // {
+            //     break;
+            // }
         }
         $this->log->write('filled new parcel shops');
     }
 
-    private function getParcelShopsFromApi($businessUnitCode)
+    private function getAuthHeader() {
+        $isTest = $this->config->get('hermes_test') == '1';
+        if ($isTest) {
+            return 'Basic dGVzdGxvZ2luOnRlc3RwYXNzd29yZA==';
+
+        } else {
+            return 'Basic S2F6YW5rb3ZhOkpqd2xpKTkl';
+        }
+    }
+
+    private function getPricesUrl() {
+        $isTest = $this->config->get('hermes_test') == '1';
+        if ($isTest) {
+            return 'https://test-api.hermesrussia.ru/Calculator/RestService.svc/rest/CalculateProductPrice';
+
+        } else {
+            return 'https://api.hermesrussia.ru/Calculator/RestService.svc/rest/CalculateProductPrice';
+        }
+    }
+
+    private function getParcelShopsUrl() {
+        $isTest = $this->config->get('hermes_test') == '1';
+        if ($isTest) {
+            return 'https://test-api.hermes-dpd.ru/WS/RestService.svc/rest/GetParcelShops';
+
+        } else {
+            return 'https://api.hermes-dpd.ru/ws/restservice.svc/rest/GetParcelShops';
+        }
+    }
+
+    private function getParcelShopsFromApi()
     {
+        $businessUnitCode = $this->config->get('hermes_bu_code');
+
         $payload = array(
             'businessUnitCode' => $businessUnitCode
         );
-        $url = "https://test-api.hermes-dpd.ru/WS/RestService.svc/rest/GetParcelShops";
+        $url = $this->getParcelShopsUrl();
         $this->log->write("Request to GetParcelShops");
         $this->dumplog->write("Request to GetParcelShops:\n" . json_encode($payload));
 
@@ -449,7 +491,7 @@ class ModelShippingHermes extends Model
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json; charset=utf-8',
-            'Authorization: Basic dGVzdGxvZ2luOnRlc3RwYXNzd29yZA==')
+            'Authorization: ' . $this->getAuthHeader())
         );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
