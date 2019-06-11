@@ -9,8 +9,8 @@ class ModelShippingHermes extends Model
     const CHERRY_WEIGHT = 3300;
     public function updatePrices()
     {
-        $this->log = new Log('test.log');
-        $this->dumplog = new Log('dump.log');
+        $this->log = new Log('update-prices.log');
+        $this->dumplog = new Log('dump-update-prices.log');
         $this->log->write('Updating prices');
 
         $this->log->write('Create table and/or delete rows');
@@ -94,7 +94,7 @@ class ModelShippingHermes extends Model
             }
 
             $pageNumber = $pageNumber + 1;
-            // break;
+            break;
         } while (count($parcelShops) == self::PARCEL_PAGE_SIZE);
 
         $this->log->write('Updated all prices');
@@ -397,8 +397,8 @@ class ModelShippingHermes extends Model
 
     public function updateParcelShops()
     {
-        $this->log = new Log('test.log');
-        $this->dumplog = new Log('dump.log');
+        $this->log = new Log('update-parcels.log');
+        $this->dumplog = new Log('dump-update-parcels.log');
         $this->log->write('populating parcel shops');
 
         // create tables oc_hermes_parcelshops

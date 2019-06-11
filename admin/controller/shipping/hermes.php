@@ -16,20 +16,19 @@ class ControllerShippingHermes extends Controller {
 			if (isset($this->request->post['hermes_updateprices'])) {
 				$log->write('updating prices');
 				$this->model_shipping_hermes->updatePrices();
+
+				$this->session->data['success'] = 'Prices updated!';
 			} else if (isset($this->request->post['hermes_updateparcelshops'])) {
 				$log->write('updating parcel shops');
 				$this->model_shipping_hermes->updateParcelShops();
+
+				$this->session->data['success'] = 'Parcel shops updated!';
+			} else if ($this->validate()) {
+				$log->write('updating hermes settings');
+				$this->model_setting_setting->editSetting('hermes', $this->request->post);
+
+				$this->session->data['success'] = $this->language->get('text_success');
 			}
-			
-			$this->session->data['success'] = $this->language->get('text_success');
-
-			$this->response->redirect($this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL'));
-		}
-		else if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$log->write('updating hermes settings');
-			$this->model_setting_setting->editSetting('hermes', $this->request->post);
-
-			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL'));
 		}
@@ -93,6 +92,12 @@ class ControllerShippingHermes extends Controller {
 		// } else {
 		// 	$data['hermes_display_weight'] = $this->config->get('hermes_display_weight');
 		// }
+
+		if (isset($this->request->post['hermes_test'])) {
+			$data['hermes_test'] = $this->request->post['hermes_test'];
+		} else {
+			$data['hermes_test'] = $this->config->get('hermes_test');
+		}
 
 		if (isset($this->request->post['hermes_status'])) {
 			$data['hermes_status'] = $this->request->post['hermes_status'];
