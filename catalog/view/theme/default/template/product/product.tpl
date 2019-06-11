@@ -454,14 +454,14 @@
 
           <div class="document-item">
               <div class="icon-wrapper">
-                  <a href="<?php echo $baseurl ?>uploaded/cert-vishnya.pdf" 
+                  <a href="<?php echo $baseurl ?>uploaded/cert-vishnya-061119.pdf" 
                     target="_blank">
                       <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                   </a>
               </div>
   
               <div class="document-name">
-                <a href="<?php echo $baseurl ?>uploaded/cert-vishnya.pdf" 
+                <a href="<?php echo $baseurl ?>uploaded/cert-vishnya-061119.pdf" 
                   target="_blank">
                   Сертификат соответствия на устройство</a>
               </div>
@@ -469,14 +469,14 @@
 
             <div class="document-item">
                 <div class="icon-wrapper">
-                    <a href="<?php echo $baseurl ?>uploaded/passport-vishnya.pdf" 
+                    <a href="<?php echo $baseurl ?>uploaded/passport-vishnya-061119.pdf" 
                       target="_blank">
                         <img src="<?php echo $baseurl ?>image/catalog/icons/pdf.png" />
                     </a>
                 </div>
     
                 <div class="document-name">
-                  <a href="<?php echo $baseurl ?>uploaded/passport-vishnya.pdf" 
+                  <a href="<?php echo $baseurl ?>uploaded/passport-vishnya-061119.pdf" 
                     target="_blank">
                     Паспорт на устройство ОППС ВИШНЯ</a>
                 </div>
