@@ -7,7 +7,6 @@ class ControllerCommonSeoUrl extends Controller {
 		}
 		// Decode URL
 		if (isset($this->request->get['_route_'])) {
-			$log->write('_route_:'.$this->request->get['_route_']); 
 			$parts = explode('/', $this->request->get['_route_']);
 
 			// remove any empty arrays from trailing
