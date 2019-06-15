@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
-<meta name="yandex-verification" content="d44bdb151264074e" />
+<meta name="yandex-verification" content="473bb303f2c8725a" />
 <meta name="google-site-verification" content="E6seqrpPFKd4Ek4yy1yG83IyDZ6C0KV-GHVQVc6iYZQ" />
 <?php if ($description) { ?>
 <meta name="description" content="<?php echo $description; ?>" />
