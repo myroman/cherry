@@ -57,6 +57,11 @@
 <noscript><div><img src="https://mc.yandex.ru/watch/54080398" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
+<!-- setup e-commerce -->
+<script type="text/javascript">
+  window.dataLayer = window.dataLayer || [];
+</script>
+
 </head>
 <body class="<?php echo $class; ?>">
 <nav id="top">

@@ -774,5 +774,21 @@ $(document).ready(function() {
 		}
 	});
 });
+
+
+// view detail page
+
+window.dataLayer.push({
+    "ecommerce": {
+        "detail": {
+            "products": [
+                {
+                    "name" : "ОГНЕТУШИТЕЛЬ ВИШНЯ",
+                    "price": 3940.00
+                }
+            ]
+        }
+    }
+});
 //--></script>
 <?php echo $footer; ?>
