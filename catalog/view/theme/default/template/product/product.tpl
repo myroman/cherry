@@ -499,12 +499,12 @@
         </div>
       </div>      
 
-      <div class="video-wrapper">
+      <!-- <div class="video-wrapper">
           <iframe width="100%" height="100%" 
           src="https://www.youtube.com/embed/0_sgdTZQigM" 
           frameborder="0" allow="autoplay; encrypted-media" 
           allowfullscreen=""></iframe>
-      </div>
+      </div> -->
 
       <?php if ($products) { ?>
       <h3><?php echo $text_related; ?></h3>
