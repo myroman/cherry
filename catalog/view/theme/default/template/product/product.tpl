@@ -775,11 +775,14 @@ $(document).ready(function() {
 	});
 });
 
+//--></script>
 
+<script type="text/javascript">
 // view detail page
 
-window.dataLayer.push({
+dataLayer.push({
     "ecommerce": {
+      "currencyCode": "RUB",
         "detail": {
             "products": [
                 {
@@ -790,5 +793,5 @@ window.dataLayer.push({
         }
     }
 });
-//--></script>
+</script>
 <?php echo $footer; ?>
