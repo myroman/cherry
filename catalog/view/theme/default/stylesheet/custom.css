@@ -505,9 +505,9 @@ h2.subheadline {
 
 /* adaptive css*/
 @media only screen and (min-width: 768px) {
-    /* .top-menu-mobile-wrapper {
+    .top-menu-mobile-wrapper {
         display: none;
-    } */
+    }
 }
 
 @media only screen and (max-width: 414px) {
@@ -515,13 +515,20 @@ h2.subheadline {
         display: none;
     }
 
-    /* .top-menu-desktop-wrapper {
+    .top-menu-desktop-wrapper {
         display: none;
     }
+    .navbar-header {
+        background: white;
+    }
     .navbar-brand {
-        width: 80%;
+        width: 60%;
+        padding: 10px 15px;
     }
     .navbar-brand > img {
-        width: 20%;
-    } */
+        width: 40%;
+    }
+    .navbar-collapse.collapse {
+        background: white;
+    }
 }

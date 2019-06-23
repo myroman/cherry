@@ -92,7 +92,40 @@
 </header>
 
 <?php if ($informations) { ?>
-  <div class="container">
+  <div class="top-menu-mobile-wrapper">
+    <nav class="navbar navbar-default top-menu">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topcollapse-menu" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <?php if ($logo) { ?>
+            <a href="<?php echo $home; ?>" class="navbar-brand"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" class="img-responsive" /></a>
+            <?php } else { ?>
+            <h1><a href="<?php echo $home; ?>" class="navbar-brand"><?php echo $name; ?></a></h1>
+            <?php } ?>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="topcollapse-menu">
+          <ul class="nav navbar-nav">
+            <?php foreach ($informations as $information) { ?>
+                <li class="top-menu-item"> 
+                    <a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a>
+                </li>
+              <?php } ?>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+  
+  <div class="container top-menu-desktop-wrapper">
     <nav id="top-menu">      
         <ul class="top-menu-list">
           <?php foreach ($informations as $information) { ?>
