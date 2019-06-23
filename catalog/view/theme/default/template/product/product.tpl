@@ -371,7 +371,7 @@
              </div>
 
              <div class="tech-info-item-description">
-              <span>Классы очагов возгарания</span>
+              <span>Классы очагов возгорания</span>
              </div>
            </div>
 
