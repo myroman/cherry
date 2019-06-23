@@ -615,7 +615,10 @@ $('#button-cart').on('click', function() {
 		},
 		success: function(json) {
 			$('.alert, .text-danger').remove();
-			$('.form-group').removeClass('has-error');
+      $('.form-group').removeClass('has-error');
+      
+      var quantity = $('input-quantity').val();
+      Cherry.YandexMetrika.addToCart(quantity);
 
 			if (json['error']) {
 				if (json['error']['option']) {
@@ -780,18 +783,6 @@ $(document).ready(function() {
 <script type="text/javascript">
 // view detail page
 
-dataLayer.push({
-    "ecommerce": {
-      "currencyCode": "RUB",
-        "detail": {
-            "products": [
-                {
-                    "name" : "ОГНЕТУШИТЕЛЬ ВИШНЯ",
-                    "price": 3940.00
-                }
-            ]
-        }
-    }
-});
+  window.Cherry.YandexMetrika.view();
 </script>
 <?php echo $footer; ?>
