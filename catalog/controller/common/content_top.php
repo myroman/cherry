@@ -76,7 +76,7 @@ class ControllerCommonContentTop extends Controller {
 			),
 			array(
 				'title' => 'Высокая эффективность', 
-				'description'=>'Огнетушитель ВИШНЯ способен локализовать возгарание
+				'description'=>'Огнетушитель ВИШНЯ способен локализовать возгорание
 				в помещении объемом 36 м.куб.'
 			),
 			array(
