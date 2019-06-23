@@ -90,22 +90,6 @@
         </div>
       </div>
 </header>
-<!-- <?php if ($informations) { ?>
-  <div class="container">
-    <nav id="menu" class="navbar">
-      <div class="navbar-header"><span id="category" class="visible-xs"><?php echo $text_category; ?></span>
-        <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
-      </div>
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav">
-          <?php foreach ($informations as $information) { ?>
-            <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-          <?php } ?>
-        </ul>
-      </div>
-    </nav>
-  </div>
-<?php } ?> -->
 
 <?php if ($informations) { ?>
   <div class="container">
