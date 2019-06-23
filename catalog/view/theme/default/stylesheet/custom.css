@@ -501,3 +501,27 @@ h2.subheadline {
 .contacts-vert-block {
     margin-top: 20px;
 }
+
+
+/* adaptive css*/
+@media only screen and (min-width: 768px) {
+    /* .top-menu-mobile-wrapper {
+        display: none;
+    } */
+}
+
+@media only screen and (max-width: 414px) {
+    nav#top, header {
+        display: none;
+    }
+
+    /* .top-menu-desktop-wrapper {
+        display: none;
+    }
+    .navbar-brand {
+        width: 80%;
+    }
+    .navbar-brand > img {
+        width: 20%;
+    } */
+}
