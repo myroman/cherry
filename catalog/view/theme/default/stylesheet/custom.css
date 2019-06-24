@@ -508,6 +508,10 @@ h2.subheadline {
     .top-menu-mobile-wrapper {
         display: none;
     }
+
+    .mobile-wrapper {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 414px) {
@@ -518,15 +522,18 @@ h2.subheadline {
     .top-menu-desktop-wrapper {
         display: none;
     }
+    .desktop-wrapper {
+        display: none;
+    }
     .navbar-header {
         background: white;
     }
     .navbar-brand {
         width: 60%;
-        padding: 10px 15px;
+        padding: 5px 15px;
     }
     .navbar-brand > img {
-        width: 40%;
+        width: 50%;
     }
     .navbar-collapse.collapse {
         background: white;
