@@ -531,4 +531,42 @@ h2.subheadline {
     .navbar-collapse.collapse {
         background: white;
     }
+
+    .top-menu-mobile-wrapper .top-cart  {
+        position: relative;
+        float: right;
+        padding: 0 0;
+        margin-top: 8px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+        background-color: transparent;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .top-menu-mobile-wrapper .top-cart .fa.fa-shopping-cart {
+        font-size: 30px;
+        color: black;
+    }
+
+    .navbar-default.navbar-toggle.icon-bar {
+        background: black;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background: black;
+    }
+
+    .navbar-default .navbar-toggle {
+        border-color: black;
+    }
+
+    .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+        background-color: white;
+    }
+
+    .navbar-default .navbar-nav > li.top-menu-item > a {
+        color: black;
+    }
 }

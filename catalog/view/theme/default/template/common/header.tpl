@@ -104,6 +104,10 @@
             <span class="icon-bar"></span>
           </button>
 
+          <a href="<?php echo $shopping_cart; ?>" title="<?php echo $text_shopping_cart; ?>" class="top-cart">
+            <i class="fa fa-shopping-cart"></i>
+          </a>
+
           <?php if ($logo) { ?>
             <a href="<?php echo $home; ?>" class="navbar-brand"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" class="img-responsive" /></a>
             <?php } else { ?>
