@@ -491,14 +491,6 @@ h2.subheadline {
     padding-top: 0;
 }
 
-.my-footer .pad-column {
-    padding-top: 90px;
-}
-
-.pad-column-contacts {
-    padding-top: 100px;
-}
-
 /* contacts  */
 .contacts-wrapper {
     display: flex;
@@ -522,6 +514,14 @@ h2.subheadline {
 
     .feedback-box .ctl-feedback {
         width: 60%;
+    }
+
+    .my-footer .pad-column {
+        padding-top: 90px;
+    }
+    
+    .pad-column-contacts {
+        padding-top: 100px;
     }
 }
 
@@ -590,5 +590,9 @@ h2.subheadline {
 
     .feedback-message {
         line-height: 2em;
+    }
+
+    .footer-block {
+        margin-top: 20px;
     }
 }

@@ -2,8 +2,27 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-sm-4">
-          <div id="logo" class="top-action-logo">
+      <?php if ($informations) { ?>
+        <div class="col-sm-2 col-sm-push-4 pad-column footer-block">
+          <h5><?php echo $text_information; ?></h5>
+          <ul class="list-unstyled">
+            <?php foreach ($informations as $information) { ?>
+            <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
+            <?php } ?>
+          </ul>
+        </div>
+        <?php } ?>
+        <div class="col-sm-2 col-sm-push-4 pad-column footer-block">
+          <h5><?php echo $text_service; ?></h5>
+          <ul class="list-unstyled">
+            <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
+            <li><a href="<?php echo $delivery_and_payment; ?>" title="Доставка и оплата"> <span>Доставка и оплата</span></a></li>
+          <li><a href="<?php echo $refunds; ?>" title="Возврат"><span>Возврат</span></a></li>
+          </ul>
+        </div>
+
+      <div class="col-sm-4 col-sm-pull-4 footer-block">
+          <div id="logo" class="top-action-logo desktop-wrapper">
               <?php if ($logo) { ?>
               <a href="<?php echo $home; ?>">
                 <img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" 
@@ -29,26 +48,7 @@
           </p>
       </div>
 
-      <?php if ($informations) { ?>
-      <div class="col-sm-2 pad-column">
-        <h5><?php echo $text_information; ?></h5>
-        <ul class="list-unstyled">
-          <?php foreach ($informations as $information) { ?>
-          <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-          <?php } ?>
-        </ul>
-      </div>
-      <?php } ?>
-      <div class="col-sm-2 pad-column">
-        <h5><?php echo $text_service; ?></h5>
-        <ul class="list-unstyled">
-          <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
-          <li><a href="<?php echo $delivery_and_payment; ?>" title="Доставка и оплата"> <span>Доставка и оплата</span></a></li>
-        <li><a href="<?php echo $refunds; ?>" title="Возврат"><span>Возврат</span></a></li>
-        </ul>
-      </div>
-
-      <div class="col-sm-3 pad-column-contacts">
+      <div class="col-sm-3 pad-column-contacts desktop-wrapper">
           <div class="footer-contacts">
               <div class="footer-contacts-bl">
                   <a href="tel:8 800 500-67-46">8 800 500-67-46</a> (звонок бесплатный)
