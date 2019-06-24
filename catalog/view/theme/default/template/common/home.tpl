@@ -18,30 +18,32 @@
       </a>
     </div>
 
-    <div class="more-info">        
-    
-        <div class="main-page-info-block cherry-features">
-            <div class="cherry-features-heading">
+    <div class="more-info info-block">
+        <div class="row">
+            <div class="col-sm-12 ">
                 <h2 class="subheadline">ПРЕИМУЩЕСТВА ВИШНИ</h2>
             </div>
-    
-            <div class="cherry-features-row2">
-                <div class="cherry-features-img-buy-wrap">
-                    <div class="cherry-features-img-buy">
-                        <div class="cherry-features-img">
-                            <img src="<?php echo $baseurl ?>image/catalog/cherry-box-white-bg.jpg" />
-                        </div>
-        
-                        <div class="cherry-features-buy">
-                            <button type="button" class="btn btn-default btn-med btn-buy_green"
-                            onclick="cart.add('50', '1', {redirectToUrl: '<?php echo $baseurl; ?>index.php?route=checkout/cart'});">Купить</button>
-                        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="col-sm-12">
+                    <div class="cherry-features-img">
+                        <img src="<?php echo $baseurl ?>image/catalog/cherry-box-white-bg.jpg" />
                     </div>
                 </div>
-    
+
+                <div class="col-sm-12">
+                    <div class="center">
+                            <button type="button" class="btn btn-default btn-med btn-buy_green"
+                            onclick="cart.add('50', '1', {redirectToUrl: '<?php echo $baseurl; ?>index.php?route=checkout/cart'});">Купить</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
                 <?php if ($cherryFeatures) {?>
-                    <div class="cherry-features-ul">
-    
+                    <div class="_cherry-features-ul">    
                         <ul>
                             <?php foreach($cherryFeatures as $item) { ?>
                             <li class="cherry-features-li">
@@ -61,57 +63,68 @@
                     </div>
                 <?php } ?>
             </div>
-        </div> <!--cherry-features-->
-    
-        <?php if ($usageList) {?>
-        <div class="main-page-info-block usage">
+        </div>
+    </div>
+
+    <?php if ($usageList) {?>
+    <div class="info-block">
+        <div class="row">
             <div class="usage-heading">
-                <h2 class="subheadline">ПРИМЕНЕНИЕ</h2>
-            </div>
+                    <h2 class="subheadline">ПРИМЕНЕНИЕ</h2>
+                </div>
+        </div>
+        <?php foreach($usageList as $item) { ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-sm-12 usage-text-title">
+                            <span class="clr-maroon"><?php echo $item['title'] ?></span>
+                        </div>
     
-            <div class="usage-content">
-                <ul>
-                    <?php foreach($usageList as $item) { ?>
-                    <li>
-                        <div class="usage-content-row">
-                            <div class="usage-text">
-                                <div class="usage-text-title">
-                                    <span class="clr-maroon"><?php echo $item['title'] ?></span>
-                                </div>
-            
-                                <div class="usage-text-description">
-                                    <span><?php echo $item['description'] ?></span>
-                                </div>
-                            </div>
-            
-                            <div class="usage-img">
+                        <div class="col-sm-12 usage-text-description">
+                            <span><?php echo $item['description'] ?></span>
+                        </div>
+                </div>
+                <div class="col-sm-6">
+                        <div class="usage-img">
                                 <img src="<?php echo $item['imageUrl'] ?>" />
                             </div>
-                        </div>
-                    </li>
-                    <?php } ?>
-                </ul>
+                </div>
             </div>
+
+            <?php } ?>        
+    </div>
+    <?php } ?>
+
+    <div class="info-block">
+        <div class="row">
+                <div class="how-works-title">
+                        <h2 class="subheadline">Принцип действия</h2>
+                    </div>
         </div>
-    
-        <?php } ?>
-    
-        <div class="how-works">
-            <div class="how-works-title">
-                <h2 class="subheadline">Принцип действия</h2>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="how-works-row2">
+                    <div class="how-works-img">
+                            <img src="<?php echo $baseurl ?>image/catalog/how-works-1.jpg" />
+                        </div>
+                        <div class="how-works-description how-works-description1">
+                            <p>
+                                При попадании огнетушителя ВИШНЯ в огонь происходит воспламенение 
+                            запального шнура на внешней поверхности корпуса с последующим инициированием 
+                            размещенного внутри пиротехнического заряда
+                            </p>
+                        </div>
+                </div>
+                
             </div>
-            <div class="how-works-row2">
-                <div class="how-works-img">
-                    <img src="<?php echo $baseurl ?>image/catalog/how-works-1.jpg" />
-                </div>
-                <div class="how-works-description how-works-description1">
-                  <p>
-                      При попадании огнетушителя ВИШНЯ в огонь происходит воспламенение 
-                    запального шнура на внешней поверхности корпуса с последующим инициированием 
-                    размещенного внутри пиротехнического заряда
-                  </p>
-                </div>
-                <div class="filler"></div>
+
+            <div class="col-sm-6 mobile-wrapper usage-arrow clr-maroon">
+                <i class="fa fa-arrow-down"></i>
+            </div>
+
+            <div class="col-sm-6">
+                    <div class="how-works-row2">
                 <div class="how-works-img">
                     <img src="<?php echo $baseurl ?>image/catalog/how-works-2.jpg" />
                 </div>
@@ -122,7 +135,9 @@
                     </p>
                 </div>
             </div>
+            </div>
         </div>
+    </div>
 
         <div class="feedback-box">
             <div class="feedback-message">

@@ -273,13 +273,17 @@ h2.subheadline {
 }
 
 .usage-img img{
-    width: 500px;
+    width: 100%;
+}
+
+.usage-arrow {      
+    text-align: center;
+}
+.usage-arrow i.fa {
+    font-size: 30px;
 }
 
 /* feedback section */
-.feedback-box .ctl-feedback {
-    width: 60%;
-}
 .contacts-feedback-box .ctl-feedback {
     width: auto;
     margin: 0 20% 0 20%;
@@ -381,6 +385,9 @@ h2.subheadline {
 .tech-info .subheadline,
 .info-block .subheadline {
     text-align: center;    
+}
+.center {
+    text-align: center;
 }
 
 .tech-info-content {
@@ -512,6 +519,10 @@ h2.subheadline {
     .mobile-wrapper {
         display: none;
     }
+
+    .feedback-box .ctl-feedback {
+        width: 60%;
+    }
 }
 
 @media only screen and (max-width: 414px) {
@@ -575,5 +586,9 @@ h2.subheadline {
 
     .navbar-default .navbar-nav > li.top-menu-item > a {
         color: black;
+    }
+
+    .feedback-message {
+        line-height: 2em;
     }
 }
