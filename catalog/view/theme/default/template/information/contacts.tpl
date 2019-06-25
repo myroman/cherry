@@ -38,7 +38,7 @@
         </div>
 
         <div class="col-sm-6">
-          <div style="padding-bottom:56.25%; position:relative; display:block; width: 100%">
+          <div class="iframe-full-width-wrapper">
               <iframe src="https://yandex.com/map-widget/v1/-/CCGRnR0s" 
               width="100%" height="100%" 
               style="position:absolute; top:0; left: 0"

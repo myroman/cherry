@@ -132,6 +132,13 @@ h2.subheadline {
     margin-top: 10px;
 }
 
+.iframe-full-width-wrapper {
+    padding-bottom:56.25%; 
+    position:relative; 
+    display:block; 
+    width: 100%
+}
+
 /* main banner on home screen*/
 .banner-wrapper {
     padding: 0px 10px 0 10px;
