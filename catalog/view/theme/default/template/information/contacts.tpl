@@ -38,17 +38,17 @@
         </div>
 
         <div class="col-sm-6">
-          <div>
+          <div style="padding-bottom:56.25%; position:relative; display:block; width: 100%">
               <iframe src="https://yandex.com/map-widget/v1/-/CCGRnR0s" 
-              width="560" 
-              height="400" 
+              width="100%" height="100%" 
+              style="position:absolute; top:0; left: 0"
               frameborder="1" allowfullscreen="true"></iframe>
           </div>
         </div>
 
       </div> <!--<div class="row">-->
 
-      <div class="row">
+      <div class="row margin-top-sm">
         <div class="col-sm-12">
             <div class="panel panel-default" >          
                 <div class="panel-heading">
@@ -177,7 +177,7 @@
         </div>
       </div> <!--<div class="row">-->
 
-      <div class="row">
+      <div class="row margin-top-sm">
           <div class="col-sm-12">
               <div class="panel panel-default">
                   <div class="panel-heading">
