@@ -254,6 +254,9 @@ class ModelCheckoutOrder extends Model {
 	}
 
 	public function addOrderHistory($order_id, $order_status_id, $comment = '', $notify = false, $override = false) {
+		$log = new Log('order.log');
+		$log->write('addOrderHistory: orderid:' . $order_id . ',$order_status_id:' . $order_status_id . ',comment:' . $comment . ',$notify:' . $notify . ',$override:' . $override); 
+
 		$event_data = array(
 			'order_id'		  => $order_id,
 			'order_status_id' => $order_status_id,
@@ -266,6 +269,7 @@ class ModelCheckoutOrder extends Model {
 		$order_info = $this->getOrder($order_id);
 
 		if ($order_info) {
+			$log->write('found order, status id:' . $order_info['order_status_id']);
 			// Fraud Detection
 			$this->load->model('account/customer');
 
@@ -380,8 +384,8 @@ class ModelCheckoutOrder extends Model {
 
 			$this->cache->delete('product');
 
-			// If order status is 0 then becomes greater than 0 send main html email
-			if (!$order_info['order_status_id'] && $order_status_id) {
+			// If order status is complete (1) then becomes greater than 1, send main html email
+			if ($order_info['order_status_id'] == 1 && $order_status_id > 1) {
 				// Check for any downloadable products
 				$download_status = false;
 
@@ -594,6 +598,8 @@ class ModelCheckoutOrder extends Model {
 					);
 				}
 
+				$log->write('preparing email to customer');
+
 				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mail/order.tpl')) {
 					$html = $this->load->view($this->config->get('config_template') . '/template/mail/order.tpl', $data);
 				} else {
@@ -677,6 +683,7 @@ class ModelCheckoutOrder extends Model {
 				$mail->smtp_port = $this->config->get('config_mail_smtp_port');
 				$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
+				$log->write('will be sent to customer . ' . $order_info['email']);
 				$mail->setTo($order_info['email']);
 				$mail->setFrom($this->config->get('config_email'));
 				$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
@@ -821,6 +828,8 @@ class ModelCheckoutOrder extends Model {
 
 				$message .= $language->get('text_update_footer');
 
+				$log->write('Send update email to ' . $order_info['email']);				
+
 				$mail = new Mail();
 				$mail->protocol = $this->config->get('config_mail_protocol');
 				$mail->parameter = $this->config->get('config_mail_parameter');
@@ -830,11 +839,16 @@ class ModelCheckoutOrder extends Model {
 				$mail->smtp_port = $this->config->get('config_mail_smtp_port');
 				$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
+				$log->write(json_encode($mail));
+
 				$mail->setTo($order_info['email']);
 				$mail->setFrom($this->config->get('config_email'));
 				$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
 				$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 				$mail->setText($message);
+
+				$log->write(json_encode($message));
+
 				$mail->send();
 			}
 		}
