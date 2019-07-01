@@ -346,6 +346,11 @@ h2.subheadline {
 }
 
 /* for articles */
+.article-wrapper.article-text {
+    font-family: Open Sans, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000;
+}
 
 .article-wrapper p {
     font-family: Open Sans, Arial, Helvetica, sans-serif;
