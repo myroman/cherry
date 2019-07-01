@@ -118,6 +118,8 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_captcha'] = $this->language->get('entry_captcha');
 		$data['entry_captcha_page'] = $this->language->get('entry_captcha_page');
 		$data['entry_logo'] = $this->language->get('entry_logo');
+		$data['entry_desktop_banner'] = $this->language->get('entry_desktop_banner');
+		$data['entry_mobile_banner'] = $this->language->get('entry_mobile_banner');
 		$data['entry_icon'] = $this->language->get('entry_icon');
 		$data['entry_image_category'] = $this->language->get('entry_image_category');
 		$data['entry_image_thumb'] = $this->language->get('entry_image_thumb');
@@ -992,6 +994,7 @@ class ControllerSettingSetting extends Controller {
 			'value' => 'contact'
 		);
 
+		//logotype
 		if (isset($this->request->post['config_logo'])) {
 			$data['config_logo'] = $this->request->post['config_logo'];
 		} else {
@@ -1006,6 +1009,37 @@ class ControllerSettingSetting extends Controller {
 			$data['logo'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 		}
 
+		//desktop banner
+		if (isset($this->request->post['config_desktop_banner'])) {
+			$data['config_desktop_banner'] = $this->request->post['config_desktop_banner'];
+		} else {
+			$data['config_desktop_banner'] = $this->config->get('config_desktop_banner');
+		}
+
+		if (isset($this->request->post['config_desktop_banner']) && is_file(DIR_IMAGE . $this->request->post['config_desktop_banner'])) {
+			$data['desktopBanner'] = $this->model_tool_image->resize($this->request->post['config_desktop_banner'], 100, 100);
+		} elseif ($this->config->get('config_desktop_banner') && is_file(DIR_IMAGE . $this->config->get('config_desktop_banner'))) {
+			$data['desktopBanner'] = $this->model_tool_image->resize($this->config->get('config_desktop_banner'), 100, 100);
+		} else {
+			$data['desktopBanner'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+		}
+
+		//mobile banner
+		if (isset($this->request->post['config_mobile_banner'])) {
+			$data['config_mobile_banner'] = $this->request->post['config_mobile_banner'];
+		} else {
+			$data['config_mobile_banner'] = $this->config->get('config_mobile_banner');
+		}
+
+		if (isset($this->request->post['config_mobile_banner']) && is_file(DIR_IMAGE . $this->request->post['config_mobile_banner'])) {
+			$data['mobileBanner'] = $this->model_tool_image->resize($this->request->post['config_mobile_banner'], 100, 100);
+		} elseif ($this->config->get('config_mobile_banner') && is_file(DIR_IMAGE . $this->config->get('config_mobile_banner'))) {
+			$data['mobileBanner'] = $this->model_tool_image->resize($this->config->get('config_mobile_banner'), 100, 100);
+		} else {
+			$data['mobileBanner'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+		}
+
+		//icon
 		if (isset($this->request->post['config_icon'])) {
 			$data['config_icon'] = $this->request->post['config_icon'];
 		} else {

@@ -1071,6 +1071,21 @@
                   <input type="hidden" name="config_logo" value="<?php echo $config_logo; ?>" id="input-logo" />
                 </div>
               </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-logo"><?php echo $entry_desktop_banner; ?></label>
+                <div class="col-sm-10"><a href="" id="thumb-desktop-banner" data-toggle="image" class="img-thumbnail"><img src="<?php echo $desktopBanner; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+                  <input type="hidden" name="config_desktop_banner" value="<?php echo $config_desktop_banner; ?>" id="input-desktop-banner" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-logo"><?php echo $entry_mobile_banner; ?></label>
+                <div class="col-sm-10"><a href="" id="thumb-mobile-banner" data-toggle="image" class="img-thumbnail"><img src="<?php echo $mobileBanner; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+                  <input type="hidden" name="config_mobile_banner" value="<?php echo $config_mobile_banner; ?>" id="input-mobile-banner" />
+                </div>
+              </div>
+
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-icon"><span data-toggle="tooltip" title="<?php echo $help_icon; ?>"><?php echo $entry_icon; ?></span></label>
                 <div class="col-sm-10"><a href="" id="thumb-icon" data-toggle="image" class="img-thumbnail"><img src="<?php echo $icon; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>

@@ -312,6 +312,9 @@ class ControllerProductProduct extends Controller {
 
 			$this->load->model('tool/image');
 
+			$log = new Log('test.log');
+			$log->write('image url: ' . $product_info['image']); 
+
 			if ($product_info['image']) {
 				$data['popup'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
 			} else {

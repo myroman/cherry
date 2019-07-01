@@ -70,6 +70,17 @@ class ControllerCommonHome extends Controller {
 		);
 
 		$data['usageList'] = $usageList;
+
+		if (is_file(DIR_IMAGE . $this->config->get('config_desktop_banner'))) {
+			$data['desktopBannerUrl'] = $data['baseurl'] . 'image/' . $this->config->get('config_desktop_banner');
+		} else {
+			$data['desktopBannerUrl'] = '';
+		}
+		if (is_file(DIR_IMAGE . $this->config->get('config_mobile_banner'))) {
+			$data['mobileBannerUrl'] = $data['baseurl'] . 'image/' . $this->config->get('config_mobile_banner');
+		} else {
+			$data['mobileBannerUrl'] = '';
+		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
 			$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/common/home.tpl', $data));

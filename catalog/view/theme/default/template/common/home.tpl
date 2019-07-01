@@ -14,7 +14,8 @@
 
     <div class="main-page-info-block banner-wrapper">
       <a href="<?php echo $baseurl ?>index.php?route=product/product&path=57&product_id=50">
-        <img src="<?php echo $baseurl ?>image/catalog/vishnya-banner-white-bg.jpg" />
+        <img class='top-menu-desktop-wrapper' src="<?php echo $desktopBannerUrl ?>" />
+        <img class='top-menu-mobile-wrapper' src="<?php echo $mobileBannerUrl ?>" />
       </a>
     </div>
 
