@@ -346,7 +346,8 @@ h2.subheadline {
 }
 
 /* for articles */
-.article-wrapper.article-text {
+.article-wrapper.article-text,
+.article-wrapper.article-text label {
     font-family: Open Sans, Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #000;
@@ -519,6 +520,35 @@ h2.subheadline {
 
 .contacts-vert-block {
     margin-top: 20px;
+}
+
+.card-container {
+
+}
+
+.card-container img {
+    width: 100%;
+}
+
+.checklist input[type=checkbox] {
+    margin-right: 5px;
+}
+.checklist label {
+    display: block;
+}
+
+.read-more-link {
+    color: rgb(80, 123, 123);
+    text-decoration: none;
+
+}
+.read-more-link:hover {
+    text-decoration: underline;
+}
+
+.image-wrapper {
+    margin: 20px 0; 
+    text-align: center;
 }
 
 
