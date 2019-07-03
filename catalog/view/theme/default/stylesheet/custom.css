@@ -552,7 +552,7 @@ h2.subheadline {
 }
 
 
-/* adaptive css*/
+/* desktop css */
 @media only screen and (min-width: 768px) {
     .top-menu-mobile-wrapper {
         display: none;
@@ -573,8 +573,19 @@ h2.subheadline {
     .pad-column-contacts {
         padding-top: 100px;
     }
+
+    .about-us-text-content {
+        float: left;
+        width: 63%;
+        text-align: justify;
+    }
+
+    .about-us-image {
+        width: 33%;
+    }
 }
 
+/* mobile */
 @media only screen and (max-width: 414px) {
     nav#top, header {
         display: none;
@@ -644,5 +655,13 @@ h2.subheadline {
 
     .footer-block {
         margin-top: 20px;
+    }
+
+    .about-us-text-content {
+        text-align: justify;
+    }
+
+    .about-us-image {
+        width: 100%;
     }
 }
