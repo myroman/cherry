@@ -301,8 +301,27 @@
               <input type="text" name="quantity" value="<?php echo $minimum; ?>" size="2" id="input-quantity" class="form-control" />
               <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" />
               <br />
-              <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" 
-                class="btn btn-default btn-med btn-buy_green btn-buy_green"><?php echo $button_cart; ?></button>
+              <div class="buy-and-share-wrapper clearfix">
+                <div class="buy-button">
+                  <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" 
+                    class="btn btn-default btn-med btn-buy_green btn-buy_green"><?php echo $button_cart; ?>
+                  </button>
+                </div>
+
+                <div class="share-buttons">
+                  <!-- AddThis Button BEGIN -->
+                  <div class="addthis_toolbox addthis_default_style">
+                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> 
+                    <a class="addthis_button_tweet"></a> 
+                    <a class="addthis_button_pinterest_pinit"></a> 
+                    <a class="addthis_counter addthis_pill_style"></a>
+                  </div>
+                  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script>
+                  <!-- AddThis Button END -->
+                </div>
+              </div>
+
+                
 
               <!-- <button type="button" id="button-find-dealer" data-loading-text="<?php echo $text_loading; ?>" 
                 class="btn btn-default btn-med btn_outlined" style="margin-left: 10px;"><?php echo $button_find_dealer; ?></button> -->

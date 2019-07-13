@@ -551,6 +551,17 @@ h2.subheadline {
     text-align: center;
 }
 
+.buy-and-share-wrapper .buy-button {
+    float: left;
+}
+
+.buy-and-share-wrapper .share-buttons {
+    float: right;
+}
+
+.addthis_pill_style {
+    margin-left: 15px;
+}
 
 /* desktop css */
 @media only screen and (min-width: 768px) {
