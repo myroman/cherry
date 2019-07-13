@@ -153,7 +153,15 @@ class ControllerCheckoutConfirm extends Controller {
 			if ($this->cart->hasShipping()) {
 				$order_data['shipping_firstname'] = $this->session->data['shipping_address']['firstname'];
 				$order_data['shipping_lastname'] = $this->session->data['shipping_address']['lastname'];
-				$order_data['shipping_company'] = $this->session->data['shipping_address']['company'];
+				$order_data['shipping_company'] = $this->session->data['shipping_address']['company'];				
+				
+				if (isset($this->session->data['shipping_address']['parcelshopid'])){
+					$parcelShopId = $this->session->data['shipping_address']['parcelshopid'];
+					$this->load->model('shipping/hermes');					
+					$parcelShop = $this->model_shipping_hermes->getParcelShopById($parcelShopId);
+					$this->session->data['shipping_address']['address_1'] = $parcelShop['address'];
+				}			
+				
 				$order_data['shipping_address_1'] = $this->session->data['shipping_address']['address_1'];
 				$order_data['shipping_address_2'] = $this->session->data['shipping_address']['address_2'];
 				$order_data['shipping_city'] = $this->session->data['shipping_address']['city'];

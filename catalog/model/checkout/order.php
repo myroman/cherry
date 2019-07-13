@@ -474,17 +474,17 @@ class ModelCheckoutOrder extends Model {
 				if ($order_info['payment_address_format']) {
 					$format = $order_info['payment_address_format'];
 				} else {
-					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+					$format = '{firstname} {lastname}' . "\n" . '{zone}' . "\n" . '{country}';
 				}
 
 				$find = array(
 					'{firstname}',
 					'{lastname}',
-					'{company}',
-					'{address_1}',
-					'{address_2}',
-					'{city}',
-					'{postcode}',
+					// '{company}',
+					// '{address_1}',
+					// '{address_2}',
+					// '{city}',
+					// '{postcode}',
 					'{zone}',
 					'{zone_code}',
 					'{country}'
@@ -493,11 +493,11 @@ class ModelCheckoutOrder extends Model {
 				$replace = array(
 					'firstname' => $order_info['payment_firstname'],
 					'lastname'  => $order_info['payment_lastname'],
-					'company'   => $order_info['payment_company'],
-					'address_1' => $order_info['payment_address_1'],
-					'address_2' => $order_info['payment_address_2'],
-					'city'      => $order_info['payment_city'],
-					'postcode'  => $order_info['payment_postcode'],
+					// 'company'   => $order_info['payment_company'],
+					// 'address_1' => $order_info['payment_address_1'],
+					// 'address_2' => $order_info['payment_address_2'],
+					// 'city'      => $order_info['payment_city'],
+					// 'postcode'  => $order_info['payment_postcode'],
 					'zone'      => $order_info['payment_zone'],
 					'zone_code' => $order_info['payment_zone_code'],
 					'country'   => $order_info['payment_country']
