@@ -593,6 +593,14 @@
         </div>
       </div>
 
+      <div class="row info-block">
+        <div class="col-sm-12">
+          <div class="iframe-full-width-wrapper">
+              <iframe width="100%" height="100%" style="position:absolute; top:0; left: 0" src="https://www.youtube.com/embed/iObMwStE61k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+          </div>
+        </div>
+      </div>
+
       <?php if ($products) { ?>
       <h3><?php echo $text_related; ?></h3>
       <div class="row">
