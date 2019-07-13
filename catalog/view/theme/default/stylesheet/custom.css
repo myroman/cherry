@@ -557,6 +557,7 @@ h2.subheadline {
 
 .buy-and-share-wrapper .share-buttons {
     float: right;
+    width: 300px;
 }
 
 .addthis_pill_style {
