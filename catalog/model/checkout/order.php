@@ -420,7 +420,8 @@ class ModelCheckoutOrder extends Model {
 
 				$data['title'] = sprintf($language->get('text_new_subject'), $order_info['store_name'], $order_id);
 
-				$data['text_greeting'] = sprintf($language->get('text_new_greeting'), $order_info['store_name']);
+				$data['text_greeting'] = sprintf($language->get('text_new_greeting'));
+				$data['text_greeting_line2'] = sprintf($language->get('text_new_greeting_line2'));
 				$data['text_link'] = $language->get('text_new_link');
 				$data['text_download'] = $language->get('text_new_download');
 				$data['text_order_detail'] = $language->get('text_new_order_detail');
@@ -441,6 +442,7 @@ class ModelCheckoutOrder extends Model {
 				$data['text_price'] = $language->get('text_new_price');
 				$data['text_total'] = $language->get('text_new_total');
 				$data['text_footer'] = $language->get('text_new_footer');
+				$data['text_footer_line2'] = $language->get('text_new_footer_line2');
 
 				$data['logo'] = $this->config->get('config_url') . 'image/' . $this->config->get('config_logo');
 				$data['store_name'] = $order_info['store_name'];
@@ -607,7 +609,7 @@ class ModelCheckoutOrder extends Model {
 				}
 
 				// Text Mail
-				$text  = sprintf($language->get('text_new_greeting'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8')) . "\n\n";
+				$text  = sprintf($language->get('text_new_greeting')) . "\n" . sprintf($language->get('text_new_greeting_line2')) . "\n\n";
 				$text .= $language->get('text_new_order_id') . ' ' . $order_id . "\n";
 				$text .= $language->get('text_new_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n";
 				$text .= $language->get('text_new_order_status') . ' ' . $order_status . "\n\n";
@@ -672,7 +674,7 @@ class ModelCheckoutOrder extends Model {
 					$text .= $order_info['comment'] . "\n\n";
 				}
 
-				$text .= $language->get('text_new_footer') . "\n\n";
+				$text .= $language->get('text_new_footer') . "\n" . $language->get('text_new_footer_line2') . "\n\n";
 
 				$mail = new Mail();
 				$mail->protocol = $this->config->get('config_mail_protocol');

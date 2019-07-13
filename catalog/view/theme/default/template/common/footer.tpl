@@ -51,7 +51,7 @@
       <div class="col-sm-3 pad-column-contacts desktop-wrapper">
           <div class="footer-contacts">
               <div class="footer-contacts-bl">
-                  <a href="tel:8 800 500-67-46">8 800 500-67-46</a> (звонок бесплатный)
+                  <a href="tel:8 (800) 500-67-46">8 (800) 500-67-46</a> (звонок бесплатный)
               </div>
 
               <div class="footer-contacts-bl">
